@@ -11,6 +11,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HeaderImageComponent } from './home/header-image/header-image.component';
 import { CategoriesComponent } from './home/categories/categories.component';
 import { HomeComponent } from './home/home.component';
+import { StartersComponent } from './starters/starters.component';
 
 
 
@@ -20,7 +21,8 @@ import { HomeComponent } from './home/home.component';
     NavbarComponent,
     HeaderImageComponent,
     CategoriesComponent,
-    HomeComponent
+    HomeComponent,
+    StartersComponent
   ],
   imports: [
     BrowserModule,

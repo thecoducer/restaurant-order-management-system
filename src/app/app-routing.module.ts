@@ -4,11 +4,16 @@ import { AppComponent } from './app.component';
 import { HeaderImageComponent } from './home/header-image/header-image.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { StartersComponent } from './starters/starters.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'starters',
+    component: StartersComponent
   }
 ];
 
