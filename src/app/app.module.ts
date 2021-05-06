@@ -3,20 +3,20 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SigninComponent } from './auth/signin/signin.component';
-import { SignupComponent } from './auth/signup/signup.component';
 
 import {ButtonModule} from 'primeng/button';
 import {MenubarModule} from 'primeng/menubar';
 import {RippleModule} from 'primeng/ripple';
+import { NavbarComponent } from './navbar/navbar.component';
+import { HeaderImageComponent } from './header-image/header-image.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SigninComponent,
-    SignupComponent
+    NavbarComponent,
+    HeaderImageComponent
   ],
   imports: [
     BrowserModule,
