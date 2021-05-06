@@ -8,7 +8,9 @@ import {ButtonModule} from 'primeng/button';
 import {MenubarModule} from 'primeng/menubar';
 import {RippleModule} from 'primeng/ripple';
 import { NavbarComponent } from './navbar/navbar.component';
-import { HeaderImageComponent } from './header-image/header-image.component';
+import { HeaderImageComponent } from './home/header-image/header-image.component';
+import { CategoriesComponent } from './home/categories/categories.component';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -16,7 +18,9 @@ import { HeaderImageComponent } from './header-image/header-image.component';
   declarations: [
     AppComponent,
     NavbarComponent,
-    HeaderImageComponent
+    HeaderImageComponent,
+    CategoriesComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

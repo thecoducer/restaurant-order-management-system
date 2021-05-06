@@ -5,3 +5,13 @@
 #navbar-container {
     margin-top: 35px;
 }
+
+.nav-link {
+    font-size: 22px;
+    color: black;
+}
+
+.nav-item {
+    padding-right: 10px;
+    padding-left: 10px;
+}
