@@ -20,7 +20,6 @@ export class HeaderImageComponent implements OnInit {
         //console.log(response);
       },
       (error) => {
-        console.log(error.url);
         this.imageUrl = error.url;
         this.isFetchingImage = false;
       }

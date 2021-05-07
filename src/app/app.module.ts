@@ -20,6 +20,7 @@ import { DessertsComponent } from './desserts/desserts.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { FooterComponent } from './footer/footer.component';
+import { CartComponent } from './cart/cart.component';
 
 
 
@@ -37,7 +38,8 @@ import { FooterComponent } from './footer/footer.component';
     DessertsComponent,
     LoginComponent,
     SignupComponent,
-    FooterComponent
+    FooterComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

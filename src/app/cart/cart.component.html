@@ -1,0 +1,11 @@
+<nav class="navbar fixed-bottom navbar-expand-lg" id="cart-bar" *ngIf="!isCartEmpty">
+    <div class="container" id="cart-bar-div">
+        <span class="navbar-brand">4 items</span>
+
+        <div>
+            <span id="subtotal">Subtotal: ₹1689</span>
+            <button type="button" class="btn btn-outline-danger" id="clear-cart-btn">Clear Cart</button>
+            <button type="button" class="btn btn-outline-success" id="view-cart-btn">View Cart</button>
+        </div>
+    </div>
+</nav>

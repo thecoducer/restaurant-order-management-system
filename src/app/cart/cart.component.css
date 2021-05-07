@@ -1,0 +1,97 @@
+#subtotal {
+    padding-right: 20px;
+}
+
+#clear-cart-btn {
+    margin-right: 15px;
+}
+
+#cart-bar {
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    color: black;
+    /** below css is to make cart bar sticky and always on top without obstructing others*/
+    position: sticky;
+}
+
+
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+    /* CSS */
+}
+
+
+/* 
+    ##Device = Laptops, Desktops
+    ##Screen = B/w 1025px to 1280px
+  */
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    /* CSS */
+}
+
+
+/* 
+    ##Device = Tablets, Ipads (portrait)
+    ##Screen = B/w 768px to 1024px
+  */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* CSS */
+}
+
+
+/* 
+    ##Device = Tablets, Ipads (landscape)
+    ##Screen = B/w 768px to 1024px
+  */
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    /* CSS */
+}
+
+
+/* 
+    ##Device = Low Resolution Tablets, Mobiles (Landscape)
+    ##Screen = B/w 481px to 767px
+  */
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .navbar-brand {
+        font-size: 14px;
+    }
+    #cart-bar-div {
+        font-size: 12px;
+    }
+    #clear-cart-btn {
+        font-size: 12px;
+    }
+    #view-cart-btn {
+        font-size: 12px;
+    }
+}
+
+
+/* 
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w 320px to 479px
+  */
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .navbar-brand {
+        font-size: 14px;
+    }
+    #cart-bar-div {
+        font-size: 12px;
+    }
+    #clear-cart-btn {
+        font-size: 12px;
+    }
+    #view-cart-btn {
+        font-size: 12px;
+    }
+}
