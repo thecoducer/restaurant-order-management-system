@@ -5,8 +5,10 @@ import { AppComponent } from './app.component';
 import { DessertsComponent } from './desserts/desserts.component';
 import { HeaderImageComponent } from './home/header-image/header-image.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 import { MainsComponent } from './mains/mains.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { SignupComponent } from './signup/signup.component';
 import { StartersComponent } from './starters/starters.component';
 
 const routes: Routes = [
@@ -29,6 +31,14 @@ const routes: Routes = [
   {
     path: 'desserts',
     component: DessertsComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'sign-up',
+    component: SignupComponent
   }
 ];
 

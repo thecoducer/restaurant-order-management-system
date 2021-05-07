@@ -1,17 +1,12 @@
 .categories-outer {
     max-width: 100%;
     background-color: rgb(250, 250, 250);
-    margin-top: 18px;
     padding-top: 100px;
     padding-bottom: 100px;
 }
 
 #text-1 {
-    margin-bottom: 50px;
-}
-
-#text-2 {
-    margin-top: 50px;
+    margin-bottom: 30px;
 }
 
 .lead {
@@ -133,7 +128,7 @@ div.card:hover {
         object-fit: cover;
     }
     .lead {
-        font-size: 25px;
+        font-size: 22px;
     }
 }
 
@@ -155,6 +150,8 @@ div.card:hover {
         object-fit: cover;
     }
     .lead {
-        font-size: 25px;
+        font-size: 22px;
+        margin-left: 20px;
+        margin-right: 20px;
     }
 }

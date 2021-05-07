@@ -1,7 +1,7 @@
 
 export class ConstantsService {
 
-  private static readonly unsplashSourceApi: string = 'https://source.unsplash.com/1280x900/?food,alcohol';
+  private static readonly unsplashSourceApi: string = 'https://source.unsplash.com/1280x900/?restaurants,food,alcohol';
 
   constructor() { }
 
