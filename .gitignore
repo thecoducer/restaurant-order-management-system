@@ -49,4 +49,3 @@ Thumbs.db
 .env.example
 .env.local
 .env.staging
-/src/environments

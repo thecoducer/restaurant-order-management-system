@@ -555,25 +555,6 @@ CartComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
 
 /***/ }),
 
-/***/ "cxbk":
-/*!**********************************************!*\
-  !*** ./src/environments/environment.prod.ts ***!
-  \**********************************************/
-/*! exports provided: environment */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
-const environment = {
-    production: true,
-    FIREBASE_API_KEY: "AIzaSyBQq6pRpxgDOYsNo3PdNnfI-hiD5g-SBFk",
-    FIREBASE_REALTIME_DB_URL: "https://restaurant-21-club-default-rtdb.firebaseio.com/"
-};
-
-
-/***/ }),
-
 /***/ "fp1T":
 /*!********************************************!*\
   !*** ./src/app/footer/footer.component.ts ***!
@@ -630,7 +611,7 @@ FooterComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NavbarComponent", function() { return NavbarComponent; });
-/* harmony import */ var src_environments_environment_prod__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment.prod */ "cxbk");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ "AytR");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "tyNb");
@@ -678,7 +659,7 @@ class NavbarComponent {
     constructor() { }
     ngOnInit() {
         this.isAuthenticated = false;
-        console.log(src_environments_environment_prod__WEBPACK_IMPORTED_MODULE_0__["environment"].FIREBASE_API_KEY);
+        console.log(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__["environment"].FIREBASE_API_KEY);
     }
 }
 NavbarComponent.ɵfac = function NavbarComponent_Factory(t) { return new (t || NavbarComponent)(); };
