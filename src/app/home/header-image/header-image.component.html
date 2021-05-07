@@ -1,3 +1,7 @@
+<div *ngIf="isFetchingImage" style="margin-top: 150px; margin-bottom: 150px;">
+    <app-loader></app-loader>
+</div>
+
 <div class="container-lg" id="header-image">
-    <img src="https://source.unsplash.com/1280x900/?restaurant" class="img-fluid" alt="">
+    <img src="{{imageUrl}}" class="img-fluid" alt="">
 </div>

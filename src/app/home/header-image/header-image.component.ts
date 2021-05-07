@@ -1,15 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { FetchHeaderImageService } from './fetch-header-image.service';
 
 @Component({
   selector: 'app-header-image',
   templateUrl: './header-image.component.html',
-  styleUrls: ['./header-image.component.css']
+  styleUrls: ['./header-image.component.css'],
 })
 export class HeaderImageComponent implements OnInit {
+  imageUrl: string;
+  isFetchingImage: boolean = false;
 
-  constructor() { }
+  constructor(private fetchImgService: FetchHeaderImageService) {}
 
   ngOnInit(): void {
-  }
+    this.isFetchingImage = true;
 
+    this.fetchImgService.fetchImage().subscribe(
+      (response) => {
+        //console.log(response);
+      },
+      (error) => {
+        console.log(error.url);
+        this.imageUrl = error.url;
+        this.isFetchingImage = false;
+      }
+    );
+  }
 }
