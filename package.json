@@ -23,7 +23,6 @@
         "@angular/platform-browser-dynamic": "~11.2.12",
         "@angular/router": "~11.2.12",
         "bootstrap": "^5.0.0",
-        "dotenv": "^9.0.0",
         "firebase": "^8.5.0",
         "font-awesome": "^4.7.0",
         "jquery": "^3.6.0",
@@ -32,7 +31,6 @@
         "primeng": "^11.4.0",
         "rxjs": "~6.6.0",
         "tslib": "^2.0.0",
-        "yargs": "^17.0.1",
         "zone.js": "~0.11.3"
     },
     "devDependencies": {
@@ -42,6 +40,7 @@
         "@types/jasmine": "~3.6.0",
         "@types/node": "^12.11.1",
         "codelyzer": "^6.0.0",
+        "dotenv": "^9.0.0",
         "jasmine-core": "~3.6.0",
         "jasmine-spec-reporter": "~5.0.0",
         "karma": "~6.1.0",
@@ -52,6 +51,7 @@
         "protractor": "~7.0.0",
         "ts-node": "~8.3.0",
         "tslint": "~6.1.0",
-        "typescript": "~4.1.5"
+        "typescript": "~4.1.5",
+        "yargs": "^17.0.1"
     }
 }

@@ -5,7 +5,7 @@ require('dotenv').config();
 // read the command line arguments passed with yargs
 const environment = argv.environment;
 const isProduction = environment === 'prod';
-if (!process.env.API_KEY || !process.env.ANOTHER_API_KEY) {
+if (!process.env.FIREBASE_API_KEY || !process.env.FIREBASE_REALTIME_DB_URL) {
    console.error('All the required environment variables were not provided!');
    process.exit(-1);
 }
@@ -27,4 +27,8 @@ writeFile(targetPath, environmentFileContent, function (err) {
       console.log(err);
    }
    console.log(`Wrote variables to ${targetPath}`);
-}};
+});
+
+/**
+ * Solution by https://javascript.plainenglish.io/setup-dotenv-to-access-environment-variables-in-angular-9-f06c6ffb86c0
+ */
