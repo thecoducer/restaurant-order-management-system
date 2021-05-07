@@ -1,5 +1,7 @@
-#header-image {
+#header-image-div {
     margin-top: 60px;
     padding-right: 0px;
-    padding-left: 0px
+    padding-left: 0px;
 }
+
+#header-image {}

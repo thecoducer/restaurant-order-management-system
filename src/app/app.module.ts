@@ -14,6 +14,12 @@ import { CategoriesComponent } from './home/categories/categories.component';
 import { HomeComponent } from './home/home.component';
 import { StartersComponent } from './starters/starters.component';
 import { LoaderComponent } from './global/loader/loader.component';
+import { MainsComponent } from './mains/mains.component';
+import { AlcoholicBeveragesComponent } from './alcoholic-beverages/alcoholic-beverages.component';
+import { DessertsComponent } from './desserts/desserts.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -25,7 +31,13 @@ import { LoaderComponent } from './global/loader/loader.component';
     CategoriesComponent,
     HomeComponent,
     StartersComponent,
-    LoaderComponent
+    LoaderComponent,
+    MainsComponent,
+    AlcoholicBeveragesComponent,
+    DessertsComponent,
+    LoginComponent,
+    SignupComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

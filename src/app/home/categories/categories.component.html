@@ -1,6 +1,13 @@
 <div class="categories-outer">
 
     <div class="container" style="text-align: center;">
+
+        <div class="col-lg-6 mx-auto" id="text-1">
+            <p class="lead mb-4">
+                Want to get food delivered to you? <br> Place your order now.
+            </p>
+        </div>
+
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-4">
             <div class="col">
                 <a [routerLink]="['/starters']" class="clickable-card">
@@ -13,7 +20,7 @@
                 </a>
             </div>
             <div class="col">
-                <a href="" class="clickable-card">
+                <a [routerLink]="['/mains']" class="clickable-card">
                     <div class="card">
                         <img src="../../../assets/images/mains.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
@@ -23,7 +30,7 @@
                 </a>
             </div>
             <div class="col">
-                <a href="" class="clickable-card">
+                <a [routerLink]="['/alcoholic-beverages']" class="clickable-card">
                     <div class="card">
                         <img src="../../../assets/images/alcohol.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
@@ -33,7 +40,7 @@
                 </a>
             </div>
             <div class="col">
-                <a href="" class="clickable-card">
+                <a [routerLink]="['/desserts']" class="clickable-card">
                     <div class="card">
                         <img src="../../../assets/images/dessert.jpeg" class="card-img-top" alt="...">
                         <div class="card-body">

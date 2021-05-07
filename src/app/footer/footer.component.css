@@ -1,0 +1,54 @@
+footer {
+    padding: 2rem 0;
+    background-color: #212529;
+    color: white;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.footer-column {
+    text-align: center;
+}
+
+.footer-column.nav-item.nav-link {
+    padding: 0.1rem 0;
+}
+
+.footer-column.nav-itemspan.nav-link {
+    color: #6c757d;
+}
+
+.footer-column.nav-itemspan.footer-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.footer-column.nav-item.fas {
+    margin-right: 0.5rem;
+}
+
+
+/* 
+    ##Device = Low Resolution Tablets, Mobiles (Landscape)
+    ##Screen = B/w 481px to 767px
+  */
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .footer-column {
+        margin-top: 30px;
+    }
+}
+
+
+/* 
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w 320px to 479px
+  */
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .footer-column {
+        margin-top: 30px;
+    }
+}
