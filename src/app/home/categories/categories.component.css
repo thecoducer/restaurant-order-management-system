@@ -1,14 +1,9 @@
 .categories-outer {
     max-width: 100%;
     background-color: rgb(248, 248, 248);
-    padding: 100px;
     margin-top: 60px;
-}
-
-.card-img-top {
-    width: 100%;
-    height: 15vw;
-    object-fit: cover;
+    padding-top: 100px;
+    padding-bottom: 100px;
 }
 
 a.clickable-card,
@@ -21,4 +16,115 @@ div.card:hover {
     background-color: rgb(41, 41, 41);
     color: white;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+    .card-img-top {
+        width: 100%;
+        height: 15vw;
+        object-fit: cover;
+    }
+}
+
+
+/* 
+    ##Device = Laptops, Desktops
+    ##Screen = B/w 1025px to 1280px
+  */
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    div.card {
+        margin: 0 auto;
+        float: none;
+        margin-bottom: 40px;
+        width: 90%
+    }
+    .card-img-top {
+        width: 100%;
+        height: 15vw;
+        object-fit: cover;
+    }
+}
+
+
+/* 
+    ##Device = Tablets, Ipads (portrait)
+    ##Screen = B/w 768px to 1024px
+  */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    div.card {
+        margin: 0 auto;
+        float: none;
+        margin-bottom: 40px;
+        width: 90%
+    }
+    .card-img-top {
+        width: 100%;
+        height: 25vw;
+        object-fit: cover;
+    }
+}
+
+
+/* 
+    ##Device = Tablets, Ipads (landscape)
+    ##Screen = B/w 768px to 1024px
+  */
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    div.card {
+        width: 80%;
+        margin: 0 auto;
+        float: none;
+        margin-bottom: 40px;
+    }
+    div.card-img-top {
+        height: 25vw;
+        object-fit: cover;
+    }
+}
+
+
+/* 
+    ##Device = Low Resolution Tablets, Mobiles (Landscape)
+    ##Screen = B/w 481px to 767px
+  */
+
+@media (min-width: 481px) and (max-width: 767px) {
+    div.card {
+        width: 80%;
+        margin: 0 auto;
+        float: none;
+        margin-bottom: 40px;
+    }
+    div.card-img-top {
+        height: 25vw;
+        object-fit: cover;
+    }
+}
+
+
+/* 
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w 320px to 479px
+  */
+
+@media (min-width: 320px) and (max-width: 480px) {
+    div.card {
+        width: 80%;
+        margin: 0 auto;
+        float: none;
+        margin-bottom: 40px;
+    }
+    div.card-img-top {
+        height: 25vw;
+        object-fit: cover;
+    }
 }
