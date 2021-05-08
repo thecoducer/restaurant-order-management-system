@@ -7,6 +7,10 @@
     min-height: 70vh;
 }
 
+.floating-label {
+    color: rgb(109, 109, 109)
+}
+
 .form-signin .checkbox {
     font-weight: 400;
 }
@@ -31,4 +35,28 @@
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+button[type="submit"]:disabled {
+    background-color: rgb(173, 173, 173);
+    border-color: inherit;
+}
+
+input[type="name"].ng-invalid.ng-touched {
+    border: 1px solid rgb(255, 83, 83);
+}
+
+input[type="email"].ng-invalid.ng-touched {
+    border: 1px solid rgb(255, 83, 83);
+}
+
+input[type="password"].ng-invalid.ng-touched {
+    border: 1px solid rgb(255, 83, 83);
+    margin-bottom: -1px;
+}
+
+.error-text {
+    color: rgb(255, 83, 83);
+    font-size: 13px;
+    margin-left: 13px;
 }
