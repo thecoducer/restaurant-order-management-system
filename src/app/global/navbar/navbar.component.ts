@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAuthenticated = false;
-    console.log(environment.FIREBASE_API_KEY);
+    console.log(environment.firebase.apiKey);
   }
 
 }

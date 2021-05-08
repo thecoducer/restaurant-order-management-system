@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { ConstantsService } from 'src/app/global/constants.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +13,6 @@ export class FetchHeaderImageService implements OnInit {
 
   fetchImage() {
     
-    return this.http.get(ConstantsService.getUnsplashSourceApi());
+    return this.http.get(environment.UNSPLASH_SOURCE_API);
   }
 }

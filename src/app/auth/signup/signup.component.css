@@ -2,7 +2,7 @@
     width: 100%;
     max-width: 330px;
     margin: auto;
-    padding-top: 180px;
+    padding-top: 150px;
     padding-bottom: 180px;
     min-height: 70vh;
 }
@@ -13,6 +13,12 @@
 
 .form-signin .form-floating:focus-within {
     z-index: 2;
+}
+
+.form-signin input[type="name"] {
+    margin-bottom: -1px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .form-signin input[type="email"] {

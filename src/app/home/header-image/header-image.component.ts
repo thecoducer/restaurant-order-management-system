@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FetchHeaderImageService } from './fetch-header-image.service';
+import { FetchHeaderImageService } from '../../services/fetch-header-image.service';
 
 @Component({
   selector: 'app-header-image',

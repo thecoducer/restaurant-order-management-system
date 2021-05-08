@@ -1,9 +1,9 @@
 #subtotal {
-    padding-right: 20px;
+    padding-right: 11px;
 }
 
 #clear-cart-btn {
-    margin-right: 15px;
+    margin-right: 6px;
 }
 
 #cart-bar {
@@ -64,14 +64,17 @@
     .navbar-brand {
         font-size: 14px;
     }
+    #subtotal {
+        font-size: 13px;
+    }
     #cart-bar-div {
-        font-size: 12px;
+        font-size: 14px;
     }
     #clear-cart-btn {
-        font-size: 12px;
+        font-size: 14px;
     }
     #view-cart-btn {
-        font-size: 12px;
+        font-size: 14px;
     }
 }
 
@@ -85,13 +88,16 @@
     .navbar-brand {
         font-size: 14px;
     }
+    #subtotal {
+        font-size: 13px;
+    }
     #cart-bar-div {
-        font-size: 12px;
+        font-size: 14px;
     }
     #clear-cart-btn {
-        font-size: 12px;
+        font-size: 14px;
     }
     #view-cart-btn {
-        font-size: 12px;
+        font-size: 14px;
     }
 }
