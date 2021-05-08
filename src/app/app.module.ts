@@ -23,6 +23,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
+import { CartPageComponent } from './cart-page/cart-page.component';
+import { CategoryPageComponent } from './category-page/category-page.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { environment } from 'src/environments/environment';
     SignupComponent,
     FooterComponent,
     CartComponent,
+    CartPageComponent,
+    CategoryPageComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
