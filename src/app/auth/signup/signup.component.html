@@ -11,7 +11,7 @@
         </div>
 
         <div class="form-floating" (click)="hideResponseErrors()">
-            <input type="email" class="form-control" id="email" placeholder="name@example.com" formControlName="email">
+            <input type="email" class="form-control" [ngClass]="{'error-border': !isHideResponseErrors && errorObj.signUp.email != null}" id="email" placeholder="name@example.com" formControlName="email">
             <label class="floating-label" for="floatingInput">Email address</label>
 
             <span class="error-text" *ngIf="signUpForm.controls.email.errors != null && signUpForm.controls.email.touched">Please enter a valid email.</span>

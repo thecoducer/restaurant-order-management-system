@@ -2,14 +2,14 @@ import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-
   private isAuthenticated: boolean = false;
+  isAuthSubject = new Subject<any>();
 
   constructor(
     private afs: AngularFirestore,
@@ -28,11 +28,16 @@ export class AuthService {
     return this.afAuth.createUserWithEmailAndPassword(email, password);
   }
 
-  setIsAuthenticated(v: boolean) {
-    this.isAuthenticated = v;
+  getIsAuthObservable() {
+    return this.isAuthSubject.asObservable();
   }
 
-  getIsAuthenticated() {
-    return this.isAuthenticated;
+  initializeIsAuth() {
+    this.isAuthSubject.next(this.isAuthenticated);
+  }
+
+  setIsAuthenticated(v: boolean) {
+    this.isAuthenticated = v;
+    this.isAuthSubject.next(this.isAuthenticated);
   }
 }
