@@ -6,20 +6,20 @@
 
         <div (click)="hideResponseErrors()">
             <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="email">
+                <input type="email" class="form-control" [ngClass]="{'error-border': !isHideResponseErrors && errorObj.logIn.email != null}" id="floatingInput" placeholder="name@example.com" formControlName="email">
                 <label class="floating-label" for="floatingInput">Email address</label>
 
                 <span class="error-text" *ngIf="logInForm.controls.email.errors != null && logInForm.controls.email.touched">Please enter a valid email.</span>
 
-                <span class="error-text" *ngIf="!isHideResponseErrors && emailError != null">{{emailError}}</span>
+                <span class="error-text" *ngIf="!isHideResponseErrors && errorObj.logIn.email != null">{{errorObj.logIn.email}}</span>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" formControlName="password">
+                <input type="password" class="form-control" [ngClass]="{'error-border': !isHideResponseErrors && errorObj.logIn.password != null}" id="floatingPassword" placeholder="Password" formControlName="password">
                 <label class="floating-label" for="floatingPassword">Password</label>
 
                 <span class="error-text" *ngIf="logInForm.controls.password.errors != null && logInForm.controls.password.touched">Please enter a password.</span>
 
-                <span class="error-text" *ngIf="!isHideResponseErrors && passwordError != null" style="margin-top: -100px;">{{passwordError}}</span>
+                <span class="error-text" *ngIf="!isHideResponseErrors && errorObj.logIn.password != null" style="margin-top: -100px;">{{errorObj.logIn.password}}</span>
             </div>
         </div>
 
@@ -28,7 +28,7 @@
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="isLoggingIn"></span>
         </button>
 
-        <span class="error-text" *ngIf="unknownError != null">{{unknownError}}</span>
+        <span class="error-text" *ngIf="errorObj.logIn.unknown != null" style="margin-top: 10px;">{{errorObj.logIn.unknown}}</span>
 
     </form>
 

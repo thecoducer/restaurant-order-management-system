@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -7,14 +8,14 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  isAuthenticated: boolean = false;
 
-  isAuthenticated: boolean;
+  constructor(private authService: AuthService) {
+    this.isAuthenticated = this.authService.getIsAuthenticated();
+    console.log(this.isAuthenticated);
+   }
 
-  constructor() { }
-
-  ngOnInit(): void {
-    this.isAuthenticated = false;
-    console.log(environment.firebase.apiKey);
+  ngOnInit(): void {    
   }
 
 }

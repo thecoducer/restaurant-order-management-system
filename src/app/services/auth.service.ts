@@ -8,6 +8,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
+
+  private isAuthenticated: boolean = false;
+
   constructor(
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth,
@@ -23,5 +26,13 @@ export class AuthService {
   // sign up with email and password
   signUp(email: string, password: string): Promise<any> {
     return this.afAuth.createUserWithEmailAndPassword(email, password);
+  }
+
+  setIsAuthenticated(v: boolean) {
+    this.isAuthenticated = v;
+  }
+
+  getIsAuthenticated() {
+    return this.isAuthenticated;
   }
 }

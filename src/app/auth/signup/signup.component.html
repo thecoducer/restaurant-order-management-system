@@ -16,7 +16,7 @@
 
             <span class="error-text" *ngIf="signUpForm.controls.email.errors != null && signUpForm.controls.email.touched">Please enter a valid email.</span>
 
-            <span class="error-text" *ngIf="!isHideResponseErrors && emailError != null">{{emailError}}</span>
+            <span class="error-text" *ngIf="!isHideResponseErrors && errorObj.signUp.email != null">{{errorObj.signUp.email}}</span>
         </div>
 
         <div class="form-floating">
@@ -31,7 +31,7 @@
             <i class="fa fa-check" aria-hidden="true" *ngIf="isSignedUp && isBtnClicked"></i>
         </button>
 
-        <span class="error-text" *ngIf="unknownError != null">{{unknownError}}</span>
+        <span class="error-text" *ngIf="errorObj.signUp.unknown != null">{{errorObj.signUp.unknown}}</span>
 
     </form>
 

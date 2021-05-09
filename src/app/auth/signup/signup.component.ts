@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthErrorHandlerService } from 'src/app/services/auth-error-handler.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,22 +10,35 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, OnDestroy {
   signUpForm: FormGroup;
 
   name: string;
   email: string;
   password: string;
 
+  errorObj: any;
   isBtnClicked: boolean = false;
   isSignedUp: boolean = false; // to show check icon
-  isErrorFound: boolean = false;
-  emailError: string = null;
-  unknownError: string = null;
   isHideResponseErrors: boolean = true;
   isSigningUp: boolean = false; // to show spinner
+  errorSub: Subscription;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private authErrorHandler: AuthErrorHandlerService
+  ) {
+    // creating a subscription to listen to the subject in authService
+    // so that we get updated whenever the errorObj changes
+    this.errorSub = authErrorHandler.getErrorObservable().subscribe((data) => {
+      this.errorObj = data;
+    });
+
+    // calls the next method on subject in authService
+    // and we get the errorObj data here
+    this.authErrorHandler.initializeErrorObj();
+  }
 
   ngOnInit(): void {
     // creating reactive signup form
@@ -36,6 +50,10 @@ export class SignupComponent implements OnInit {
         Validators.minLength(8),
       ]),
     });
+  }
+
+  ngOnDestroy() {
+    this.errorSub.unsubscribe();
   }
 
   // method binded to form ngSubmit event
@@ -54,8 +72,6 @@ export class SignupComponent implements OnInit {
 
         this.isSignedUp = true;
         this.isSigningUp = false;
-        //this.isBtnClicked = false;
-        this.emailError = null;
         this.isHideResponseErrors = true;
 
         setTimeout(() => {
@@ -68,36 +84,17 @@ export class SignupComponent implements OnInit {
         this.isSignedUp = false;
         this.isSigningUp = false;
         this.isBtnClicked = false;
-        this.isErrorFound = true;
-        
         this.isHideResponseErrors = false;
 
-       this.handleErrors(error.code);
+        this.authErrorHandler.handleAuthError(error, 'signUp');
       });
-  }
-
-  // returns custom error messages
-  private handleErrors(e: string) {
-    switch (e) {
-      case 'auth/email-already-in-use':
-        this.emailError = 'Email already in use.';
-        break;
-      
-      case 'auth/invalid-email':
-        this.emailError = 'Please enter a valid email.';
-        break;
-    
-      default:
-        this.unknownError = e;
-        break;
-    }
   }
 
   // hides error messages on input click
   hideResponseErrors() {
-    if (this.isErrorFound) {
+    if (this.authErrorHandler.foundSignUpError && this.isHideResponseErrors === false) {
       this.isHideResponseErrors = !this.isHideResponseErrors;
-      this.isErrorFound = false;
+      this.authErrorHandler.clearSignUpError();
     }
   }
 }
