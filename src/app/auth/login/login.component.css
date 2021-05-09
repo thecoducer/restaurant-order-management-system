@@ -26,7 +26,7 @@
 }
 
 .form-signin input[type="password"] {
-    margin-bottom: 10px;
+    margin-bottom: 1px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
@@ -34,10 +34,6 @@
 button[type="submit"]:disabled {
     background-color: rgb(173, 173, 173);
     border-color: inherit;
-}
-
-input[type="name"].ng-invalid.ng-touched {
-    border: 1px solid rgb(255, 83, 83);
 }
 
 input[type="email"].ng-invalid.ng-touched {

@@ -10,10 +10,13 @@
             <span class="error-text" *ngIf="signUpForm.controls.name.errors != null && signUpForm.controls.name.touched">What's your name?</span>
         </div>
 
-        <div class="form-floating">
+        <div class="form-floating" (click)="hideResponseErrors()">
             <input type="email" class="form-control" id="email" placeholder="name@example.com" formControlName="email">
             <label class="floating-label" for="floatingInput">Email address</label>
+
             <span class="error-text" *ngIf="signUpForm.controls.email.errors != null && signUpForm.controls.email.touched">Please enter a valid email.</span>
+
+            <span class="error-text" *ngIf="!isHideResponseErrors && emailError != null">{{emailError}}</span>
         </div>
 
         <div class="form-floating">
@@ -22,9 +25,13 @@
             <span class="error-text" *ngIf="signUpForm.controls.password.errors != null && signUpForm.controls.password.touched">Please enter a password.</span>
         </div>
 
-        <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="!signUpForm.valid">
-            <i class="fa fa-arrow-right"></i>
+        <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="!signUpForm.valid || isBtnClicked || isSignedUp">
+            <i class="fa fa-arrow-right" *ngIf="!isSigningUp && !isSignedUp"></i>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="isSigningUp"></span>
+            <i class="fa fa-check" aria-hidden="true" *ngIf="isSignedUp && isBtnClicked"></i>
         </button>
+
+        <span class="error-text" *ngIf="unknownError != null">{{unknownError}}</span>
 
     </form>
 
