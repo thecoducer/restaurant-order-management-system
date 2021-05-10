@@ -28,8 +28,12 @@
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="isLoggingIn"></span>
         </button>
 
-        <span class="error-text" *ngIf="errorObj.logIn.unknown != null" style="margin-top: 10px;">{{errorObj.logIn.unknown}}</span>
-
     </form>
+
+    <button class="w-100 btn btn-lg btn-primary google-btn" type="button" (click)="onLogInWithGoogle()">
+        <span class="google-btn-text">Log in with Google</span>
+    </button>
+
+    <span class="unknown-error-text" *ngIf="errorObj.logIn.unknown != null">{{errorObj.logIn.unknown}}</span>
 
 </main>

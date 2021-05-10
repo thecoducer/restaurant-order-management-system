@@ -1,6 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
+import auth from 'firebase/app';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
@@ -48,6 +49,10 @@ export class AuthService {
   // sign up with email and password
   signUp(email: string, password: string): Promise<any> {
     return this.afAuth.createUserWithEmailAndPassword(email, password);
+  }
+
+  authenticateWithGoogle(): Promise<any> {
+    return this.afAuth.signInWithPopup(new auth.auth.GoogleAuthProvider());
   }
 
   autoLogIn() {

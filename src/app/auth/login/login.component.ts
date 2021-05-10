@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   email: string;
   password: string;
+  //save name when we authenticateWithGoogle for the first time
+  name: string;
 
   errorObj: any;
   isLoggingIn: boolean = false;
@@ -57,27 +59,37 @@ export class LoginComponent implements OnInit, OnDestroy {
   onLogIn() {
     this.isBtnClicked = true;
     this.isLoggingIn = true;
-
     this.email = this.logInForm.get('email').value;
     this.password = this.logInForm.get('password').value;
 
     this.authService
       .signIn(this.email, this.password)
       .then((result) => {
-        //console.log(result);
-
         this.isLoggingIn = false;
         this.isHideResponseErrors = true;
-        //this.authService.setIsAuthenticated(true);
-
         this.router.navigate(['']);
       })
       .catch((error) => {
-        //console.log(error);
         this.isBtnClicked = false;
         this.isHideResponseErrors = false;
         this.isLoggingIn = false;
+        this.authErrorHandler.handleAuthError(error, 'logIn');
+      });
+  }
 
+  onLogInWithGoogle() {
+    this.authService
+      .authenticateWithGoogle()
+      .then((result) => {
+        if (result.additionalUserInfo.isNewUser == true) {
+          this.name = result.additionalUserInfo.profile.name;
+          console.log(this.name);
+          // save user
+        }
+        this.router.navigate(['']);
+      })
+      .catch((error) => {
+        console.log(error);
         this.authErrorHandler.handleAuthError(error, 'logIn');
       });
   }

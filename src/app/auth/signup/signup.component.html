@@ -31,8 +31,12 @@
             <i class="fa fa-check" aria-hidden="true" *ngIf="isSignedUp && isBtnClicked"></i>
         </button>
 
-        <span class="error-text" *ngIf="errorObj.signUp.unknown != null">{{errorObj.signUp.unknown}}</span>
-
     </form>
+
+    <button class="w-100 btn btn-lg btn-primary google-btn" type="button" (click)="onSignUpWithGoogle()">
+        <span class="google-btn-text">Sign up with Google</span>
+    </button>
+
+    <span class="unknown-error-text" *ngIf="errorObj.signUp.unknown != null">{{errorObj.signUp.unknown}}</span>
 
 </main>

@@ -75,7 +75,7 @@ export class SignupComponent implements OnInit, OnDestroy {
         this.isHideResponseErrors = true;
 
         setTimeout(() => {
-          this.router.navigate(['login']);
+          this.router.navigate(['']);
         }, 1500);
       })
       .catch((error) => {
@@ -90,9 +90,28 @@ export class SignupComponent implements OnInit, OnDestroy {
       });
   }
 
+  onSignUpWithGoogle() {
+    this.authService
+      .authenticateWithGoogle()
+      .then((result) => {
+        if (result.additionalUserInfo.isNewUser == true) {
+          this.name = result.additionalUserInfo.profile.name;
+          console.log(this.name);
+          // save user
+        }
+        this.router.navigate(['']);
+      })
+      .catch((error) => {
+        this.authErrorHandler.handleAuthError(error, 'signUp');
+      });
+  }
+
   // hides error messages on input click
   hideResponseErrors() {
-    if (this.authErrorHandler.foundSignUpError && this.isHideResponseErrors === false) {
+    if (
+      this.authErrorHandler.foundSignUpError &&
+      this.isHideResponseErrors === false
+    ) {
       this.isHideResponseErrors = !this.isHideResponseErrors;
       this.authErrorHandler.clearSignUpError();
     }
