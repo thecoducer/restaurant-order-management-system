@@ -11,6 +11,8 @@ import { environment } from 'src/environments/environment';
 export class NavbarComponent implements OnInit {
   isAuthenticated: boolean = false;
   isAuthSub: Subscription;
+  navItemClicked: boolean = false;
+  navBtnClicked: boolean = false;
 
   constructor(private authService: AuthService) {
     this.isAuthSub = this.authService.getIsAuthObservable().subscribe(data => {
@@ -21,6 +23,22 @@ export class NavbarComponent implements OnInit {
    }
 
   ngOnInit(): void {    
+  }
+
+  onNavItemClicked() {
+    console.log("navitemclicked")
+    console.log("navitem", this.navItemClicked)
+    console.log("navbtn", this.navBtnClicked)
+    if(this.navBtnClicked === true) {
+      return false;
+    }
+  }
+
+  onNavBtnClicked() {
+    console.log("btnclicked")
+    console.log("navitem", this.navItemClicked)
+    console.log("navbtn", this.navBtnClicked)
+    this.navBtnClicked = !this.navBtnClicked;
   }
 
 }
