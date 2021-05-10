@@ -4,6 +4,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import auth from 'firebase/app';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { User } from '../models/user.model';
+
+/**
+ * This service deals with user authentication.
+ */
 
 @Injectable({
   providedIn: 'root',
@@ -12,22 +17,19 @@ export class AuthService {
   private isAuthenticated: boolean = false;
   isAuthSubject = new Subject<any>();
   private authStateData: any = null;
-  private userUid: string;
+  authStateSubject = new Subject<any>(); //haven't created an observable
 
   constructor(
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth,
-    private router: Router,
+    private router: Router
   ) {
     // subscribing to the observable that authState returns
     // so that we get updated whenever the authState data gets manipulated
     this.afAuth.authState.subscribe((user) => {
       if (user) {
-        this.authStateData = user;
-        this.userUid = user.uid;
-
-        localStorage.setItem('user', this.userUid);
-
+        this.setAuthState(user);
+        localStorage.setItem('user', user.uid);
         this.setIsAuthenticated(true);
         //console.log('auth if', this.isAuthenticated)
         //console.log(localStorage.getItem('user'));
@@ -70,8 +72,7 @@ export class AuthService {
       localStorage.removeItem('user');
       this.setIsAuthenticated(false);
       //console.log('logout', this.isAuthenticated)
-      this.authStateData = null;
-      this.userUid = null;
+      this.setAuthState(null);
       this.router.navigate(['']);
     });
   }
@@ -89,4 +90,15 @@ export class AuthService {
     this.isAuthenticated = v;
     this.isAuthSubject.next(this.isAuthenticated);
   }
+
+  // might not be needed anymore
+  getAuthStateObservable() {
+    return this.authStateSubject.asObservable();
+  }
+
+  setAuthState(data: any) {
+    this.authStateData = data;
+    this.authStateSubject.next(this.authStateData);
+  }
+  // might not be needed anymore
 }

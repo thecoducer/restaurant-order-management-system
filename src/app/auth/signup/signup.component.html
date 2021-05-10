@@ -34,8 +34,7 @@
     </form>
 
     <button class="w-100 btn btn-lg btn-primary google-btn" type="button" (click)="onSignUpWithGoogle()">
-        <span class="google-btn-text" *ngIf="!isSigningUp && !isSignedUp">Sign up with Google</span>
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="isSigningUp"></span>
+        <span class="google-btn-text">Sign up with Google</span>
     </button>
 
     <span class="unknown-error-text" *ngIf="errorObj.signUp.unknown != null">{{errorObj.signUp.unknown}}</span>

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthErrorHandlerService } from 'src/app/services/auth-error-handler.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserDataService } from 'src/app/services/user-data.service';
 
 @Component({
   selector: 'app-signup',
@@ -27,7 +28,8 @@ export class SignupComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private authErrorHandler: AuthErrorHandlerService
+    private authErrorHandler: AuthErrorHandlerService,
+    private userDataService: UserDataService
   ) {
     // creating a subscription to listen to the subject in authService
     // so that we get updated whenever the errorObj changes
@@ -68,19 +70,21 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.authService
       .signUp(this.email, this.password)
       .then((result) => {
-        //console.log(result);
-
         this.isSignedUp = true;
         this.isSigningUp = false;
         this.isHideResponseErrors = true;
+
+        // assigning values to userData object
+        this.userDataService.name = this.name;
+        this.userDataService.email = this.email;
+        this.userDataService.uid = result.user.uid;
+        this.userDataService.createNewUser();
 
         setTimeout(() => {
           this.router.navigate(['']);
         }, 1500);
       })
       .catch((error) => {
-        //console.log(error);
-
         this.isSignedUp = false;
         this.isSigningUp = false;
         this.isBtnClicked = false;
@@ -94,10 +98,12 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.authService
       .authenticateWithGoogle()
       .then((result) => {
+        // save user data only the first time
         if (result.additionalUserInfo.isNewUser == true) {
-          this.name = result.additionalUserInfo.profile.name;
-          console.log(this.name);
-          // save user
+          this.userDataService.name = result.user.displayName;
+          this.userDataService.email = result.user.email;
+          this.userDataService.uid = result.user.uid;
+          this.userDataService.createNewUser();
         }
         this.router.navigate(['']);
       })

@@ -11,37 +11,16 @@ import { UserDataService } from './services/user-data.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-
   constructor(
-    private primengConfig: PrimeNGConfig, 
-    private authService: AuthService,
-    private userDataService: UserDataService
-    ) {
-     // auto log in user if local storage has the uid returned by firebase
-     this.authService.autoLogIn();
-     this.userDataService.createNewUser();
-    }
-
-  items: MenuItem[];
+    private primengConfig: PrimeNGConfig,
+    private authService: AuthService
+  ) {
+    // auto log in user if local storage has the uid returned by firebase
+    this.authService.autoLogIn();
+  }
 
   ngOnInit() {
+    // enables ripple effect for primeng
     this.primengConfig.ripple = true;
-
-    this.items = [
-      {
-        label: 'Olive',
-        
-      },
-      {
-        label: 'Edit',
-        icon: 'pi pi-fw pi-pencil',
-        items: [
-          { label: 'Delete', icon: 'pi pi-fw pi-trash' },
-          { label: 'Refresh', icon: 'pi pi-fw pi-refresh' },
-        ],
-      },
-    ];
-
-     
   }
 }
