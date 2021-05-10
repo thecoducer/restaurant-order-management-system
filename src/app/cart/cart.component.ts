@@ -12,7 +12,7 @@ export class CartComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.isCartEmpty = false;
+    this.isCartEmpty = true;
   }
 
 }

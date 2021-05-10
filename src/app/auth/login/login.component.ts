@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         this.isLoggingIn = false;
         this.isHideResponseErrors = true;
-        this.authService.setIsAuthenticated(true);
+        //this.authService.setIsAuthenticated(true);
 
         this.router.navigate(['']);
       })
