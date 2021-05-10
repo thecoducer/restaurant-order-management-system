@@ -12,7 +12,6 @@ export class FetchHeaderImageService implements OnInit {
   ngOnInit() {}
 
   fetchImage() {
-    
     return this.http.get(environment.UNSPLASH_SOURCE_API);
   }
 }

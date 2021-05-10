@@ -1,6 +1,6 @@
 .navbar-brand {
     font-size: 40px;
-    font-family: 'Pacifico', cursive;
+    font-family: "Pacifico", cursive;
 }
 
 #navbar-container {
@@ -20,4 +20,9 @@ a.close-icon,
 a.close-icon:hover {
     color: inherit;
     text-decoration: none;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
 }

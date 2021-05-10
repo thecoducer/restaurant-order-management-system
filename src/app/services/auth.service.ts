@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import auth from 'firebase/app';
@@ -18,7 +18,6 @@ export class AuthService {
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth,
     private router: Router,
-    private ngZone: NgZone
   ) {
     // subscribing to the observable that authState returns
     // so that we get updated whenever the authState data gets manipulated
@@ -56,7 +55,7 @@ export class AuthService {
   }
 
   autoLogIn() {
-    console.log('auto login out', this.isAuthenticated);
+    //console.log('auto login out', this.isAuthenticated);
     if (localStorage.getItem('user') != null && this.authStateData != null) {
       this.setIsAuthenticated(true);
       //console.log('auto login if', this.isAuthenticated)

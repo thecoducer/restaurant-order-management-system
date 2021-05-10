@@ -19,9 +19,9 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   errorObj: any;
   isBtnClicked: boolean = false;
-  isSignedUp: boolean = false; // to show check icon
+  isSignedUp: boolean = false;
   isHideResponseErrors: boolean = true;
-  isSigningUp: boolean = false; // to show spinner
+  isSigningUp: boolean = false;
   errorSub: Subscription;
 
   constructor(
