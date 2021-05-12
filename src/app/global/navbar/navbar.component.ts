@@ -55,7 +55,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   visitProfile() {
     let _name: string;
-    _name = this.userDataService.name.split(' ').join('-');
+    _name = this.userDataService.getName.split(' ').join('-');
     this.router.navigate(['profile', _name]);
   }
 }

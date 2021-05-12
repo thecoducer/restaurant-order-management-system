@@ -75,9 +75,9 @@ export class SignupComponent implements OnInit, OnDestroy {
         this.isHideResponseErrors = true;
 
         // assigning values to userData object
-        this.userDataService.name = this.name;
-        this.userDataService.email = this.email;
-        this.userDataService.uid = result.user.uid;
+        this.userDataService.setName = this.name;
+        this.userDataService.setEmail = this.email;
+        this.userDataService.setUid = result.user.uid;
         this.userDataService.createNewUser();
 
         setTimeout(() => {
@@ -100,12 +100,17 @@ export class SignupComponent implements OnInit, OnDestroy {
       .authenticateWithGoogle()
       .then((result) => {
         // save user data only the first time
+        console.log(result);
         if (result.additionalUserInfo.isNewUser == true) {
-          this.userDataService.name = result.user.displayName;
-          this.userDataService.email = result.user.email;
-          this.userDataService.uid = result.user.uid;
+          this.userDataService.setName = result.user.displayName;
+          this.userDataService.setEmail = result.user.email;
+          this.userDataService.setUid = result.user.uid;
           this.userDataService.createNewUser();
-          this.router.navigate(['']);
+
+          setTimeout(() => {
+            this.router.navigate(['']);
+          }, 1500);
+          //this.router.navigate(['']);
         } else if (result.additionalUserInfo.isNewUser == false) {
           setTimeout(() => {
             this.userDataService.getUserDataFromFirebase(true);

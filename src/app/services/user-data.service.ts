@@ -43,39 +43,40 @@ export class UserDataService {
 
   createNewUser() {
     this.userObj = this.afd.object('users/' + this.userData.uid);
+    console.log(this.userData)
     this.userObj.set(this.userData);
     this.userDataSubject.next(this.userData); //
   }
 
-  public set uid(v: string) {
+  public set setUid(v: string) {
     this.userData.uid = v;
   }
 
-  public get uid() {
+  public get getUid() {
     return this.userData.uid;
   }
 
-  public set email(v: string) {
+  public set setEmail(v: string) {
     this.userData.email = v;
   }
 
-  public set name(v: string) {
+  public set setName(v: string) {
     this.userData.name = v;
   }
 
-  public get name() {
+  public get getName() {
     return this.userData.name;
   }
 
-  public set phone(v: string) {
+  public set setPhone(v: string) {
     this.userData.phone = v;
   }
 
-  public set address(v: string) {
+  public set setAddress(v: string) {
     this.userData.address = v;
   }
 
-  public set requestedUserData(v: boolean) {
+  public set setRequestedUserData(v: boolean) {
     this._requestedUserData = v;
   }
 

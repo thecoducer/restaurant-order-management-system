@@ -61,7 +61,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.userData.name = this.userProfileForm.get('name').value;
     this.userData.phone = this.userProfileForm.get('phone').value;
     this.userData.address = this.userProfileForm.get('address').value;
-    this.userDataService.uid = this.userData.uid;
+    this.userDataService.setUid = this.userData.uid;
 
     console.log(this.userProfileForm);
 
@@ -75,7 +75,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           this.isUpdateSuccess = false;
           this.updateStatus = 'Update profile';
           let _name: string;
-          _name = this.userDataService.name.split(' ').join('-');
+          _name = this.userDataService.getName.split(' ').join('-');
           this.router.navigate(['profile', _name]);
         }, 3500);
       })

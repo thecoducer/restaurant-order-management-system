@@ -89,10 +89,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       .authenticateWithGoogle()
       .then((result) => {
         // save user data for a first time user only
+        console.log(result);
         if (result.additionalUserInfo.isNewUser == true) {
-          this.userDataService.name = result.user.displayName;
-          this.userDataService.email = result.user.email;
-          this.userDataService.uid = result.user.uid;
+          this.userDataService.setName = result.user.displayName;
+          this.userDataService.setEmail = result.user.email;
+          this.userDataService.setUid = result.user.uid;
           this.userDataService.createNewUser();
           this.router.navigate(['']);
         } else if (result.additionalUserInfo.isNewUser == false) {
