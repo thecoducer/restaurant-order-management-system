@@ -1,7 +1,7 @@
 <div class="container" id="navbar-container">
     <nav class="navbar navbar-expand-lg navbar-light bg-white" aria-label="Eighth navbar example">
         <div class="container">
-            <a class="navbar-brand" href="#">21 Club</a>
+            <a class="navbar-brand" [routerLink]="['']">21 Club</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -15,20 +15,15 @@
                     <li class="nav-item" *ngIf="!isAuthenticated">
                         <a class="nav-link" [routerLink]="['/sign-up']" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Sign up</a>
                     </li>
-                    <!-- <li class="nav-item" *ngIf="isAuthenticated">
-                        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Track order</a>
-                    </li>
-                    <li class="nav-item" *ngIf="isAuthenticated">
-                        <a class="nav-link" href="#" (click)="onLogOut()" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Log out</a>
-                    </li> -->
 
                     <li class="nav-item dropdown" *ngIf="isAuthenticated">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Hi, Mayukh
+                              Hi, {{displayName}}
                             </a>
                         <div class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Track order</a>
-                            <a class="dropdown-item" href="#" (click)="onLogOut()">Log out</a>
+                            <a class="dropdown-item" (click)="visitProfile()">Profile</a>
+                            <a class="dropdown-item">Track order</a>
+                            <a class="dropdown-item" (click)="onLogOut()">Log out</a>
                             <!-- <div class="dropdown-divider"></div> -->
                         </div>
                     </li>

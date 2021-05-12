@@ -25,6 +25,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { CartPageComponent } from './cart-page/cart-page.component';
 import { CategoryPageComponent } from './category-page/category-page.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CategoryPageComponent } from './category-page/category-page.component';
     CartComponent,
     CartPageComponent,
     CategoryPageComponent,
+    UserProfileComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

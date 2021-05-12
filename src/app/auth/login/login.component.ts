@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthErrorHandlerService } from 'src/app/services/auth-error-handler.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserDataService } from 'src/app/services/user-data.service';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +16,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   email: string;
   password: string;
-  //save name when we authenticateWithGoogle for the first time
-  name: string;
 
   errorObj: any;
   isLoggingIn: boolean = false;
@@ -27,7 +26,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private authErrorHandler: AuthErrorHandlerService
+    private authErrorHandler: AuthErrorHandlerService,
+    private userDataService: UserDataService
   ) {
     // creating a subscription to listen to the subject in authService
     // so that we get updated whenever the errorObj changes
@@ -35,8 +35,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.errorObj = data;
     });
 
+    // the errorObj needs to be initialized here
     // calls the next method on subject in authService
-    // and we get the errorObj data here
+    // and we get the initial errorObj data here
     this.authErrorHandler.initializeErrorObj();
   }
 
@@ -55,10 +56,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.errorSub.unsubscribe();
   }
 
-  // method binded to form ngSubmit event
+  /** method binded to form ngSubmit event */
   onLogIn() {
     this.isBtnClicked = true;
     this.isLoggingIn = true;
+
     this.email = this.logInForm.get('email').value;
     this.password = this.logInForm.get('password').value;
 
@@ -67,7 +69,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       .then((result) => {
         this.isLoggingIn = false;
         this.isHideResponseErrors = true;
-        this.router.navigate(['']);
+        setTimeout(() => {
+          this.userDataService.getUserDataFromFirebase(true);
+          this.router.navigate(['']);
+        }, 3000);
+        // ?
       })
       .catch((error) => {
         this.isBtnClicked = false;
@@ -77,16 +83,25 @@ export class LoginComponent implements OnInit, OnDestroy {
       });
   }
 
+  /** on clicking log in with google */
   onLogInWithGoogle() {
     this.authService
       .authenticateWithGoogle()
       .then((result) => {
+        // save user data for a first time user only
         if (result.additionalUserInfo.isNewUser == true) {
-          this.name = result.additionalUserInfo.profile.name;
-          console.log(this.name);
-          // save user
+          this.userDataService.name = result.user.displayName;
+          this.userDataService.email = result.user.email;
+          this.userDataService.uid = result.user.uid;
+          this.userDataService.createNewUser();
+          this.router.navigate(['']);
+        } else if (result.additionalUserInfo.isNewUser == false) {
+          setTimeout(() => {
+            this.userDataService.getUserDataFromFirebase(true);
+            this.router.navigate(['']);
+          }, 3000);
+          // ?
         }
-        this.router.navigate(['']);
       })
       .catch((error) => {
         console.log(error);
@@ -94,7 +109,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       });
   }
 
-  // hides error messages on input click
+  /** hides error messages on input click */
   hideResponseErrors() {
     if (
       this.authErrorHandler.foundLogInError &&

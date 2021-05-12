@@ -58,7 +58,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.errorSub.unsubscribe();
   }
 
-  // method binded to form ngSubmit event
+  /** method binded to form ngSubmit event */
   onSignUp() {
     this.isBtnClicked = true;
     this.isSigningUp = true;
@@ -94,6 +94,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       });
   }
 
+  /** on clicking sign up with google */
   onSignUpWithGoogle() {
     this.authService
       .authenticateWithGoogle()
@@ -104,15 +105,21 @@ export class SignupComponent implements OnInit, OnDestroy {
           this.userDataService.email = result.user.email;
           this.userDataService.uid = result.user.uid;
           this.userDataService.createNewUser();
+          this.router.navigate(['']);
+        } else if (result.additionalUserInfo.isNewUser == false) {
+          setTimeout(() => {
+            this.userDataService.getUserDataFromFirebase(true);
+            this.router.navigate(['']);
+          }, 3000);
+          // ?
         }
-        this.router.navigate(['']);
       })
       .catch((error) => {
         this.authErrorHandler.handleAuthError(error, 'signUp');
       });
   }
 
-  // hides error messages on input click
+  /** hides error messages on input click */
   hideResponseErrors() {
     if (
       this.authErrorHandler.foundSignUpError &&

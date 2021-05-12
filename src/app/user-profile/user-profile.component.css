@@ -1,0 +1,26 @@
+.profile-div {
+    padding-top: 100px;
+    padding-bottom: 180px;
+    min-height: 70vh;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+label {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.success-text {
+    color: rgb(0, 231, 77);
+    font-size: 13px;
+    margin-top: 15px;
+}
+
+.error-text {
+    color: rgb(255, 83, 83);
+    font-size: 13px;
+    margin-top: 15px;
+}

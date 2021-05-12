@@ -17,7 +17,7 @@ export class AuthService {
   private isAuthenticated: boolean = false;
   isAuthSubject = new Subject<any>();
   private authStateData: any = null;
-  authStateSubject = new Subject<any>(); //haven't created an observable
+  authStateSubject = new Subject<any>(); 
 
   constructor(
     private afs: AngularFirestore,
@@ -57,14 +57,16 @@ export class AuthService {
   }
 
   autoLogIn() {
-    //console.log('auto login out', this.isAuthenticated);
-    if (localStorage.getItem('user') != null && this.authStateData != null) {
-      this.setIsAuthenticated(true);
-      //console.log('auto login if', this.isAuthenticated)
-    } else {
+    console.log('auto login out', this.isAuthenticated);
+    if (! localStorage.getItem('user') === null ) {
+      console.log(localStorage.getItem('user'))
+      console.log('auto login if', this.isAuthenticated)
+      this.setIsAuthenticated(true); //
+      
+    } /* else if(localStorage.getItem('user') === null) {
       this.setIsAuthenticated(false);
-      //console.log('auto login else', this.isAuthenticated)
-    }
+      console.log('auto login else', this.isAuthenticated)
+    } */
   }
 
   logOut() {
@@ -88,10 +90,11 @@ export class AuthService {
 
   setIsAuthenticated(v: boolean) {
     this.isAuthenticated = v;
+    console.log('set isauth', this.isAuthenticated);
     this.isAuthSubject.next(this.isAuthenticated);
   }
 
-  // might not be needed anymore
+  // 
   getAuthStateObservable() {
     return this.authStateSubject.asObservable();
   }
@@ -100,5 +103,5 @@ export class AuthService {
     this.authStateData = data;
     this.authStateSubject.next(this.authStateData);
   }
-  // might not be needed anymore
+  // 
 }

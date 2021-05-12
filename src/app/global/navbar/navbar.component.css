@@ -26,3 +26,7 @@ a.close-icon:hover {
     display: block;
     margin-top: 0;
 }
+
+.dropdown-item {
+    cursor: pointer;
+}

@@ -1,0 +1,34 @@
+<div class="container profile-div">
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <h2 style="margin-bottom: 40px;">Your profile</h2>
+
+            <form [formGroup]="userProfileForm" (ngSubmit)="onUpdate()">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Name</label>
+                    <input type="name" class="form-control" formControlName="name">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Phone</label>
+                    <input type="phone" class="form-control" formControlName="phone">
+                    <span class="error-text" *ngIf="userProfileForm.controls.phone.errors != null">
+                    Enter a 10 digit valid phone number.
+                </span>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input type="email" class="form-control" formControlName="email" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Address</label>
+                    <input type="address" class="form-control" formControlName="address">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Role</label>
+                    <input type="role" class="form-control" formControlName="role" readonly>
+                </div>
+                <button type="submit" class="btn btn-md" [ngClass]="{'btn-success': isUpdateSuccess, 'btn-danger': isUpdateFailure, 'btn-primary': !isUpdateSuccess && !isUpdateFailure}">{{updateStatus}}</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -13,7 +13,8 @@ import { UserDataService } from './services/user-data.service';
 export class AppComponent {
   constructor(
     private primengConfig: PrimeNGConfig,
-    private authService: AuthService
+    private authService: AuthService,
+    private userDataService: UserDataService
   ) {
     // auto log in user if local storage has the uid returned by firebase
     this.authService.autoLogIn();
@@ -22,5 +23,6 @@ export class AppComponent {
   ngOnInit() {
     // enables ripple effect for primeng
     this.primengConfig.ripple = true;
+    this.userDataService.getUserDataFromFirebase(false);
   }
 }
