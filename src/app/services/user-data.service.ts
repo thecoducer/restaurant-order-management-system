@@ -25,7 +25,7 @@ export class UserDataService {
   private _requestedUserData: boolean = false;
 
   constructor(
-    private afd: AngularFireDatabase,
+    private afdb: AngularFireDatabase,
     /* private authService: AuthService, */
     private http: HttpClient
   ) {
@@ -42,42 +42,13 @@ export class UserDataService {
   }
 
   createNewUser() {
-    this.userObj = this.afd.object('users/' + this.userData.uid);
-    console.log(this.userData)
+    this.userObj = this.afdb.object('users/' + this.userData.uid);
+    this.userObj.snapshotChanges().subscribe((data) => {
+      console.log(data);
+    });
+    console.log(this.userData);
     this.userObj.set(this.userData);
     this.userDataSubject.next(this.userData); //
-  }
-
-  public set setUid(v: string) {
-    this.userData.uid = v;
-  }
-
-  public get getUid() {
-    return this.userData.uid;
-  }
-
-  public set setEmail(v: string) {
-    this.userData.email = v;
-  }
-
-  public set setName(v: string) {
-    this.userData.name = v;
-  }
-
-  public get getName() {
-    return this.userData.name;
-  }
-
-  public set setPhone(v: string) {
-    this.userData.phone = v;
-  }
-
-  public set setAddress(v: string) {
-    this.userData.address = v;
-  }
-
-  public set setRequestedUserData(v: boolean) {
-    this._requestedUserData = v;
   }
 
   getUserDataObservable() {
@@ -111,7 +82,7 @@ export class UserDataService {
 
   updateUserData(userDataParam: User): Promise<void> {
     this.userDataSubject.next(userDataParam);
-    this.userObj = this.afd.object('users/' + userDataParam.uid);
+    this.userObj = this.afdb.object('users/' + userDataParam.uid);
     return this.userObj.update(userDataParam);
   }
 
@@ -132,4 +103,36 @@ export class UserDataService {
 
   // sign in - profile - logout - sign in - profile
   // previous user data???
+
+  public set setUid(v: string) {
+    this.userData.uid = v;
+  }
+
+  public get getUid() {
+    return this.userData.uid;
+  }
+
+  public set setEmail(v: string) {
+    this.userData.email = v;
+  }
+
+  public set setName(v: string) {
+    this.userData.name = v;
+  }
+
+  public get getName() {
+    return this.userData.name;
+  }
+
+  public set setPhone(v: string) {
+    this.userData.phone = v;
+  }
+
+  public set setAddress(v: string) {
+    this.userData.address = v;
+  }
+
+  public set setRequestedUserData(v: boolean) {
+    this._requestedUserData = v;
+  }
 }

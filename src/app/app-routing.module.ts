@@ -7,28 +7,43 @@ import { LoginComponent } from './auth/login/login.component';
 import { NavbarComponent } from './global/navbar/navbar.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { DisplayItemsComponent } from './admin/manage-items/display-items/display-items.component';
+import { AddOrEditItemsComponent } from './admin/manage-items/add-or-edit-items/add-or-edit-items.component';
+import { ManageItemsComponent } from './admin/manage-items/manage-items.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'sign-up',
-    component: SignupComponent
+    component: SignupComponent,
   },
   {
     path: 'profile/:name',
-    component: UserProfileComponent
-  }
+    component: UserProfileComponent,
+  },
+  {
+    path: 'admin/items',
+    component: DisplayItemsComponent,
+  },
+  {
+    path: 'admin/items/:path',
+    component: AddOrEditItemsComponent,
+  },
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

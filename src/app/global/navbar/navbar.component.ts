@@ -58,4 +58,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     _name = this.userDataService.getName.split(' ').join('-');
     this.router.navigate(['profile', _name]);
   }
+
+  onManageItems() {
+    this.router.navigate(['admin/items']);
+  }
 }

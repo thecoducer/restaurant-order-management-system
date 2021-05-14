@@ -16,17 +16,31 @@
                         <a class="nav-link" [routerLink]="['/sign-up']" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Sign up</a>
                     </li>
 
+                    <!-- visible only to customers -->
                     <li class="nav-item dropdown" *ngIf="isAuthenticated">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
+                              Hi, {{displayName}}
+                            </a>
+                        <div class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" (click)="visitProfile()">Profile</a>
+                            <a class="dropdown-item" (click)="onManageItems()">Manage Items</a>
+                            <a class="dropdown-item">Orders</a>
+                            <a class="dropdown-item" (click)="onLogOut()">Log out</a>
+                            <!-- <div class="dropdown-divider"></div> -->
+                        </div>
+                    </li>
+
+                    <!-- visible only to admins  -->
+                    <!-- <li class="nav-item dropdown" *ngIf="isAuthenticated">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
                               Hi, {{displayName}}
                             </a>
                         <div class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" (click)="visitProfile()">Profile</a>
                             <a class="dropdown-item">Orders</a>
                             <a class="dropdown-item" (click)="onLogOut()">Log out</a>
-                            <!-- <div class="dropdown-divider"></div> -->
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>

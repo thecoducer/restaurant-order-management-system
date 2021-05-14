@@ -22,10 +22,15 @@ import { CartComponent } from './cart/cart.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+
 import { environment } from 'src/environments/environment';
 import { CartPageComponent } from './cart-page/cart-page.component';
 import { CategoryPageComponent } from './category-page/category-page.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ManageItemsComponent } from './admin/manage-items/manage-items.component';
+import { AddOrEditItemsComponent } from './admin/manage-items/add-or-edit-items/add-or-edit-items.component';
+import { DisplayItemsComponent } from './admin/manage-items/display-items/display-items.component';
 
 @NgModule({
   declarations: [
@@ -42,11 +47,15 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     CartPageComponent,
     CategoryPageComponent,
     UserProfileComponent,
+    ManageItemsComponent,
+    AddOrEditItemsComponent,
+    DisplayItemsComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     BrowserModule,
     AppRoutingModule,
     ButtonModule,
