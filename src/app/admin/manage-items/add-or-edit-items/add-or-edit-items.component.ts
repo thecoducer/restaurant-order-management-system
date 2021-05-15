@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, Data, NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { Item } from 'src/app/models/item.model';
@@ -69,8 +69,8 @@ export class AddOrEditItemsComponent implements OnInit {
       itemImage: new FormControl('', [Validators.required]),
     });
 
-    this.route.params.subscribe((params) => {
-      this.selectedPath = params['path'];
+    this.route.data.subscribe((data: Data) => {
+      this.selectedPath = data['path'];
       this.submitBtnText =
         this.selectedPath === 'edit' ? 'Update item' : 'Add item';
       this.isAdd = this.selectedPath === 'add' ? true : false;

@@ -36,14 +36,16 @@ const routes: Routes = [
   {
     path: 'admin/items/add',
     component: AddOrEditItemsComponent,
+    data: { path: 'add' },
   },
   {
     path: 'admin/items/edit/:itemId',
-    component: AddOrEditItemsComponent
+    component: AddOrEditItemsComponent,
+    data: { path: 'edit' },
   },
   {
     path: '**',
-    component: NotFoundComponent
+    component: NotFoundComponent,
     //redirectTo: '',
   },
 ];
