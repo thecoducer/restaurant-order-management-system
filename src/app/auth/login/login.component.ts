@@ -58,6 +58,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   /** method binded to form ngSubmit event */
   onLogIn() {
+    // handle the case when disabled attribute for submit button is deleted
+    // from html
+    if(this.logInForm.invalid) {
+      return;
+    }
+
     this.isBtnClicked = true;
     this.isLoggingIn = true;
 

@@ -31,6 +31,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ManageItemsComponent } from './admin/manage-items/manage-items.component';
 import { AddOrEditItemsComponent } from './admin/manage-items/add-or-edit-items/add-or-edit-items.component';
 import { DisplayItemsComponent } from './admin/manage-items/display-items/display-items.component';
+import { GreenTickComponent } from './global/green-tick/green-tick.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { DisplayItemsComponent } from './admin/manage-items/display-items/displa
     ManageItemsComponent,
     AddOrEditItemsComponent,
     DisplayItemsComponent,
+    GreenTickComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

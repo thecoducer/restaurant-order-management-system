@@ -16,14 +16,13 @@
                         <input type="itemDesc" class="form-control" formControlName="itemDesc">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Amount</label>
+                        <label for="exampleInputEmail1">Amount (in ₹)</label>
                         <input type="itemAmt" class="form-control" formControlName="itemAmt">
                         <span class="error-text" *ngIf="addOrEditItemsForm.controls.itemAmt.errors != null && addOrEditItemsForm.controls.itemAmt.touched">Please enter a valid amount.</span>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Category</label>
                         <select class="form-select" aria-label="Default select example" formControlName="itemCategory">
-                            <option selected disabled>Select a category</option>
                             <option value="starters">Starters</option>
                             <option value="mains">Mains</option>
                             <option value="alcoholic-beverages">Alcoholic Beverages</option>
@@ -52,25 +51,25 @@
                     </div>
                 </div>
 
-                <div class="alert alert-success" role="alert" *ngIf="isUploaded">
-                    Uploaded successfully.
-                </div>
-
                 <div class="alert alert-danger" role="alert" *ngIf="(selectedFile) && (!isImage)">
                     Please select an .jpg, .jpeg or .png file only.
                 </div>
 
-                <div class="alert alert-danger" role="alert" *ngIf="isUploadBtnClicked == true && isSelectedCategory == false">
-                    Please select a category.
+                <div class="alert alert-danger" role="alert" *ngIf="(selectedFile) && (isImage) && (fileSizeExceeded)">
+                    File size exceeds 2 MB maximum limit.
                 </div>
 
                 <div class="form-group">
-                    <button type="button" *ngIf="(!isUploading) && (!isUploaded) && isImage" class="btn btn-warning btn-sm" [disabled]="!selectedFile" (click)="onUpload()">
-                        <i class="fa fa-upload" aria-hidden="true"></i> Upload
-                    </button>
+                    <button type="submit" class="btn btn-md" [ngClass]="{'btn-success': isSubmitted, 'btn-primary': !isSubmitted, 'btn-danger': isSubmitted==false && unknownErrorText != null}" [disabled]="(!addOrEditItemsForm.valid) || isUploading || fileSizeExceeded || !isImage">{{submitBtnText}}</button>
+
+                    <button type="button" class="btn btn-md btn-primary" style="margin-left: 10px" *ngIf="(isSubmitted == true && isAdd == true) || (unknownErrorText != null && isAdd == true)" (click)="addAnotherItem()">{{addAnotherItemBtnText}}</button>
                 </div>
 
-                <button type="submit" class="btn btn-md btn-primary" [disabled]="(!addOrEditItemsForm.valid) || isUploaded == false">{{submitBtnText}}</button>
+                <div class="alert alert-danger" role="alert" *ngIf="unknownErrorText != null">
+                    <h4>Some error occurred.</h4>
+                    {{unknownErrorText}}
+                </div>
+
             </form>
         </div>
 

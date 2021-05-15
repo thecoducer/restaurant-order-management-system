@@ -32,7 +32,13 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         if (this.userData != undefined) {
           //check for email?
           setTimeout(() => {
-            this.userProfileForm.patchValue(this.userData);
+            this.userProfileForm.patchValue({
+              name: this.userData.name,
+              phone: this.userData.phone,
+              email: this.userData.email,
+              address: this.userData.address,
+              role: this.userData.role.val,
+            });
           }, 800);
         }
         console.log(this.userData);
@@ -48,7 +54,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       ]),
       email: new FormControl(this.userData.email),
       address: new FormControl(this.userData.address),
-      role: new FormControl(this.userData.role),
+      role: new FormControl(this.userData.role.val),
     });
   }
 

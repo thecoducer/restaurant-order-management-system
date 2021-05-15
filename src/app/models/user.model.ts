@@ -4,5 +4,7 @@ export interface User {
   name: string;
   phone: string;
   address: string;
-  role: string;
+  role: {
+    val: string;
+  }
 }

@@ -60,6 +60,11 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   /** method binded to form ngSubmit event */
   onSignUp() {
+    // handle the case when disabled attribute for submit button is deleted
+    // from html
+    if(this.signUpForm.invalid) {
+      return;
+    }
     this.isBtnClicked = true;
     this.isSigningUp = true;
 

@@ -33,9 +33,11 @@
 
     </form>
 
-    <button class="w-100 btn btn-lg btn-primary google-btn" type="button" (click)="onSignUpWithGoogle()">
+    <button class="w-100 btn btn-lg btn-primary google-btn" type="button" (click)="onSignUpWithGoogle()" style="margin-bottom: 10px;">
         <span class="google-btn-text">Sign up with Google</span>
     </button>
+
+    <span>Have an account? <a [routerLink]="['/login']">Log in</a></span>
 
     <span class="unknown-error-text" *ngIf="errorObj.signUp.unknown != null">{{errorObj.signUp.unknown}}</span>
 

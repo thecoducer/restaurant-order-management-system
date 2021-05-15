@@ -17,8 +17,11 @@ export class UserDataService {
     name: null,
     phone: null,
     address: null,
-    role: 'customer',
+    role: {
+      val: 'customer',
+    },
   };
+
   userDataSubject = new BehaviorSubject<User>(this.userData);
   /* private _uid: string;
   private isAuthenticated: boolean; */
@@ -43,12 +46,16 @@ export class UserDataService {
 
   createNewUser() {
     this.userObj = this.afdb.object('users/' + this.userData.uid);
-    this.userObj.snapshotChanges().subscribe((data) => {
-      console.log(data);
-    });
-    console.log(this.userData);
+    this.userObj.snapshotChanges().subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     this.userObj.set(this.userData);
-    this.userDataSubject.next(this.userData); //
+    this.userDataSubject.next(this.userData);
   }
 
   getUserDataObservable() {
@@ -90,7 +97,7 @@ export class UserDataService {
     console.log(this.userData);
     Object.entries(this.userData).forEach(([key, val]) => {
       if (key === 'role') {
-        this.userData[key] = 'customer';
+        this.userData.role.val = 'customer';
       } else {
         this.userData[key] = null;
       }
