@@ -10,6 +10,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DisplayItemsComponent } from './admin/manage-items/display-items/display-items.component';
 import { AddOrEditItemsComponent } from './admin/manage-items/add-or-edit-items/add-or-edit-items.component';
 import { ManageItemsComponent } from './admin/manage-items/manage-items.component';
+import { NotFoundComponent } from './global/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -33,12 +34,17 @@ const routes: Routes = [
     component: DisplayItemsComponent,
   },
   {
-    path: 'admin/items/:path',
+    path: 'admin/items/add',
     component: AddOrEditItemsComponent,
   },
   {
+    path: 'admin/items/edit/:itemId',
+    component: AddOrEditItemsComponent
+  },
+  {
     path: '**',
-    redirectTo: '',
+    component: NotFoundComponent
+    //redirectTo: '',
   },
 ];
 
