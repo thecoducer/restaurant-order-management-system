@@ -22,7 +22,7 @@
         <div class="form-floating">
             <input type="password" class="form-control" id="password" placeholder="Password" name="password" formControlName="password">
             <label class="floating-label" for="floatingPassword">Password</label>
-            <span class="error-text" *ngIf="signUpForm.controls.password.errors != null && signUpForm.controls.password.touched">Please enter a password.</span>
+            <span class="error-text" *ngIf="signUpForm.controls.password.errors != null && signUpForm.controls.password.touched">Password length must be greater than 8.</span>
         </div>
 
         <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="!signUpForm.valid || isBtnClicked || isSignedUp">
@@ -37,8 +37,8 @@
         <span class="google-btn-text">Sign up with Google</span>
     </button>
 
-    <span>Have an account? <a [routerLink]="['/login']">Log in</a></span>
-
     <span class="unknown-error-text" *ngIf="errorObj.signUp.unknown != null">{{errorObj.signUp.unknown}}</span>
+
+    <p class="mobile-only">Have an account? <a [routerLink]="['/login']">Log in</a></p>
 
 </main>

@@ -31,7 +31,6 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ManageItemsComponent } from './admin/manage-items/manage-items.component';
 import { AddOrEditItemsComponent } from './admin/manage-items/add-or-edit-items/add-or-edit-items.component';
 import { DisplayItemsComponent } from './admin/manage-items/display-items/display-items.component';
-import { GreenTickComponent } from './global/green-tick/green-tick.component';
 import { NotFoundComponent } from './global/not-found/not-found.component';
 
 @NgModule({
@@ -52,7 +51,6 @@ import { NotFoundComponent } from './global/not-found/not-found.component';
     ManageItemsComponent,
     AddOrEditItemsComponent,
     DisplayItemsComponent,
-    GreenTickComponent,
     NotFoundComponent,
   ],
   imports: [
@@ -67,7 +65,7 @@ import { NotFoundComponent } from './global/not-found/not-found.component';
     RippleModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

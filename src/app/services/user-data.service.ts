@@ -4,7 +4,6 @@ import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -21,40 +20,21 @@ export class UserDataService {
       val: 'customer',
     },
   };
-
   userDataSubject = new BehaviorSubject<User>(this.userData);
-  /* private _uid: string;
-  private isAuthenticated: boolean; */
-  private _requestedUserData: boolean = false;
 
-  constructor(
-    private afdb: AngularFireDatabase,
-    /* private authService: AuthService, */
-    private http: HttpClient
-  ) {
-    /* this.authService.getAuthStateObservable().subscribe((data) => {
-      if (data != null && data.uid != null) {
-        this._uid = data.uid;
-      }
-    });
+  constructor(private afdb: AngularFireDatabase, private http: HttpClient) {}
 
-    this.authService.getIsAuthObservable().subscribe((data) => {
-      this.isAuthenticated = data;
-    });
-    this.authService.initializeIsAuth(); */
-  }
+  /** saves new user data in Firebase DB */
+  createNewUser(name: string, email: string, uid: string) {
+    this.userData.name = name;
+    this.userData.email = email;
+    this.userData.uid = uid;
 
-  createNewUser() {
     this.userObj = this.afdb.object('users/' + this.userData.uid);
-    this.userObj.snapshotChanges().subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    this.userObj.set(this.userData);
+    this.userObj.set(this.userData).then(() => {
+      this.getUserDataFromFirebase();
+    });
+
     this.userDataSubject.next(this.userData);
   }
 
@@ -62,14 +42,9 @@ export class UserDataService {
     return this.userDataSubject.asObservable();
   }
 
-  getUserDataFromFirebase(force: boolean) {
-    if (
-      (localStorage.getItem('user') != null &&
-        this._requestedUserData === false) ||
-      force === true
-    ) {
-      this._requestedUserData = true;
-
+  getUserDataFromFirebase() {
+    if (localStorage.getItem('user') != null) {
+      console.log('getting user data from firebase');
       this.http
         .get(
           environment.firebase.databaseURL +
@@ -80,10 +55,8 @@ export class UserDataService {
         .subscribe((data: User) => {
           this.userDataSubject.next(data);
           this.userData = data;
-          console.log(this.userData);
+          console.log('got from firebase', this.userData);
         });
-    } else if (this._requestedUserData === true) {
-      console.log('Already fetched user data.');
     }
   }
 
@@ -137,9 +110,5 @@ export class UserDataService {
 
   public set setAddress(v: string) {
     this.userData.address = v;
-  }
-
-  public set setRequestedUserData(v: boolean) {
-    this._requestedUserData = v;
   }
 }

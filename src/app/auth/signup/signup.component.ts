@@ -62,9 +62,10 @@ export class SignupComponent implements OnInit, OnDestroy {
   onSignUp() {
     // handle the case when disabled attribute for submit button is deleted
     // from html
-    if(this.signUpForm.invalid) {
+    if (this.signUpForm.invalid) {
       return;
     }
+
     this.isBtnClicked = true;
     this.isSigningUp = true;
 
@@ -79,11 +80,11 @@ export class SignupComponent implements OnInit, OnDestroy {
         this.isSigningUp = false;
         this.isHideResponseErrors = true;
 
-        // assigning values to userData object
-        this.userDataService.setName = this.name;
-        this.userDataService.setEmail = this.email;
-        this.userDataService.setUid = result.user.uid;
-        this.userDataService.createNewUser();
+        this.userDataService.createNewUser(
+          this.name,
+          this.email,
+          result.user.uid
+        );
 
         setTimeout(() => {
           this.router.navigate(['']);
@@ -105,24 +106,17 @@ export class SignupComponent implements OnInit, OnDestroy {
       .authenticateWithGoogle()
       .then((result) => {
         // save user data only the first time
-        console.log(result);
         if (result.additionalUserInfo.isNewUser == true) {
-          this.userDataService.setName = result.user.displayName;
-          this.userDataService.setEmail = result.user.email;
-          this.userDataService.setUid = result.user.uid;
-          this.userDataService.createNewUser();
-
-          setTimeout(() => {
-            this.router.navigate(['']);
-          }, 1500);
-          //this.router.navigate(['']);
-        } else if (result.additionalUserInfo.isNewUser == false) {
-          setTimeout(() => {
-            this.userDataService.getUserDataFromFirebase(true);
-            this.router.navigate(['']);
-          }, 3000);
-          // ?
+          this.userDataService.createNewUser(
+            result.user.displayName,
+            result.user.email,
+            result.user.uid
+          );
         }
+
+        setTimeout(() => {
+          this.router.navigate(['']);
+        }, 1500);
       })
       .catch((error) => {
         this.authErrorHandler.handleAuthError(error, 'signUp');

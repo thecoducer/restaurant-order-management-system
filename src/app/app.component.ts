@@ -23,6 +23,5 @@ export class AppComponent {
   ngOnInit() {
     // enables ripple effect for primeng
     //this.primengConfig.ripple = true;
-    //this.userDataService.getUserDataFromFirebase(false);
   }
 }

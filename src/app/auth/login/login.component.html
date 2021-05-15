@@ -17,7 +17,7 @@
                 <input type="password" class="form-control" [ngClass]="{'error-border': !isHideResponseErrors && errorObj.logIn.password != null}" id="floatingPassword" placeholder="Password" formControlName="password">
                 <label class="floating-label" for="floatingPassword">Password</label>
 
-                <span class="error-text" *ngIf="logInForm.controls.password.errors != null && logInForm.controls.password.touched">Please enter a password.</span>
+                <span class="error-text" *ngIf="logInForm.controls.password.errors != null && logInForm.controls.password.touched">Password length must be greater than 8.</span>
 
                 <span class="error-text" *ngIf="!isHideResponseErrors && errorObj.logIn.password != null" style="margin-top: -100px;">{{errorObj.logIn.password}}</span>
             </div>
@@ -34,8 +34,8 @@
         <span class="google-btn-text">Log in with Google</span>
     </button>
 
-    <span>Don't have an account? <a [routerLink]="['/sign-up']">Sign up</a></span>
-
     <span class="unknown-error-text" *ngIf="errorObj.logIn.unknown != null">{{errorObj.logIn.unknown}}</span>
+
+    <p class="mobile-only">Don't have an account? <a [routerLink]="['/sign-up']">Sign up</a></p>
 
 </main>

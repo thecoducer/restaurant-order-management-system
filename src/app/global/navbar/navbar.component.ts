@@ -24,10 +24,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
       .getIsAuthObservable()
       .subscribe((data) => {
         this.isAuthenticated = data;
-        console.log('data', data);
       });
     this.authService.initializeIsAuth();
-    //console.log(this.isAuthenticated);
 
     // using observer pattern for getting name here
     // because if name gets updated in profile,
@@ -49,6 +47,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   onLogOut() {
+    this.displayName = null;
     this.userDataService.clearUserDataLocally();
     this.authService.logOut();
   }

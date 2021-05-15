@@ -44,11 +44,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         console.log(this.userData);
       });
 
-    this.userDataService.getUserDataFromFirebase(true);
+    this.userDataService.getUserDataFromFirebase();
 
     // creating reactive signup form
     this.userProfileForm = new FormGroup({
-      name: new FormControl(this.userData.name),
+      name: new FormControl(this.userData.name, [Validators.required]),
       phone: new FormControl(this.userData.phone, [
         Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
       ]),
@@ -64,9 +64,21 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   // updates user data
   onUpdate() {
-    this.userData.name = this.userProfileForm.get('name').value;
-    this.userData.phone = this.userProfileForm.get('phone').value;
-    this.userData.address = this.userProfileForm.get('address').value;
+    // handle the case when disabled attribute for submit button is deleted
+    // from html
+    if (this.userProfileForm.invalid) {
+      return;
+    }
+
+    this.userData.name = this.checkUndefined(
+      this.userProfileForm.get('name').value
+    );
+    this.userData.phone = this.checkUndefined(
+      this.userProfileForm.get('phone').value
+    );
+    this.userData.address = this.checkUndefined(
+      this.userProfileForm.get('address').value
+    );
     this.userDataService.setUid = this.userData.uid;
 
     console.log(this.userProfileForm);
@@ -94,5 +106,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           this.updateStatus = 'Update profile';
         }, 3500);
       });
+  }
+
+  /** utility functions */
+
+  checkUndefined(v: any) {
+    if (v == undefined) {
+      return '';
+    }
+    return v;
   }
 }

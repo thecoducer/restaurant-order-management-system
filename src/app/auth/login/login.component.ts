@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   onLogIn() {
     // handle the case when disabled attribute for submit button is deleted
     // from html
-    if(this.logInForm.invalid) {
+    if (this.logInForm.invalid) {
       return;
     }
 
@@ -75,11 +75,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       .then((result) => {
         this.isLoggingIn = false;
         this.isHideResponseErrors = true;
-        setTimeout(() => {
-          this.userDataService.getUserDataFromFirebase(true);
-          this.router.navigate(['']);
-        }, 3000);
-        // ?
+
+        this.router.navigate(['']);
       })
       .catch((error) => {
         this.isBtnClicked = false;
@@ -95,20 +92,15 @@ export class LoginComponent implements OnInit, OnDestroy {
       .authenticateWithGoogle()
       .then((result) => {
         // save user data for a first time user only
-        console.log(result);
         if (result.additionalUserInfo.isNewUser == true) {
-          this.userDataService.setName = result.user.displayName;
-          this.userDataService.setEmail = result.user.email;
-          this.userDataService.setUid = result.user.uid;
-          this.userDataService.createNewUser();
-          this.router.navigate(['']);
-        } else if (result.additionalUserInfo.isNewUser == false) {
-          setTimeout(() => {
-            this.userDataService.getUserDataFromFirebase(true);
-            this.router.navigate(['']);
-          }, 3000);
-          // ?
+          this.userDataService.createNewUser(
+            result.user.displayName,
+            result.user.email,
+            result.user.uid
+          );
         }
+
+        this.router.navigate(['']);
       })
       .catch((error) => {
         console.log(error);
