@@ -42,7 +42,7 @@ export class AddOrEditItemsComponent implements OnInit {
     id: '',
     name: '',
     description: '',
-    amount: 0,
+    price: 0,
     category: '',
     imageUrl: '',
     addedOn: '',
@@ -145,7 +145,7 @@ export class AddOrEditItemsComponent implements OnInit {
   private pushItemData() {
     this.item.name = this.addOrEditItemsForm.get('itemTitle').value;
     this.item.description = this.addOrEditItemsForm.get('itemDesc').value;
-    this.item.amount = this.addOrEditItemsForm.get('itemPrice').value;
+    this.item.price = this.addOrEditItemsForm.get('itemPrice').value;
     this.item.category = this.addOrEditItemsForm.get('itemCategory').value;
     this.item.imageUrl = this.imageUrl;
     this.item.addedOn = new Date().toLocaleString();
@@ -198,7 +198,7 @@ export class AddOrEditItemsComponent implements OnInit {
       id: '',
       name: '',
       description: '',
-      amount: 0,
+      price: 0,
       category: '',
       imageUrl: '',
       addedOn: '',
