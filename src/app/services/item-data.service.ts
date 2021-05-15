@@ -19,12 +19,14 @@ export class ItemDataService {
       '/items/' +
       itemData.category +
       '.json';
-      
+
     return this.http.post<Item>(path, itemData);
   }
 
   setItemId(idParam: string) {
-    const itemRef = this.afdb.object('items/' + this.item.category + '/' + idParam);
+    const itemRef = this.afdb.object(
+      'items/' + this.item.category + '/' + idParam
+    );
     itemRef.update({ id: idParam });
   }
 }

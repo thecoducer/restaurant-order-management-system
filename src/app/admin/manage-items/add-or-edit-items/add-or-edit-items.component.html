@@ -1,4 +1,4 @@
-<div class="container edit-div">
+<div class="container add-edit-div">
     <div class="row">
         <div class="col-xs-12 col-md-6 col-md-offset-3">
             <h2 style="margin-bottom: 40px;">{{selectedPath | titlecase }} Item</h2>
@@ -17,8 +17,8 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Amount (in ₹)</label>
-                        <input type="itemAmt" class="form-control" formControlName="itemAmt">
-                        <span class="error-text" *ngIf="addOrEditItemsForm.controls.itemAmt.errors != null && addOrEditItemsForm.controls.itemAmt.touched">Please enter a valid amount.</span>
+                        <input type="itemPrice" class="form-control" formControlName="itemPrice">
+                        <span class="error-text" *ngIf="addOrEditItemsForm.controls.itemPrice.errors != null && addOrEditItemsForm.controls.itemPrice.touched">Please enter a valid amount.</span>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Category</label>
@@ -64,6 +64,13 @@
 
                     <button type="button" class="btn btn-md btn-primary" style="margin-left: 10px" *ngIf="(isSubmitted == true && isAdd == true) || (unknownErrorText != null && isAdd == true)" (click)="addAnotherItem()">{{addAnotherItemBtnText}}</button>
                 </div>
+
+                <button type="button" class="btn btn-md btn-secondary text-light" [routerLink]="['/admin/items']">
+                    <i class="fa fa-arrow-left"></i>
+                    <span style="margin-left: 3px;">
+                        Display all items
+                    </span>
+                </button>
 
                 <div class="alert alert-danger" role="alert" *ngIf="unknownErrorText != null">
                     <h4>Some error occurred.</h4>

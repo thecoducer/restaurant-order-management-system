@@ -1,11 +1,11 @@
-.edit-div {
+.add-edit-div {
     padding-top: 100px;
     padding-bottom: 180px;
     min-height: 70vh;
 }
 
 .form-group {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 label {

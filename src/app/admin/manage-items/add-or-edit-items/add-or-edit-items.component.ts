@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { Item } from 'src/app/models/item.model';
 import { FileUploadService } from 'src/app/services/file-upload.service';
@@ -33,6 +34,8 @@ export class AddOrEditItemsComponent implements OnInit {
   unknownErrorText: string = null;
   previewPath: string = null;
 
+  imageUrlSub: Subscription;
+
   validImageTypes: string[] = ['image/png', 'image/jpeg', 'image/jpg'];
 
   item: Item = {
@@ -58,7 +61,7 @@ export class AddOrEditItemsComponent implements OnInit {
     this.addOrEditItemsForm = new FormGroup({
       itemTitle: new FormControl('', [Validators.required]),
       itemDesc: new FormControl(''),
-      itemAmt: new FormControl('', [
+      itemPrice: new FormControl('', [
         Validators.required,
         Validators.pattern('^-?[0-9]+([,.]?[0-9]+)?$'),
       ]),
@@ -127,18 +130,22 @@ export class AddOrEditItemsComponent implements OnInit {
 
     // get the image url from Firebase
     // then push item data to Firebase Realtime DB
-    this.fileUploadService.getimageUrlObservable().subscribe((url) => {
-      if (url != '' && url != null) {
-        this.imageUrl = url;
-        this.pushItemData();
-      }
-    });
+    this.imageUrlSub = this.fileUploadService
+      .getimageUrlObservable()
+      .subscribe((url) => {
+        if (url != '' && url != null) {
+          this.imageUrl = url;
+          // unsubscribe here so that pushItemData() isn't called more than once
+          this.imageUrlSub.unsubscribe();
+          this.pushItemData();
+        }
+      });
   }
 
   private pushItemData() {
     this.item.name = this.addOrEditItemsForm.get('itemTitle').value;
     this.item.description = this.addOrEditItemsForm.get('itemDesc').value;
-    this.item.amount = this.addOrEditItemsForm.get('itemAmt').value;
+    this.item.amount = this.addOrEditItemsForm.get('itemPrice').value;
     this.item.category = this.addOrEditItemsForm.get('itemCategory').value;
     this.item.imageUrl = this.imageUrl;
     this.item.addedOn = new Date().toLocaleString();
@@ -186,6 +193,17 @@ export class AddOrEditItemsComponent implements OnInit {
 
     this.unknownErrorText = null;
     this.previewPath = null;
+
+    this.item = {
+      id: '',
+      name: '',
+      description: '',
+      amount: 0,
+      category: '',
+      imageUrl: '',
+      addedOn: '',
+      modifiedOn: '',
+    };
   }
 
   /** Utility functions */
