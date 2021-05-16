@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { HandleLocalStorageService } from 'src/app/services/handle-local-storage.service';
 import { UserDataService } from 'src/app/services/user-data.service';
 
 @Component({
@@ -18,11 +19,18 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private userDataService: UserDataService,
-    private router: Router
+    private router: Router,
+    private handleLocalStorageService: HandleLocalStorageService
   ) {
+    // get name and isAuthenticated values from local storage if they are present there
+    this.displayName = this.handleLocalStorageService.getUserName();
+    this.isAuthenticated =
+      this.handleLocalStorageService.getIsAuthenticated() == 'true' ? true : false;
+
     this.isAuthSub = this.authService
       .getIsAuthObservable()
       .subscribe((data) => {
+        console.log(this.isAuthenticated)
         this.isAuthenticated = data;
       });
     this.authService.initializeIsAuth();
@@ -48,6 +56,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   onLogOut() {
     this.displayName = null;
+    this.isAuthenticated = false;
     this.userDataService.clearUserDataLocally();
     this.authService.logOut();
   }

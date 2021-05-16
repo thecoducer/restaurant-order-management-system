@@ -4,6 +4,7 @@ import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
+import { HandleLocalStorageService } from './handle-local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,11 @@ export class UserDataService {
   };
   userDataSubject = new BehaviorSubject<User>(this.userData);
 
-  constructor(private afdb: AngularFireDatabase, private http: HttpClient) {}
+  constructor(
+    private afdb: AngularFireDatabase,
+    private http: HttpClient,
+    private handleLocalStorageService: HandleLocalStorageService
+  ) {}
 
   /** saves new user data in Firebase DB */
   createNewUser(name: string, email: string, uid: string) {
@@ -43,7 +48,7 @@ export class UserDataService {
   }
 
   getUserDataFromFirebase() {
-    if (localStorage.getItem('user') != null) {
+    if (this.handleLocalStorageService.getUser() != null) {
       console.log('getting user data from firebase');
       this.http
         .get(
@@ -55,6 +60,7 @@ export class UserDataService {
         .subscribe((data: User) => {
           this.userData = data;
           this.userDataSubject.next(this.userData);
+          this.handleLocalStorageService.setUserName(this.userData.name);
           console.log('got from firebase', this.userData);
         });
     }

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { User } from '../models/user.model';
 import { UserDataService } from './user-data.service';
+import { HandleLocalStorageService } from './handle-local-storage.service';
 
 /**
  * This service deals with user authentication.
@@ -24,23 +25,21 @@ export class AuthService {
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth,
     private router: Router,
-    private userDataService: UserDataService
+    private userDataService: UserDataService,
+    private handleLocalStorageService: HandleLocalStorageService
   ) {
     // subscribing to the observable that authState returns
     // so that we get updated whenever the authState data gets manipulated
     this.afAuth.authState.subscribe((user) => {
       if (user) {
-        localStorage.setItem('user', user.uid);
+        handleLocalStorageService.setUser(user.uid);
         this.userDataService.getUserDataFromFirebase();
-
         this.setIsAuthenticated(true);
-        //localStorage.setItem('isAuthenticated', 'true');
-
+        handleLocalStorageService.setIsAuthenticated('true');
         this.setAuthState(user);
       } else {
-        localStorage.setItem('user', null);
         this.setIsAuthenticated(false);
-        //localStorage.setItem('isAuthenticated', 'false');
+        handleLocalStorageService.clearDataOnLogOut();
       }
     });
   }
@@ -62,12 +61,13 @@ export class AuthService {
   autoLogIn() {
     if (localStorage.getItem('user') != null) {
       this.setIsAuthenticated(true);
+      this.handleLocalStorageService.setIsAuthenticated('true');
     }
   }
 
   logOut() {
     this.afAuth.signOut().then(() => {
-      localStorage.removeItem('user');
+      this.handleLocalStorageService.clearDataOnLogOut();
       this.setIsAuthenticated(false);
       this.setAuthState(null);
       this.router.navigate(['']);

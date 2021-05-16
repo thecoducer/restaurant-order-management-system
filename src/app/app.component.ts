@@ -15,13 +15,13 @@ export class AppComponent {
     private primengConfig: PrimeNGConfig,
     private authService: AuthService,
     private userDataService: UserDataService
-  ) {
-    // auto log in user if local storage has the uid returned by firebase
-    this.authService.autoLogIn();
-  }
+  ) {}
 
   ngOnInit() {
     // enables ripple effect for primeng
     //this.primengConfig.ripple = true;
+
+    // auto log in user if local storage has the uid returned by firebase
+    this.authService.autoLogIn();
   }
 }
