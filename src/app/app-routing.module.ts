@@ -39,7 +39,7 @@ const routes: Routes = [
     data: { path: 'add' },
   },
   {
-    path: 'admin/items/edit/:itemId',
+    path: 'admin/items/edit/:itemCategory/:itemId',
     component: AddOrEditItemsComponent,
     data: { path: 'edit' },
   },

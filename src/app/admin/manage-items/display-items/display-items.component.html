@@ -2,6 +2,12 @@
     <div class="album py-5">
         <div class="container">
 
+            <div class="d-flex flex-row-reverse" style="margin-bottom: 30px;">
+                <div class="p-2">
+                    <button type="button" class="btn btn-outline-primary" (click)="onAdd()">Add a new item</button>
+                </div>
+            </div>
+
             <div class="loader-div" *ngIf="isLoading == true && isLoaded == false">
                 <app-loader></app-loader>
             </div>
@@ -25,7 +31,7 @@
 
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
-                                        <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary" (click)="onEdit(item.category, item.id)">Edit</button>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +59,7 @@
 
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
-                                        <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary" (click)="onEdit(item.category, item.id)">Edit</button>
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +87,7 @@
 
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
-                                        <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary" (click)="onEdit(item.category, item.id)">Edit</button>
                                     </div>
                                 </div>
                             </div>
@@ -109,7 +115,7 @@
 
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
-                                        <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary" (click)="onEdit(item.category, item.id)">Edit</button>
                                     </div>
                                 </div>
                             </div>

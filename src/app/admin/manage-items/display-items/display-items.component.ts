@@ -49,8 +49,8 @@ export class DisplayItemsComponent implements OnInit {
     }
   }
 
-  onEdit() {
-    this.router.navigate(['admin/items/edit']);
+  onEdit(itemCategory: string, itemId: string) {
+    this.router.navigate(['admin/items/edit',itemCategory, itemId]);
   }
 
   onAdd() {

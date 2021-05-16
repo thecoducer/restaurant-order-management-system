@@ -20,6 +20,8 @@ export class AddOrEditItemsComponent implements OnInit {
   file: File | null;
   uploadPercentage = -1;
   imageUrl: string;
+  itemId: string;
+  itemCategory: string;
 
   isAdd: boolean = false;
   isEdit: boolean = false;
@@ -69,6 +71,7 @@ export class AddOrEditItemsComponent implements OnInit {
       itemImage: new FormControl('', [Validators.required]),
     });
 
+    // get data from route
     this.route.data.subscribe((data: Data) => {
       this.selectedPath = data['path'];
       this.submitBtnText =
@@ -76,6 +79,32 @@ export class AddOrEditItemsComponent implements OnInit {
       this.isAdd = this.selectedPath === 'add' ? true : false;
       this.isEdit = this.selectedPath === 'edit' ? true : false;
     });
+
+    // get value of path variables from route
+    this.route.params.subscribe((value) => {
+      this.itemId = value['itemId'];
+      this.itemCategory = value['itemCategory'];
+    });
+
+    if (this.isEdit == true) {
+      this.fillEditForm();
+    }
+  }
+
+  async fillEditForm() {
+    this.item = (await this.itemDataService.getItemById(
+      this.itemCategory,
+      this.itemId
+    )) as Item;
+    
+    this.addOrEditItemsForm.patchValue({
+      itemTitle: this.item.name,
+      itemDesc: this.item.description,
+      itemPrice: this.item.price,
+      itemCategory: this.item.category
+    });
+
+    this.previewPath = this.item.imageUrl;
   }
 
   // on selecting a file

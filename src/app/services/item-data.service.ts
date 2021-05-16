@@ -68,7 +68,8 @@ export class ItemDataService {
   } */
 
   async getItemsCategoryWise(category: string) {
-    const path = environment.firebase.databaseURL + '/items/' + category + '.json';
+    const path =
+      environment.firebase.databaseURL + '/items/' + category + '.json';
 
     return await this.http
       .get(path)
@@ -86,5 +87,25 @@ export class ItemDataService {
       )
       .toPromise();
   }
-  
+
+  async getItemById(category: string, id: string) {
+    const pathItemId = '-' + id.split('-', 2)[1];
+
+    const path =
+      environment.firebase.databaseURL +
+      '/items/' +
+      category +
+      '/' +
+      pathItemId +
+      '.json';
+
+    return await this.http
+      .get(path)
+      .pipe(
+        map((data) => {
+          return data;
+        })
+      )
+      .toPromise();
+  }
 }

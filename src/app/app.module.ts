@@ -6,13 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ButtonModule } from 'primeng/button';
-import { MenubarModule } from 'primeng/menubar';
-import { RippleModule } from 'primeng/ripple';
-import { DataViewModule } from 'primeng/dataview';
-import {DropdownModule} from 'primeng/dropdown';
-import {RatingModule} from 'primeng/rating';
-
 import { NavbarComponent } from './global/navbar/navbar.component';
 import { HeaderImageComponent } from './home/header-image/header-image.component';
 import { CategoriesComponent } from './home/categories/categories.component';
@@ -64,15 +57,9 @@ import { NotFoundComponent } from './global/not-found/not-found.component';
     AngularFireStorageModule,
     BrowserModule,
     AppRoutingModule,
-    ButtonModule,
-    MenubarModule,
-    RippleModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    DataViewModule,
-    DropdownModule,
-    RatingModule
   ],
   providers: [],
   bootstrap: [AppComponent],
