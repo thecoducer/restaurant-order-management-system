@@ -1,13 +1,3 @@
-.not-found-div {
-    padding-top: 120px;
-    padding-bottom: 50px;
-}
-
-.home-link-div {
-    padding-bottom: 100px;
-    min-height: 27vh;
-}
-
 .fundo {
     animation: scales 3s alternate infinite;
     transform-origin: center;
@@ -88,6 +78,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 120px;
+}
+
+.home-link {
+    padding-bottom: 150px;
 }
 
 .path {
