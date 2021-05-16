@@ -22,10 +22,10 @@
                               Hi, {{displayName}}
                             </a>
                         <div class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" (click)="visitProfile()">Profile</a>
-                            <a class="dropdown-item" (click)="onManageItems()">Manage Items</a>
-                            <a class="dropdown-item">Orders</a>
-                            <a class="dropdown-item" (click)="onLogOut()">Log out</a>
+                            <a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" (click)="visitProfile()">Profile</a>
+                            <a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" (click)="onManageItems()">Manage Items</a>
+                            <a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Orders</a>
+                            <a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" (click)="onLogOut()">Log out</a>
                             <!-- <div class="dropdown-divider"></div> -->
                         </div>
                     </li>
