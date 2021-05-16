@@ -10,7 +10,13 @@ import { ItemDataService } from 'src/app/services/item-data.service';
   styleUrls: ['./display-items.component.css'],
 })
 export class DisplayItemsComponent implements OnInit {
-  itemsArray: Item[] = [];
+  starters: Item[] = [];
+  mains: Item[] = [];
+  alcoholicBeverages: Item[] = [];
+  desserts: Item[] = [];
+
+  isLoading: boolean = false;
+  isLoaded: boolean = false;
 
   constructor(
     private router: Router,
@@ -18,10 +24,29 @@ export class DisplayItemsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.itemDataService.getAllItems().subscribe((data) => {
-      this.itemsArray = data;
-      console.log(this.itemsArray);
-    });
+    this.fetchItems();
+  }
+
+  async fetchItems() {
+    try {
+      this.isLoading = true;
+
+      this.starters = await this.itemDataService.getItemsCategoryWise(
+        'starters'
+      );
+      this.mains = await this.itemDataService.getItemsCategoryWise('mains');
+      this.alcoholicBeverages = await this.itemDataService.getItemsCategoryWise(
+        'alcoholic-beverages'
+      );
+      this.desserts = await this.itemDataService.getItemsCategoryWise(
+        'desserts'
+      );
+
+      this.isLoading = false;
+      this.isLoaded = true;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   onEdit() {

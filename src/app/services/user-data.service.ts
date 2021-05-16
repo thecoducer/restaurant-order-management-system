@@ -65,19 +65,7 @@ export class UserDataService {
         });
     }
   }
-
-  /* async testGetData() {
-    if (this.handleLocalStorageService.getUser() != null) {
-      const url =
-        environment.firebase.databaseURL +
-        '/users/' +
-        localStorage.getItem('user') +
-        '.json';
-      const response = await this.http.get(url).toPromise();
-      return response;
-    }
-  } */
-
+  
   updateUserData(userDataParam: User): Promise<void> {
     this.handleLocalStorageService.setUserName(userDataParam.name);
     this.userDataSubject.next(userDataParam);

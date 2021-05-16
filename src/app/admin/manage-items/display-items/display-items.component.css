@@ -5,8 +5,12 @@ img {
 }
 
 .item-price {
-    font-size: 19px;
+    font-size: 18px;
     color: black;
+}
+
+.card {
+    font-family: 'Karla', sans-serif;
 }
 
 .card-text {
@@ -22,4 +26,27 @@ img {
 
 .item-price {
     margin-right: 10px;
+}
+
+.loader-div {
+    margin-top: 250px;
+    min-height: 40vh;
+}
+
+.img-loading {
+    background-color: #e2e2e2;
+    background-image: linear-gradient(0deg, #e2e2e2 0%, #f7f7f7 100%);
+}
+
+div.card {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+div.card:hover {
+    transform: translateY(-0.1rem) scale(1);
+    box-shadow: 0 0.5em 3rem -1rem rgba(0, 0, 0, 0.5);
+}
+
+.items-div {
+    margin-bottom: 80px;
 }

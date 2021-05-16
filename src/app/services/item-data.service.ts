@@ -45,22 +45,46 @@ export class ItemDataService {
     itemRef.update({ id: modifiedIdParam });
   }
 
-  getAllItems() {
+  /* async getAllItems() {
     const path = environment.firebase.databaseURL + '/items.json';
     let res: any;
 
-    return this.http.get(path).pipe(
-      map((responseData) => {
-        const itemsArray: Item[] = [];
-        for (const category in responseData) {
-          if (responseData.hasOwnProperty(category)) {
-            for (const item in responseData[category]) {
-              itemsArray.push(responseData[category][item]);
+    return await this.http
+      .get(path)
+      .pipe(
+        map((responseData) => {
+          const itemsArray: Item[] = [];
+          for (const category in responseData) {
+            if (responseData.hasOwnProperty(category)) {
+              for (const item in responseData[category]) {
+                itemsArray.push(responseData[category][item]);
+              }
             }
           }
-        }
-        return itemsArray;
-      })
-    );
+          return itemsArray;
+        })
+      )
+      .toPromise();
+  } */
+
+  async getItemsCategoryWise(category: string) {
+    const path = environment.firebase.databaseURL + '/items/' + category + '.json';
+
+    return await this.http
+      .get(path)
+      .pipe(
+        map((responseData) => {
+          const itemsArray: Item[] = [];
+
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              itemsArray.push(responseData[key]);
+            }
+          }
+          return itemsArray;
+        })
+      )
+      .toPromise();
   }
+  
 }

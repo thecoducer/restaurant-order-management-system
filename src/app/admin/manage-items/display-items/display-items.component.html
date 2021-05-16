@@ -2,27 +2,122 @@
     <div class="album py-5">
         <div class="container">
 
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <div class="col" *ngFor="let item of itemsArray">
-                    <div class="card shadow-sm">
-                        <img class="card-img-top" src={{item.imageUrl}} role="img" aria-label="item-image" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <div class="loader-div" *ngIf="isLoading == true && isLoaded == false">
+                <app-loader></app-loader>
+            </div>
 
-                        <div class="card-body">
-                            <p class="card-text">{{item.name}}</p>
-                            <span class="badge bg-light text-dark item-category">{{item.category}}</span>
+            <div class="items-div" *ngIf="isLoaded == true">
+                <div class="d-flex align-items-center pb-3 mb-5 border-bottom">
+                    <span class="fs-2">Starters</span>
+                </div>
 
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-dark item-price">₹{{item.price}}</small>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <div class="col" *ngFor="let item of starters">
+                        <div class="card">
+                            <img class="img-loading card-img-top" src={{item.imageUrl}} role="img" aria-label="item-image" preserveAspectRatio="xMidYMid slice" focusable="false">
 
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            <div class="card-body">
+                                <p class="card-text">{{item.name}}</p>
+                                <span class="badge bg-light text-dark item-category">{{item.category}}</span>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-dark item-price">₹{{item.price}}</small>
+
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="items-div" *ngIf="isLoaded == true">
+                <div class="d-flex align-items-center pb-3 mb-5 border-bottom">
+                    <span class="fs-2">Mains</span>
+                </div>
+
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <div class="col" *ngFor="let item of mains">
+                        <div class="card">
+                            <img class="img-loading card-img-top" src={{item.imageUrl}} role="img" aria-label="item-image" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+                            <div class="card-body">
+                                <p class="card-text">{{item.name}}</p>
+                                <span class="badge bg-light text-dark item-category">{{item.category}}</span>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-dark item-price">₹{{item.price}}</small>
+
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="items-div" *ngIf="isLoaded == true">
+                <div class="d-flex align-items-center pb-3 mb-5 border-bottom">
+                    <span class="fs-2">Desserts</span>
+                </div>
+
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <div class="col" *ngFor="let item of desserts">
+                        <div class="card">
+                            <img class="img-loading card-img-top" src={{item.imageUrl}} role="img" aria-label="item-image" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+                            <div class="card-body">
+                                <p class="card-text">{{item.name}}</p>
+                                <span class="badge bg-light text-dark item-category">{{item.category}}</span>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-dark item-price">₹{{item.price}}</small>
+
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="items-div" *ngIf="isLoaded == true">
+                <div class="d-flex align-items-center pb-3 mb-5 border-bottom">
+                    <span class="fs-2">Alcoholic Beverages</span>
+                </div>
+
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <div class="col" *ngFor="let item of alcoholicBeverages">
+                        <div class="card">
+                            <img class="img-loading card-img-top" src={{item.imageUrl}} role="img" aria-label="item-image" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+                            <div class="card-body">
+                                <p class="card-text">{{item.name}}</p>
+                                <span class="badge bg-light text-dark item-category">{{item.category}}</span>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-dark item-price">₹{{item.price}}</small>
+
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </main>
