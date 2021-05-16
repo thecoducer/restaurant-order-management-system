@@ -53,8 +53,8 @@ export class UserDataService {
             '.json'
         )
         .subscribe((data: User) => {
-          this.userDataSubject.next(data);
           this.userData = data;
+          this.userDataSubject.next(this.userData);
           console.log('got from firebase', this.userData);
         });
     }

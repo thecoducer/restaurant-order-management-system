@@ -24,6 +24,16 @@ export class ItemDataService {
   }
 
   setItemId(idParam: string) {
+    if (this.item.category === 'starters') {
+      idParam = 'S' + idParam;
+    } else if (this.item.category === 'mains') {
+      idParam = 'M' + idParam;
+    } else if (this.item.category === 'alcoholic-beverages') {
+      idParam = 'AB' + idParam;
+    } else if (this.item.category === 'desserts') {
+      idParam = 'D' + idParam;
+    }
+
     const itemRef = this.afdb.object(
       'items/' + this.item.category + '/' + idParam
     );

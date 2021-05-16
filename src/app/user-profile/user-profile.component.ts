@@ -29,22 +29,37 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       .getUserDataObservable()
       .subscribe((data) => {
         this.userData = data;
+
         if (this.userData != undefined) {
-          //check for email?
-          setTimeout(() => {
+          if (this.userData.name != undefined) {
             this.userProfileForm.patchValue({
               name: this.userData.name,
-              phone: this.userData.phone,
-              email: this.userData.email,
-              address: this.userData.address,
-              role: this.userData.role.val,
             });
-          }, 800);
+          }
+          if (this.userData.phone != undefined) {
+            this.userProfileForm.patchValue({
+              phone: this.userData.phone,
+            });
+          }
+          if (this.userData.email != undefined) {
+            this.userProfileForm.patchValue({
+              email: this.userData.email,
+            });
+          }
+          if (this.userData.address != undefined) {
+            this.userProfileForm.patchValue({
+              address: this.userData.address,
+            });
+          }
+          /* if (this.userData.role != undefined && this.userData.role.val != undefined) {
+          this.userProfileForm.patchValue({
+            role: this.userData.role.val
+          });
+          */
         }
+
         console.log(this.userData);
       });
-
-    this.userDataService.getUserDataFromFirebase();
 
     // creating reactive signup form
     this.userProfileForm = new FormGroup({
@@ -70,15 +85,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.userData.name = this.checkUndefined(
-      this.userProfileForm.get('name').value
-    );
-    this.userData.phone = this.checkUndefined(
-      this.userProfileForm.get('phone').value
-    );
-    this.userData.address = this.checkUndefined(
-      this.userProfileForm.get('address').value
-    );
+    this.userData.name = this.userProfileForm.get('name').value;
+    this.userData.phone = this.userProfileForm.get('phone').value;
+    this.userData.address = this.userProfileForm.get('address').value;
     this.userDataService.setUid = this.userData.uid;
 
     console.log(this.userProfileForm);
@@ -110,9 +119,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   /** utility functions */
 
-  checkUndefined(v: any) {
-    if (v == undefined) {
-      return '';
+  replaceUndefinedOrNull(v: any): string {
+    if (v == undefined || v == null) {
+      return ' ';
     }
     return v;
   }

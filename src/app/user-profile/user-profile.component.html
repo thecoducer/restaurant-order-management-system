@@ -26,7 +26,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Role</label>
-                    <input type="text" class="form-control" formControlName="role" readonly>
+                    <input type="role" class="form-control" formControlName="role" readonly>
                 </div>
                 <button type="submit" [disabled]="!userProfileForm.valid" class="btn btn-md" [ngClass]="{'btn-success': isUpdateSuccess, 'btn-danger': isUpdateFailure, 'btn-primary': !isUpdateSuccess && !isUpdateFailure}">
                     {{updateStatus}}
