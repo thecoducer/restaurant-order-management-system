@@ -67,6 +67,7 @@ export class UserDataService {
   }
 
   updateUserData(userDataParam: User): Promise<void> {
+    this.handleLocalStorageService.setUserName(userDataParam.name);
     this.userDataSubject.next(userDataParam);
     this.userObj = this.afdb.object('users/' + userDataParam.uid);
     return this.userObj.update(userDataParam);

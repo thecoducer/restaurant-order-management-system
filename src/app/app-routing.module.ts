@@ -44,9 +44,12 @@ const routes: Routes = [
     data: { path: 'edit' },
   },
   {
+    path: 'not-found',
+    component: NotFoundComponent
+  },
+  {
     path: '**',
-    component: NotFoundComponent,
-    //redirectTo: '',
+    redirectTo: 'not-found',
   },
 ];
 

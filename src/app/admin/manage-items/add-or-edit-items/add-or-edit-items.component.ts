@@ -133,7 +133,9 @@ export class AddOrEditItemsComponent implements OnInit {
     this.imageUrlSub = this.fileUploadService
       .getimageUrlObservable()
       .subscribe((url) => {
-        if (url != '' && url != null) {
+        if (url != '' && url != null && url != undefined) {
+          console.log(this.imageUrl)
+          console.log(url)
           this.imageUrl = url;
           // unsubscribe here so that pushItemData() isn't called more than once
           this.imageUrlSub.unsubscribe();

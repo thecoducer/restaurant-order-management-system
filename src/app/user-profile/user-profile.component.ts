@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../models/user.model';
+import { HandleLocalStorageService } from '../services/handle-local-storage.service';
 import { UserDataService } from '../services/user-data.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   userProfileForm: FormGroup;
   private userDataSub: Subscription;
   private userData: User;
+  private pathVar: string = '';
 
   updateStatus: string = 'Update profile';
   isUpdateSuccess: boolean = false;
@@ -21,10 +23,27 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   constructor(
     private userDataService: UserDataService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private route: ActivatedRoute,
+    private handleLocalStorageService: HandleLocalStorageService
+  ) {
+    // get the path variable
+    this.pathVar = this.route.snapshot.params['name'];
+  }
 
   ngOnInit(): void {
+    // show 404 if profile path name doesn't match logged in user's username
+    if (this.pathVar != '' && this.pathVar != undefined) {
+      let _name = this.makeProfilePath(
+        this.handleLocalStorageService.getUserName()
+      );
+
+      if (this.pathVar != _name) {
+        console.log(this.pathVar);
+        this.router.navigate(['not-found']);
+      }
+    }
+
     this.userDataSub = this.userDataService
       .getUserDataObservable()
       .subscribe((data) => {
@@ -102,7 +121,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           this.isUpdateSuccess = false;
           this.updateStatus = 'Update profile';
           let _name: string;
-          _name = this.userDataService.getName.split(' ').join('-');
+          _name = this.makeProfilePath(this.userDataService.getName);
           this.router.navigate(['profile', _name]);
         }, 3500);
       })
@@ -124,5 +143,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       return ' ';
     }
     return v;
+  }
+
+  makeProfilePath(v: string) {
+    return v.split(' ').join('-');
   }
 }
