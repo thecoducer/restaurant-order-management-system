@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { ItemDataService } from 'src/app/services/item-data.service';
 
 @Component({
   selector: 'app-display-items',
@@ -7,9 +8,14 @@ import { NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./display-items.component.css'],
 })
 export class DisplayItemsComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private itemDataService: ItemDataService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.itemDataService.getAllItems();
+  }
 
   onEdit() {
     this.router.navigate(['admin/items/edit']);

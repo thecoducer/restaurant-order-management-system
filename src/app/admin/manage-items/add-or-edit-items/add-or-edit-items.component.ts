@@ -4,7 +4,7 @@ import { ActivatedRoute, Data, NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { Item } from 'src/app/models/item.model';
-import { FileUploadService } from 'src/app/services/file-upload.service';
+import { ItemImageService } from 'src/app/services/item-image.service';
 import { ItemDataService } from 'src/app/services/item-data.service';
 
 @Component({
@@ -52,7 +52,7 @@ export class AddOrEditItemsComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private fileUploadService: FileUploadService,
+    private itemImageService: ItemImageService,
     private itemDataService: ItemDataService
   ) {}
 
@@ -113,7 +113,7 @@ export class AddOrEditItemsComponent implements OnInit {
 
     this.isUploading = true;
 
-    this.fileUploadService.pushFileToStorage(this.file, category).subscribe(
+    this.itemImageService.pushFileToStorage(this.file, category).subscribe(
       (percentage) => {
         this.uploadPercentage = Math.round(percentage ? percentage : 0);
 
@@ -130,12 +130,10 @@ export class AddOrEditItemsComponent implements OnInit {
 
     // get the image url from Firebase
     // then push item data to Firebase Realtime DB
-    this.imageUrlSub = this.fileUploadService
+    this.imageUrlSub = this.itemImageService
       .getimageUrlObservable()
       .subscribe((url) => {
         if (url != '' && url != null && url != undefined) {
-          console.log(this.imageUrl)
-          console.log(url)
           this.imageUrl = url;
           // unsubscribe here so that pushItemData() isn't called more than once
           this.imageUrlSub.unsubscribe();

@@ -12,6 +12,7 @@ export class ItemDataService {
 
   constructor(private http: HttpClient, private afdb: AngularFireDatabase) {}
 
+  // adds item data to Firebase DB
   addItemData(itemData: Item) {
     this.item = itemData;
     const path =
@@ -23,6 +24,7 @@ export class ItemDataService {
     return this.http.post<Item>(path, itemData);
   }
 
+  // sets item id in Firebase DB
   setItemId(idParam: string) {
     let modifiedIdParam: string;
 
@@ -40,5 +42,17 @@ export class ItemDataService {
       'items/' + this.item.category + '/' + idParam
     );
     itemRef.update({ id: modifiedIdParam });
+  }
+
+  getAllItems() {
+    const path = environment.firebase.databaseURL + '/items.json';
+    let res: any;
+
+    this.http.get(path).subscribe((data) => {
+      res = data;
+      console.log(data);
+    });
+
+    console.log(res);
   }
 }

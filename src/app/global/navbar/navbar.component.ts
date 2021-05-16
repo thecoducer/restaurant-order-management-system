@@ -30,7 +30,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.isAuthSub = this.authService
       .getIsAuthObservable()
       .subscribe((data) => {
-        console.log(this.isAuthenticated)
         this.isAuthenticated = data;
       });
     this.authService.initializeIsAuth();

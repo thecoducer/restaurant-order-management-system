@@ -49,7 +49,7 @@ export class UserDataService {
 
   getUserDataFromFirebase() {
     if (this.handleLocalStorageService.getUser() != null) {
-      console.log('getting user data from firebase');
+      //console.log('getting user data from firebase');
       this.http
         .get(
           environment.firebase.databaseURL +
@@ -61,7 +61,7 @@ export class UserDataService {
           this.userData = data;
           this.userDataSubject.next(this.userData);
           this.handleLocalStorageService.setUserName(this.userData.name);
-          console.log('got from firebase', this.userData);
+          //console.log('got from firebase', this.userData);
         });
     }
   }

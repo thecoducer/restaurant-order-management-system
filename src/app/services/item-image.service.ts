@@ -7,7 +7,7 @@ import { finalize } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class FileUploadService {
+export class ItemImageService {
   private basePath = '/uploads/images/';
   private imageUrl: string = '';
   private imageUrlSub = new Subject<any>();
