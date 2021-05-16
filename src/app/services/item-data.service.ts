@@ -24,19 +24,21 @@ export class ItemDataService {
   }
 
   setItemId(idParam: string) {
+    let modifiedIdParam: string;
+
     if (this.item.category === 'starters') {
-      idParam = 'S' + idParam;
+      modifiedIdParam = 'S' + idParam;
     } else if (this.item.category === 'mains') {
-      idParam = 'M' + idParam;
+      modifiedIdParam = 'M' + idParam;
     } else if (this.item.category === 'alcoholic-beverages') {
-      idParam = 'AB' + idParam;
+      modifiedIdParam = 'AB' + idParam;
     } else if (this.item.category === 'desserts') {
-      idParam = 'D' + idParam;
+      modifiedIdParam = 'D' + idParam;
     }
 
     const itemRef = this.afdb.object(
       'items/' + this.item.category + '/' + idParam
     );
-    itemRef.update({ id: idParam });
+    itemRef.update({ id: modifiedIdParam });
   }
 }

@@ -34,13 +34,13 @@ export class AuthService {
         this.userDataService.getUserDataFromFirebase();
 
         this.setIsAuthenticated(true);
-        localStorage.setItem('isAuthenticated', 'true');
+        //localStorage.setItem('isAuthenticated', 'true');
 
         this.setAuthState(user);
       } else {
         localStorage.setItem('user', null);
         this.setIsAuthenticated(false);
-        localStorage.setItem('isAuthenticated', 'false');
+        //localStorage.setItem('isAuthenticated', 'false');
       }
     });
   }
