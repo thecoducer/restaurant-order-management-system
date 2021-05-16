@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Item } from '../models/item.model';
 
@@ -48,11 +49,18 @@ export class ItemDataService {
     const path = environment.firebase.databaseURL + '/items.json';
     let res: any;
 
-    this.http.get(path).subscribe((data) => {
-      res = data;
-      console.log(data);
-    });
-
-    console.log(res);
+    return this.http.get(path).pipe(
+      map((responseData) => {
+        const itemsArray: Item[] = [];
+        for (const category in responseData) {
+          if (responseData.hasOwnProperty(category)) {
+            for (const item in responseData[category]) {
+              itemsArray.push(responseData[category][item]);
+            }
+          }
+        }
+        return itemsArray;
+      })
+    );
   }
 }

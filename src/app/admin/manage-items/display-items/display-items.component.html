@@ -1,7 +1,28 @@
-<p>display-items works!</p>
+<main>
+    <div class="album py-5">
+        <div class="container">
 
-<a (click)="onEdit()">edit</a>
-<br>
-<br>
-<br>
-<a (click)="onAdd()">add</a>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col" *ngFor="let item of itemsArray">
+                    <div class="card shadow-sm">
+                        <img class="card-img-top" src={{item.imageUrl}} role="img" aria-label="item-image" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+                        <div class="card-body">
+                            <p class="card-text">{{item.name}}</p>
+                            <span class="badge bg-light text-dark item-category">{{item.category}}</span>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-dark item-price">₹{{item.price}}</small>
+
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
