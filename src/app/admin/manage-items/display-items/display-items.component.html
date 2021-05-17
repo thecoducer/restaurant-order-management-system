@@ -2,7 +2,7 @@
     <div class="album py-5">
         <div class="container">
 
-            <div class="d-flex flex-row-reverse" style="margin-bottom: 30px;">
+            <div class="d-flex flex-row-reverse" style="margin-bottom: 30px;" #startersRef>
                 <div class="p-2">
                     <button type="button" class="btn btn-outline-primary" (click)="onAdd()">Add a new item</button>
                 </div>
@@ -39,7 +39,7 @@
                 <app-loader></app-loader>
             </div>
 
-            <section class="section" id="starters" style="scroll-margin-top: 0rem;" #startersRef>
+            <section class="section" id="starters" style="scroll-margin-top: 0rem;">
                 <div class="items-div" *ngIf="isLoaded == true">
                     <div class="d-flex align-items-center pb-3 mb-5 border-bottom">
                         <span class="fs-2">Starters</span>

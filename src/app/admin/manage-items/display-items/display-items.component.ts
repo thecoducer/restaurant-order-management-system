@@ -62,7 +62,7 @@ export class DisplayItemsComponent implements OnInit, AfterViewInit {
 
   @HostListener('window:scroll', ['$event'])
   checkOffsetTop() {
-    this.startersOffset = this.startersRef.nativeElement.offsetTop;
+    this.startersOffset = this.startersRef.nativeElement.offsetTop+200;
     this.mainsOffset = this.mainsRef.nativeElement.offsetTop-200;
     this.dessertsOffset = this.dessertsRef.nativeElement.offsetTop-200;
     this.alcoholicBeveragesOffset =
@@ -96,7 +96,8 @@ export class DisplayItemsComponent implements OnInit, AfterViewInit {
   }
 
   scrollTo(el: HTMLElement, v: number) {
-    el.scrollIntoView({ block: 'start', inline: 'nearest' });
+    //el.scrollIntoView({ block: 'start', inline: 'nearest' });
+    el.scrollIntoView();
     this.currentActive = v;
   }
 
