@@ -30,6 +30,7 @@ export class AddOrEditItemsComponent implements OnInit {
   isImage: boolean = false;
   isSubmitted: boolean = false;
   fileSizeExceeded: boolean = false;
+  showDeleteBtn: boolean = false;
 
   submitBtnText: string;
   addAnotherItemBtnText: string;
@@ -56,7 +57,19 @@ export class AddOrEditItemsComponent implements OnInit {
     private route: ActivatedRoute,
     private itemImageService: ItemImageService,
     private itemDataService: ItemDataService
-  ) {}
+  ) {
+    //
+    this.isAdd = false;
+    this.isEdit = false;
+    this.isUploaded = false;
+    this.isUploading = false;
+    this.isImage = false;
+    this.isSubmitted = false;
+    this.fileSizeExceeded = false;
+    this.showDeleteBtn = false;
+    this.selectedFile = null;
+    //
+  }
 
   ngOnInit(): void {
     // creating reactive signup form
@@ -86,25 +99,29 @@ export class AddOrEditItemsComponent implements OnInit {
       this.itemCategory = value['itemCategory'];
     });
 
+    // if it is edit
     if (this.isEdit == true) {
-      this.fillEditForm();
+      this.initializeForItemEdit();
     }
   }
 
-  async fillEditForm() {
+  async initializeForItemEdit() {
     this.item = (await this.itemDataService.getItemById(
       this.itemCategory,
       this.itemId
     )) as Item;
-    
+
     this.addOrEditItemsForm.patchValue({
       itemTitle: this.item.name,
       itemDesc: this.item.description,
       itemPrice: this.item.price,
-      itemCategory: this.item.category
+      itemCategory: this.item.category,
     });
 
     this.previewPath = this.item.imageUrl;
+    this.fileSizeExceeded = false;
+    this.isImage = true;
+    this.showDeleteBtn = true;
   }
 
   // on selecting a file
@@ -142,7 +159,7 @@ export class AddOrEditItemsComponent implements OnInit {
 
     this.isUploading = true;
 
-    this.itemImageService.pushFileToStorage(this.file, category).subscribe(
+    this.itemImageService.pushImageToStorage(this.file, category).subscribe(
       (percentage) => {
         this.uploadPercentage = Math.round(percentage ? percentage : 0);
 
@@ -152,6 +169,7 @@ export class AddOrEditItemsComponent implements OnInit {
       },
       (error) => {
         this.unknownErrorText = error;
+        this.submitBtnText = 'Failed!';
         this.isUploaded = false;
         this.isUploading = false;
       }
@@ -233,6 +251,48 @@ export class AddOrEditItemsComponent implements OnInit {
       addedOn: '',
       modifiedOn: '',
     };
+  }
+
+  onDeleteImage() {
+    if (this.isEdit != true && this.showDeleteBtn != true) {
+      return;
+    }
+    this.performDeleteImage();
+  }
+
+  async performDeleteImage() {
+    await this.itemImageService
+      .deleteImage(this.item.imageUrl)
+      .then(() => {
+        this.previewPath = '';
+      })
+      .catch(() => {
+        this.unknownErrorText = 'Some error occurred.';
+      });
+  }
+
+  onDeleteItem() {
+    if (this.isEdit != true && this.showDeleteBtn != true) {
+      return;
+    }
+
+    this.performDeleteItem();
+  }
+
+  async performDeleteItem() {
+    // first delete the thumbnail image and then delete the item data
+    if (this.previewPath != '') {
+      await this.performDeleteImage();
+    }
+
+    await this.itemDataService
+      .deleteItemData(this.item.category, this.item.id)
+      .then(() => {
+        this.router.navigate(['admin/items']);
+      })
+      .catch(() => {
+        this.unknownErrorText = 'Some error occurred.';
+      });
   }
 
   /** Utility functions */

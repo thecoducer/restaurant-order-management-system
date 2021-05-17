@@ -12,6 +12,7 @@
     color: black;
     /** below css is to make cart bar sticky and always on top without obstructing others*/
     position: sticky;
+    font-family: "Karla", sans-serif;
 }
 
 

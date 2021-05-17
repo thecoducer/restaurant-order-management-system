@@ -1,8 +1,19 @@
 <div class="container add-edit-div">
     <div class="row">
+
+        <div class="d-flex flex-row-reverse" style="margin-bottom: 30px;">
+            <div class="p-2">
+                <button type="button" class="btn btn-outline-primary" [routerLink]="['/admin/items']">
+                    <i class="fa fa-arrow-left"></i>
+                    <span style="margin-left: 3px; margin-bottom: 10px;">
+                        Display all items
+                    </span>
+                </button>
+            </div>
+        </div>
+
         <div class="col-xs-12 col-md-6 col-md-offset-3">
             <h2 style="margin-bottom: 40px;">{{selectedPath | titlecase }} Item</h2>
-            <!-- display name of the item dynamically -->
 
             <form [formGroup]="addOrEditItemsForm" (ngSubmit)="onSubmit()">
                 <div (click)="hideErrors()">
@@ -46,7 +57,7 @@
                 </div>
 
                 <div *ngIf="isUploading" class="progress mt-2" style="margin-bottom: 15px;">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" attr.aria-valuenow="{{ uploadPercentage }}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: uploadPercentage + '%' }">
+                    <div class="progress-bar progress-bar-animated bg-success" role="progressbar" attr.aria-valuenow="{{ uploadPercentage }}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: uploadPercentage + '%' }">
                         {{ uploadPercentage }}%
                     </div>
                 </div>
@@ -59,22 +70,19 @@
                     Please upload an image smaller than 2 MB.
                 </div>
 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-md" [ngClass]="{'btn-success': isSubmitted, 'btn-primary': !isSubmitted, 'btn-danger': isSubmitted==false && unknownErrorText != null}" [disabled]="(!addOrEditItemsForm.valid) || isUploading || fileSizeExceeded || !isImage">{{submitBtnText}}</button>
-
-                    <button type="button" class="btn btn-md btn-primary" style="margin-left: 10px" *ngIf="(isSubmitted == true && isAdd == true) || (unknownErrorText != null && isAdd == true)" (click)="addAnotherItem()">{{addAnotherItemBtnText}}</button>
-                </div>
-
-                <button type="button" class="btn btn-outline-primary" [routerLink]="['/admin/items']">
-                    <i class="fa fa-arrow-left"></i>
-                    <span style="margin-left: 3px; margin-bottom: 10px;">
-                        Display all items
-                    </span>
-                </button>
-
                 <div class="alert alert-danger" role="alert" *ngIf="unknownErrorText != null">
                     <h4>Some error occurred.</h4>
                     {{unknownErrorText}}
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" *ngIf="isAdd == true" class="btn btn-md" [ngClass]="{'btn-success': isSubmitted, 'btn-primary': !isSubmitted, 'btn-danger': isSubmitted==false && unknownErrorText != null}" [disabled]="(!addOrEditItemsForm.valid) || isUploading || fileSizeExceeded || !isImage">{{submitBtnText}}</button>
+
+                    <button type="submit" *ngIf="isEdit == true" class="btn btn-md" [ngClass]="{'btn-success': isSubmitted, 'btn-primary': !isSubmitted, 'btn-danger': isSubmitted==false && unknownErrorText != null}" [disabled]="isUploading || fileSizeExceeded || !isImage">{{submitBtnText}}</button>
+
+                    <button type="button" class="btn btn-md btn-outline-danger" style="margin-left: 10px" *ngIf="showDeleteBtn == true" (click)="onDeleteItem()">Delete item</button>
+
+                    <button type="button" class="btn btn-md btn-primary" style="margin-left: 10px" *ngIf="(isSubmitted == true && isAdd == true) || (unknownErrorText != null && isAdd == true)" (click)="addAnotherItem()">{{addAnotherItemBtnText}}</button>
                 </div>
 
             </form>
@@ -90,6 +98,9 @@
                 </div>
             </div>
 
+            <div class="text-center">
+                <button type="button" class="btn btn-md btn-outline-danger" style="margin-top: 25px" *ngIf="showDeleteBtn == true && previewPath != ''" (click)="onDeleteImage()">Delete image</button>
+            </div>
         </div>
 
     </div>

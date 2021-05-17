@@ -17,7 +17,8 @@ export class ItemImageService {
     private storage: AngularFireStorage
   ) {}
 
-  pushFileToStorage(file: File, itemCategory: string): Observable<number> {
+  // upload image file to Firebase storage
+  pushImageToStorage(file: File, itemCategory: string): Observable<number> {
     const filePath = this.basePath + itemCategory + '/' + file.name;
     const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, file);
@@ -37,6 +38,10 @@ export class ItemImageService {
       });
 
     return uploadTask.percentageChanges();
+  }
+
+  async deleteImage(imageUrl: string) {    
+    return await this.storage.refFromURL(imageUrl).delete().toPromise();
   }
 
   getimageUrlObservable() {

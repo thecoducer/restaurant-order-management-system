@@ -10,7 +10,13 @@ img {
 }
 
 .card {
-    font-family: 'Karla', sans-serif;
+    font-family: "Karla", sans-serif;
+    border-radius: 1.3em;
+}
+
+.card-img-top {
+    border-top-left-radius: 1.3em;
+    border-top-right-radius: 1.3em;
 }
 
 .card-text {
@@ -49,4 +55,62 @@ div.card:hover {
 
 .items-div {
     margin-bottom: 80px;
+}
+
+.category-navbar {
+    background-color: white;
+    color: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    font-size: 18px;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    color: rgb(255, 255, 255);
+    background-color: #727272d8;
+}
+
+.nav-link {
+    color: #000000;
+}
+
+
+/*
+##Device = Low Resolution Tablets, Mobiles (Landscape)
+##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .nav-link {
+        padding-top: 0.5rem;
+        padding-right: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 0.5rem;
+    }
+    .category-navbar {
+        font-size: 15px;
+    }
+}
+
+
+/* 
+##Device = Most of the Smartphones Mobiles (Portrait)
+##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .nav-link {
+        padding-top: 0.5rem;
+        padding-right: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 0.5rem;
+    }
+    .category-navbar {
+        font-size: 15px;
+    }
 }
