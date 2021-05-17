@@ -63,10 +63,10 @@ export class DisplayItemsComponent implements OnInit, AfterViewInit {
   @HostListener('window:scroll', ['$event'])
   checkOffsetTop() {
     this.startersOffset = this.startersRef.nativeElement.offsetTop;
-    this.mainsOffset = this.mainsRef.nativeElement.offsetTop;
-    this.dessertsOffset = this.dessertsRef.nativeElement.offsetTop;
+    this.mainsOffset = this.mainsRef.nativeElement.offsetTop-200;
+    this.dessertsOffset = this.dessertsRef.nativeElement.offsetTop-200;
     this.alcoholicBeveragesOffset =
-      this.alcoholicBeveragesRef.nativeElement.offsetTop;
+      this.alcoholicBeveragesRef.nativeElement.offsetTop-200;
 
     if (
       window.pageYOffset >= this.startersOffset &&

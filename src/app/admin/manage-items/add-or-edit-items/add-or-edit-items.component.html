@@ -16,7 +16,7 @@
             <h2 style="margin-bottom: 40px;">{{selectedPath | titlecase }} Item</h2>
 
             <form [formGroup]="addOrEditItemsForm" (ngSubmit)="onSubmit()">
-                <div (click)="hideErrors()">
+                <div (click)="hideResponseTexts()">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Title</label>
                         <input type="itemTitle" class="form-control" formControlName="itemTitle">
@@ -61,7 +61,7 @@
                 </div>
 
                 <div *ngIf="isUploading" class="progress mt-2" style="margin-bottom: 15px;">
-                    <div class="progress-bar progress-bar-animated bg-success" role="progressbar" attr.aria-valuenow="{{ uploadPercentage }}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: uploadPercentage + '%' }">
+                    <div class="progress-bar progress-bar-animated bg-warning" role="progressbar" attr.aria-valuenow="{{ uploadPercentage }}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: uploadPercentage + '%' }">
                         {{ uploadPercentage }}%
                     </div>
                 </div>
@@ -74,19 +74,23 @@
                     Please upload an image smaller than 2 MB.
                 </div>
 
-                <div class="alert alert-danger" role="alert" *ngIf="unknownErrorText != null">
+                <div class="alert alert-success" role="alert" *ngIf="onSuccessText != ''">
+                    {{onSuccessText}}
+                </div>
+
+                <div class="alert alert-danger" role="alert" *ngIf="unknownErrorText != ''">
                     <h4>Some error occurred.</h4>
                     {{unknownErrorText}}
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" *ngIf="isAdd == true" class="btn btn-md" [ngClass]="{'btn-success': isSubmitted, 'btn-primary': !isSubmitted, 'btn-danger': isSubmitted==false && unknownErrorText != null}" [disabled]="(!addOrEditItemsForm.valid) || isUploading || fileSizeExceeded || !isImage">{{submitBtnText}}</button>
+                    <button type="submit" *ngIf="isAdd == true && isUploading == false" style="margin-right: 10px" class="btn btn-md btn-primary" [disabled]="(!addOrEditItemsForm.valid) || isUploading || fileSizeExceeded || !isImage">{{submitBtnText}}</button>
 
-                    <button type="submit" *ngIf="isEdit == true" class="btn btn-md" [ngClass]="{'btn-success': isSubmitted, 'btn-primary': !isSubmitted, 'btn-danger': isSubmitted==false && unknownErrorText != null}" [disabled]="isUploading || fileSizeExceeded || !isImage">{{submitBtnText}}</button>
+                    <button type="submit" *ngIf="isEdit == true" class="btn btn-md btn-primary" [disabled]="isUploading || fileSizeExceeded || !isImage">{{submitBtnText}}</button>
 
                     <button type="button" class="btn btn-md btn-outline-danger" style="margin-left: 10px" *ngIf="showDeleteBtn == true" (click)="onDeleteItem()">Delete item</button>
 
-                    <button type="button" class="btn btn-md btn-primary" style="margin-left: 10px" *ngIf="(isSubmitted == true && isAdd == true) || (unknownErrorText != null && isAdd == true)" (click)="addAnotherItem()">{{addAnotherItemBtnText}}</button>
+                    <button type="button" class="btn btn-md btn-primary" *ngIf="(isSubmitted == true && isAdd == true) || (unknownErrorText != '' && isAdd == true)" (click)="addAnotherItem()">{{addAnotherItemBtnText}}</button>
                 </div>
 
             </form>

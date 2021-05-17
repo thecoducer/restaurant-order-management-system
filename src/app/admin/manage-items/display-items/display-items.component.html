@@ -35,30 +35,11 @@
                 </div>
             </nav>
 
-            <!-- <nav class="sticky-top category-navbar" *ngIf="showCategoryNavbar == true">
-                <div class="container">
-                    <ul class="nav nav-pills nav-justified text-light category-ul-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" [ngClass]="{'active': currentActive === 1}" [routerLink]="['/admin/items']" (click)="scrollTo(startersRef, 1)">Starters</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" [ngClass]="{'active': currentActive === 2}" [routerLink]="['/admin/items']" (click)="scrollTo(mainsRef, 2)">Mains</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" [ngClass]="{'active': currentActive === 3}" [routerLink]="['/admin/items']" (click)="scrollTo(dessertsRef, 3)">Desserts</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" [ngClass]="{'active': currentActive === 4}" [routerLink]="['/admin/items']" (click)="scrollTo(alcoholicBeveragesRef, 4)">Alcoholic Beverages</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav> -->
-
             <div class="loader-div" *ngIf="isLoading == true && isLoaded == false">
                 <app-loader></app-loader>
             </div>
 
-            <section class="section" id="starters" #startersRef>
+            <section class="section" id="starters" style="scroll-margin-top: 0rem;" #startersRef>
                 <div class="items-div" *ngIf="isLoaded == true">
                     <div class="d-flex align-items-center pb-3 mb-5 border-bottom">
                         <span class="fs-2">Starters</span>

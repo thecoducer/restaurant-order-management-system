@@ -32,9 +32,10 @@ export class AddOrEditItemsComponent implements OnInit {
   fileSizeExceeded: boolean = false;
   showDeleteBtn: boolean = false;
 
+  onSuccessText: string = '';
   submitBtnText: string;
   addAnotherItemBtnText: string;
-  unknownErrorText: string = null;
+  unknownErrorText: string = '';
   previewPath: string = '';
 
   imageUrlSub: Subscription;
@@ -233,7 +234,7 @@ export class AddOrEditItemsComponent implements OnInit {
       (response) => {
         if (response != null) {
           this.isSubmitted = true;
-          this.submitBtnText = 'Done!';
+          this.onSuccessText = 'Item added!';
           this.addAnotherItemBtnText = 'Add another item';
           // Firebase returns an unique identifier on adding some data via POST request
           // We fetch it from response.name
@@ -243,7 +244,6 @@ export class AddOrEditItemsComponent implements OnInit {
       (error) => {
         this.unknownErrorText = error;
         this.isSubmitted = false;
-        this.submitBtnText = 'Failed!';
         this.addAnotherItemBtnText = 'Try again?';
       }
     );
@@ -261,12 +261,11 @@ export class AddOrEditItemsComponent implements OnInit {
     this.performItemDataUpdate(this.item)
       .then((res) => {
         this.isSubmitted = true;
-        this.submitBtnText = 'Updated!';
+        this.onSuccessText = 'Item updated!';
       })
       .catch((error) => {
         this.unknownErrorText = error;
         this.isSubmitted = false;
-        this.submitBtnText = 'Failed!';
       });
   }
 
@@ -289,7 +288,6 @@ export class AddOrEditItemsComponent implements OnInit {
     this.isUploading = false;
     this.isSubmitted = false;
     this.fileSizeExceeded = false;
-    this.unknownErrorText = '';
 
     if (this.isAdd) {
       this.submitBtnText = 'Add item';
@@ -299,8 +297,9 @@ export class AddOrEditItemsComponent implements OnInit {
       this.submitBtnText = 'Update item';
     }
 
-    this.unknownErrorText = null;
-    this.previewPath = null;
+    this.unknownErrorText = '';
+    this.previewPath = '';
+    this.onSuccessText = '';
 
     this.item = {
       id: '',
@@ -329,13 +328,12 @@ export class AddOrEditItemsComponent implements OnInit {
         // hide image preview
         if (this.selectedFile == null) {
           this.previewPath = '';
+          this.showDeleteBtn = false;
           this.item.imageUrl = '';
         }
-
-        this.showDeleteBtn = false;
       })
       .catch(() => {
-        this.unknownErrorText = 'Some error occurred. 1';
+        this.unknownErrorText = 'Some error occurred while deleting image.';
       });
 
     await this.itemDataService.deleteImageUrl(this.item.category, this.itemId);
@@ -358,10 +356,14 @@ export class AddOrEditItemsComponent implements OnInit {
     await this.itemDataService
       .deleteItemData(this.item.category, this.item.id)
       .then(() => {
-        this.router.navigate(['admin/items']);
+        this.onSuccessText = 'Item deleted!';
+
+        setTimeout(() => {
+          this.router.navigate(['admin/items']);
+        }, 1500);
       })
       .catch(() => {
-        this.unknownErrorText = 'Some error occurred. 2';
+        this.unknownErrorText = 'Some error occurred while deleting item.';
       });
   }
 
@@ -415,9 +417,9 @@ export class AddOrEditItemsComponent implements OnInit {
     }
   }
 
-  hideErrors() {
-    this.unknownErrorText = null;
-
+  hideResponseTexts() {
+    this.unknownErrorText = '';
+    this.onSuccessText = '';
   }
 
   replaceUndefinedOrNull(v: any): string {
