@@ -98,6 +98,23 @@ export class ItemDataService {
     return await itemRef.remove();
   }
 
+  /** delete imageUrl value when image deleted from storage */
+  async deleteImageUrl(itemCategory: string, itemId: string) {
+    const pathItemId = this.getPathItemId(itemId);
+    const itemRef = this.afdb.object(
+      'items/' + itemCategory + '/' + pathItemId
+    );
+    return await itemRef.update({ imageUrl: '' });
+  }
+
+  async updateItemData(item: Item, itemCategory: string, itemId: string) {
+    const pathItemId = this.getPathItemId(itemId);
+    const itemRef = this.afdb.object(
+      'items/' + itemCategory + '/' + pathItemId
+    );
+    return await itemRef.update(item);
+  }
+
   /** utilities */
 
   getPathItemId(itemId: string): string {
@@ -111,8 +128,6 @@ export class ItemDataService {
     } else {
       pathItemId = itemId;
     }
-
-    console.log(pathItemId);
 
     return pathItemId;
   }

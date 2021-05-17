@@ -29,6 +29,10 @@ import { ManageItemsComponent } from './admin/manage-items/manage-items.componen
 import { AddOrEditItemsComponent } from './admin/manage-items/add-or-edit-items/add-or-edit-items.component';
 import { DisplayItemsComponent } from './admin/manage-items/display-items/display-items.component';
 import { NotFoundComponent } from './global/not-found/not-found.component';
+import { StartersIconComponent } from './global/starters-icon/starters-icon.component';
+import { MainsIconComponent } from './global/mains-icon/mains-icon.component';
+import { DrinksIconComponent } from './global/drinks-icon/drinks-icon.component';
+import { DessertsIconComponent } from './global/desserts-icon/desserts-icon.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +53,10 @@ import { NotFoundComponent } from './global/not-found/not-found.component';
     AddOrEditItemsComponent,
     DisplayItemsComponent,
     NotFoundComponent,
+    StartersIconComponent,
+    MainsIconComponent,
+    DrinksIconComponent,
+    DessertsIconComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

@@ -8,31 +8,57 @@
                 </div>
             </div>
 
-
-            <nav class="sticky-top category-navbar">
+            <nav class="sticky-top category-navbar" *ngIf="showCategoryNavbar == true">
                 <div class="container">
                     <ul class="nav nav-pills nav-justified text-light category-ul-nav">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" [routerLink]="['/admin/items']" [fragment]="'starters'">Starters</a>
+                            <a class="nav-link" [ngClass]="{'active': currentActive === 1}" [routerLink]="['/admin/items']" (click)="scrollTo(startersRef, 1)">
+                                <app-starters-icon></app-starters-icon>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" [routerLink]="['/admin/items']" [fragment]="'mains'">Mains</a>
+                            <a class="nav-link" [ngClass]="{'active': currentActive === 2}" [routerLink]="['/admin/items']" (click)="scrollTo(mainsRef, 2)">
+                                <app-mains-icon></app-mains-icon>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" [routerLink]="['/admin/items']" [fragment]="'desserts'">Desserts</a>
+                            <a class="nav-link" [ngClass]="{'active': currentActive === 3}" [routerLink]="['/admin/items']" (click)="scrollTo(dessertsRef, 3)">
+                                <app-desserts-icon></app-desserts-icon>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" [routerLink]="['/admin/items']" [fragment]="'alcoholic-beverages'">Alcoholic Beverages</a>
+                            <a class="nav-link" [ngClass]="{'active': currentActive === 4}" [routerLink]="['/admin/items']" (click)="scrollTo(alcoholicBeveragesRef, 4)">
+                                <app-drinks-icon></app-drinks-icon>
+                            </a>
                         </li>
                     </ul>
                 </div>
             </nav>
 
+            <!-- <nav class="sticky-top category-navbar" *ngIf="showCategoryNavbar == true">
+                <div class="container">
+                    <ul class="nav nav-pills nav-justified text-light category-ul-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" [ngClass]="{'active': currentActive === 1}" [routerLink]="['/admin/items']" (click)="scrollTo(startersRef, 1)">Starters</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [ngClass]="{'active': currentActive === 2}" [routerLink]="['/admin/items']" (click)="scrollTo(mainsRef, 2)">Mains</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [ngClass]="{'active': currentActive === 3}" [routerLink]="['/admin/items']" (click)="scrollTo(dessertsRef, 3)">Desserts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [ngClass]="{'active': currentActive === 4}" [routerLink]="['/admin/items']" (click)="scrollTo(alcoholicBeveragesRef, 4)">Alcoholic Beverages</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav> -->
+
             <div class="loader-div" *ngIf="isLoading == true && isLoaded == false">
                 <app-loader></app-loader>
             </div>
 
-            <section class="section" id="starters">
+            <section class="section" id="starters" #startersRef>
                 <div class="items-div" *ngIf="isLoaded == true">
                     <div class="d-flex align-items-center pb-3 mb-5 border-bottom">
                         <span class="fs-2">Starters</span>
@@ -61,7 +87,7 @@
                 </div>
             </section>
 
-            <section class="section" id="mains">
+            <section class="section" id="mains" #mainsRef>
                 <div class="items-div" *ngIf="isLoaded == true">
                     <div class="d-flex align-items-center pb-3 mb-5 border-bottom">
                         <span class="fs-2">Mains</span>
@@ -90,7 +116,7 @@
                 </div>
             </section>
 
-            <section class="section" id="desserts">
+            <section class="section" id="desserts" #dessertsRef>
                 <div class="items-div" *ngIf="isLoaded == true">
                     <div class="d-flex align-items-center pb-3 mb-5 border-bottom">
                         <span class="fs-2">Desserts</span>
@@ -119,7 +145,7 @@
                 </div>
             </section>
 
-            <section class="section" id="alcoholic-beverages">
+            <section class="section" id="alcoholic-beverages" #alcoholicBeveragesRef>
                 <div class="items-div" *ngIf="isLoaded == true">
                     <div class="d-flex align-items-center pb-3 mb-5 border-bottom">
                         <span class="fs-2">Alcoholic Beverages</span>

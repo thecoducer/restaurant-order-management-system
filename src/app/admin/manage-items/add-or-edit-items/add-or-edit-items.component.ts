@@ -35,7 +35,7 @@ export class AddOrEditItemsComponent implements OnInit {
   submitBtnText: string;
   addAnotherItemBtnText: string;
   unknownErrorText: string = null;
-  previewPath: string = null;
+  previewPath: string = '';
 
   imageUrlSub: Subscription;
 
@@ -81,7 +81,7 @@ export class AddOrEditItemsComponent implements OnInit {
         Validators.pattern('^-?[0-9]+([,.]?[0-9]+)?$'),
       ]),
       itemCategory: new FormControl('', [Validators.required]),
-      itemImage: new FormControl('', [Validators.required]),
+      itemImage: new FormControl(''),
     });
 
     // get data from route
@@ -112,13 +112,14 @@ export class AddOrEditItemsComponent implements OnInit {
     )) as Item;
 
     this.addOrEditItemsForm.patchValue({
-      itemTitle: this.item.name,
-      itemDesc: this.item.description,
-      itemPrice: this.item.price,
-      itemCategory: this.item.category,
+      itemTitle: this.replaceUndefinedOrNull(this.item.name),
+      itemDesc: this.replaceUndefinedOrNull(this.item.description),
+      itemPrice: this.replaceUndefinedOrNull(this.item.price),
+      itemCategory: this.replaceUndefinedOrNull(this.item.category),
     });
 
     this.previewPath = this.item.imageUrl;
+    this.imageUrl = this.item.imageUrl;
     this.fileSizeExceeded = false;
     this.isImage = true;
     this.showDeleteBtn = true;
@@ -141,17 +142,44 @@ export class AddOrEditItemsComponent implements OnInit {
 
   // on clicking submit
   onSubmit() {
-    // handle the case when disabled attribute for submit button is deleted
+    // handle the case when disabled attribute for add item button is deleted
     // from html
-    if (
-      this.addOrEditItemsForm.invalid == true ||
-      this.isImage == false ||
-      this.fileSizeExceeded == true
-    ) {
-      return;
+    if (this.isAdd) {
+      if (
+        this.addOrEditItemsForm.invalid == true ||
+        this.isImage == false ||
+        this.fileSizeExceeded == true
+      ) {
+        return;
+      }
     }
 
-    this.uploadImage();
+    // call to uploadImage() uploads the selected image and fetches the image URL
+    // and then it pushes the item data to Firebase DB
+    if (this.isAdd == true && this.selectedFile != null) {
+      this.uploadImage();
+    }
+
+    // if a new image file is selected on edit page
+    // we delete the previous image
+    // and upload the new image
+    // and update the item data
+    if (
+      this.selectedFile != null &&
+      this.isEdit == true &&
+      this.item.imageUrl == ''
+    ) {
+      this.uploadImage();
+    } else if (
+      this.selectedFile != null &&
+      this.isEdit == true &&
+      this.item.imageUrl != ''
+    ) {
+      this.performDeleteImage();
+      this.uploadImage();
+    } else if (this.selectedFile == null && this.isEdit) {
+      this.updateItemData();
+    }
   }
 
   private uploadImage(): void {
@@ -169,7 +197,6 @@ export class AddOrEditItemsComponent implements OnInit {
       },
       (error) => {
         this.unknownErrorText = error;
-        this.submitBtnText = 'Failed!';
         this.isUploaded = false;
         this.isUploading = false;
       }
@@ -184,11 +211,16 @@ export class AddOrEditItemsComponent implements OnInit {
           this.imageUrl = url;
           // unsubscribe here so that pushItemData() isn't called more than once
           this.imageUrlSub.unsubscribe();
-          this.pushItemData();
+          if (this.isAdd) {
+            this.pushItemData();
+          } else if (this.isEdit) {
+            this.updateItemData();
+          }
         }
       });
   }
 
+  // saves item data in Firebase DB
   private pushItemData() {
     this.item.name = this.addOrEditItemsForm.get('itemTitle').value;
     this.item.description = this.addOrEditItemsForm.get('itemDesc').value;
@@ -214,6 +246,35 @@ export class AddOrEditItemsComponent implements OnInit {
         this.submitBtnText = 'Failed!';
         this.addAnotherItemBtnText = 'Try again?';
       }
+    );
+  }
+
+  // updates item data
+  updateItemData() {
+    this.item.name = this.addOrEditItemsForm.get('itemTitle').value;
+    this.item.description = this.addOrEditItemsForm.get('itemDesc').value;
+    this.item.price = this.addOrEditItemsForm.get('itemPrice').value;
+    this.item.category = this.addOrEditItemsForm.get('itemCategory').value;
+    this.item.imageUrl = this.imageUrl;
+    this.item.modifiedOn = new Date().toLocaleString();
+
+    this.performItemDataUpdate(this.item)
+      .then((res) => {
+        this.isSubmitted = true;
+        this.submitBtnText = 'Updated!';
+      })
+      .catch((error) => {
+        this.unknownErrorText = error;
+        this.isSubmitted = false;
+        this.submitBtnText = 'Failed!';
+      });
+  }
+
+  async performItemDataUpdate(item: Item) {
+    await this.itemDataService.updateItemData(
+      item,
+      this.itemCategory,
+      this.itemId
     );
   }
 
@@ -264,11 +325,20 @@ export class AddOrEditItemsComponent implements OnInit {
     await this.itemImageService
       .deleteImage(this.item.imageUrl)
       .then(() => {
-        this.previewPath = '';
+        // only when no image file selected
+        // hide image preview
+        if (this.selectedFile == null) {
+          this.previewPath = '';
+          this.item.imageUrl = '';
+        }
+
+        this.showDeleteBtn = false;
       })
       .catch(() => {
-        this.unknownErrorText = 'Some error occurred.';
+        this.unknownErrorText = 'Some error occurred. 1';
       });
+
+    await this.itemDataService.deleteImageUrl(this.item.category, this.itemId);
   }
 
   onDeleteItem() {
@@ -291,9 +361,21 @@ export class AddOrEditItemsComponent implements OnInit {
         this.router.navigate(['admin/items']);
       })
       .catch(() => {
-        this.unknownErrorText = 'Some error occurred.';
+        this.unknownErrorText = 'Some error occurred. 2';
       });
   }
+
+  /**
+   *
+   *
+   *
+   *
+   *
+   *
+   *
+   *
+   *
+   */
 
   /** Utility functions */
 
@@ -335,5 +417,13 @@ export class AddOrEditItemsComponent implements OnInit {
 
   hideErrors() {
     this.unknownErrorText = null;
+
+  }
+
+  replaceUndefinedOrNull(v: any): string {
+    if (v == undefined || v == null) {
+      return '';
+    }
+    return v;
   }
 }

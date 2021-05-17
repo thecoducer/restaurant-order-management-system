@@ -15,7 +15,7 @@ import { NotFoundComponent } from './global/not-found/not-found.component';
 const routerOptions: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
   anchorScrolling: 'enabled',
-  scrollOffset: [0, 64],
+  scrollOffset: [0, 0]
 };
 
 const routes: Routes = [

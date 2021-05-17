@@ -72,7 +72,12 @@ div.card:hover {
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
     color: rgb(255, 255, 255);
-    background-color: #727272d8;
+    background-color: #e6e6e6d8;
+}
+
+.nav-fill .nav-item .nav-link,
+.nav-justified .nav-item .nav-link {
+    width: 40%;
 }
 
 .nav-link {

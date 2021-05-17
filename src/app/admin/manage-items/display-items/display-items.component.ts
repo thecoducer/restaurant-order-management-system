@@ -1,6 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
-import { SelectItem } from 'primeng/api';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Item } from 'src/app/models/item.model';
 import { ItemDataService } from 'src/app/services/item-data.service';
 
@@ -9,7 +15,7 @@ import { ItemDataService } from 'src/app/services/item-data.service';
   templateUrl: './display-items.component.html',
   styleUrls: ['./display-items.component.css'],
 })
-export class DisplayItemsComponent implements OnInit {
+export class DisplayItemsComponent implements OnInit, AfterViewInit {
   starters: Item[] = [];
   mains: Item[] = [];
   alcoholicBeverages: Item[] = [];
@@ -18,13 +24,80 @@ export class DisplayItemsComponent implements OnInit {
   isLoading: boolean = false;
   isLoaded: boolean = false;
 
+  sectionName: string = '';
+
+  showCategoryNavbar: boolean = false;
+  currentActive: number;
+  @ViewChild('startersRef') startersRef: ElementRef;
+  @ViewChild('mainsRef') mainsRef: ElementRef;
+  @ViewChild('dessertsRef') dessertsRef: ElementRef;
+  @ViewChild('alcoholicBeveragesRef') alcoholicBeveragesRef: ElementRef;
+
+  public startersOffset: Number = null;
+  public mainsOffset: Number = null;
+  public dessertsOffset: Number = null;
+  public alcoholicBeveragesOffset: Number = null;
+
   constructor(
     private router: Router,
-    private itemDataService: ItemDataService
-  ) {}
+    private itemDataService: ItemDataService,
+    private route: ActivatedRoute
+  ) {
+    this.route.fragment.subscribe((data) => {
+      this.sectionName = data;
+    });
+  }
 
   ngOnInit(): void {
     this.fetchItems();
+  }
+
+  ngAfterViewInit() {
+    this.startersOffset = this.startersRef.nativeElement.offsetTop;
+    this.mainsOffset = this.mainsRef.nativeElement.offsetTop;
+    this.dessertsOffset = this.dessertsRef.nativeElement.offsetTop;
+    this.alcoholicBeveragesOffset =
+      this.alcoholicBeveragesRef.nativeElement.offsetTop;
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  checkOffsetTop() {
+    this.startersOffset = this.startersRef.nativeElement.offsetTop;
+    this.mainsOffset = this.mainsRef.nativeElement.offsetTop;
+    this.dessertsOffset = this.dessertsRef.nativeElement.offsetTop;
+    this.alcoholicBeveragesOffset =
+      this.alcoholicBeveragesRef.nativeElement.offsetTop;
+
+    if (
+      window.pageYOffset >= this.startersOffset &&
+      window.pageYOffset < this.mainsOffset
+    ) {
+      this.currentActive = 1;
+      this.showCategoryNavbar = true;
+    } else if (
+      window.pageYOffset >= this.mainsOffset &&
+      window.pageYOffset < this.dessertsOffset
+    ) {
+      this.currentActive = 2;
+      this.showCategoryNavbar = true;
+    } else if (
+      window.pageYOffset >= this.dessertsOffset &&
+      window.pageYOffset < this.alcoholicBeveragesOffset
+    ) {
+      this.currentActive = 3;
+      this.showCategoryNavbar = true;
+    } else if (window.pageYOffset >= this.alcoholicBeveragesOffset) {
+      this.currentActive = 4;
+      this.showCategoryNavbar = true;
+    } else {
+      this.currentActive = 0;
+      this.showCategoryNavbar = false;
+    }
+  }
+
+  scrollTo(el: HTMLElement, v: number) {
+    el.scrollIntoView({ block: 'start', inline: 'nearest' });
+    this.currentActive = v;
   }
 
   async fetchItems() {
@@ -50,7 +123,7 @@ export class DisplayItemsComponent implements OnInit {
   }
 
   onEdit(itemCategory: string, itemId: string) {
-    this.router.navigate(['admin/items/edit',itemCategory, itemId]);
+    this.router.navigate(['admin/items/edit', itemCategory, itemId]);
   }
 
   onAdd() {
