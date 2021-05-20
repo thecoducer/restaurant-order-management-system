@@ -12,7 +12,7 @@ export class CartComponent implements OnInit {
   isCartEmpty: boolean = true;
   totalAmt: number;
   totalItems: number;
-  showCartBar: boolean;
+  goToOrders: boolean = false;
 
   constructor(
     private handleCartService: HandleCartService,
@@ -36,11 +36,15 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.handleCartService.getCartBarObservable().subscribe(data => {
-      this.showCartBar = data;
+      this.goToOrders = data;
     })
   }
 
   onContinue() {
     this.router.navigate(['cart']);
+  }
+
+  placeOrder() {
+    this.router.navigate(['orders']);
   }
 }

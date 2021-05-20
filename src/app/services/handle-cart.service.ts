@@ -142,15 +142,11 @@ export class HandleCartService implements OnInit {
   }
 
   getCartBarObservable() {
-    this.cartBarSub.next(true);
+    this.cartBarSub.next(false);
     return this.cartBarSub.asObservable();
   }
 
-  disableCartBar() {
-    this.cartBarSub.next(false);
-  }
-
-  enableCartBar() {
-    this.cartBarSub.next(true);
+  goToOrders(v: boolean) {
+    this.cartBarSub.next(v);
   }
 }

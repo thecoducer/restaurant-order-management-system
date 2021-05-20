@@ -36,6 +36,7 @@ import { DessertsIconComponent } from './global/desserts-icon/desserts-icon.comp
 import { CartIconComponent } from './global/cart-icon/cart-icon.component';
 import { OrderPageComponent } from './order-page/order-page.component';
 import { AuthGuard } from './route-guards/auth-guard.service';
+import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { AuthGuard } from './route-guards/auth-guard.service';
     DrinksIconComponent,
     DessertsIconComponent,
     CartIconComponent,
-    OrderPageComponent
+    OrderPageComponent,
+    ConfirmOrderComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

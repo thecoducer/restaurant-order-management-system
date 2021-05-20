@@ -11,10 +11,6 @@
             </div>
 
             <div *ngIf="isCartEmpty == false">
-                <div class="text-center" style="margin-bottom: 50px;">
-                    <h4>Subtotal: ₹{{[(totalAmt)]}}</h4>
-                </div>
-
                 <div *ngFor="let item of cartArray">
                     <div class="card mb-3 mx-auto" style="max-width: 700px;" *ngIf="item.quantity > 0">
                         <div class="row g-0">
@@ -43,7 +39,6 @@
 
                 <div class="text-center cart-btn-group">
                     <div class="form-group">
-                        <button class="btn btn-outline-success" style="margin-right: 10px;" (click)="placeOrder()">Place order</button>
                         <button class="btn btn-outline-danger" (click)="clearCart()">Clear cart</button>
                     </div>
                 </div>
