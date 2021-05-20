@@ -20,7 +20,8 @@ export class HandleCartService implements OnInit {
   postPath: string;
   getPath: string;
 
-  cartBarSub = new BehaviorSubject<boolean>(true);
+  onCartPageSub = new BehaviorSubject<boolean>(false);
+  onConfirmOrderPageSub = new BehaviorSubject<boolean>(false);
 
   constructor(private handleLocalStorageService: HandleLocalStorageService) {}
 
@@ -141,12 +142,20 @@ export class HandleCartService implements OnInit {
     this.handleLocalStorageService.removeCartData();
   }
 
-  getCartBarObservable() {
-    this.cartBarSub.next(false);
-    return this.cartBarSub.asObservable();
+  onCartPageObs() {
+    this.onCartPageSub.next(false);
+    return this.onCartPageSub.asObservable();
   }
 
   goToOrders(v: boolean) {
-    this.cartBarSub.next(v);
+    this.onCartPageSub.next(v);
+  }
+
+  onConfirmOrderPageObs() {
+    return this.onConfirmOrderPageSub.asObservable();
+  }
+
+  hideCartBar(v: boolean) {
+    this.onConfirmOrderPageSub.next(v);
   }
 }

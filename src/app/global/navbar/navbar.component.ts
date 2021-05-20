@@ -77,4 +77,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
   onManageItems() {
     this.router.navigate(['admin/items']);
   }
+
+  onMyCart() {
+    this.router.navigate(['cart']);
+  }
+
+  onMyOrders() {
+    this.router.navigate(['orders']);
+  }
 }

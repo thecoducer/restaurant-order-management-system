@@ -1,0 +1,16 @@
+.confirm-order-page {
+    min-height: 120vh;
+    padding-top: 80px;
+}
+
+div {
+    font-family: "Karla", sans-serif;
+}
+
+.card-title {
+    font-size: 20px;
+}
+
+.item-price {
+    font-size: 20px;
+}

@@ -17,6 +17,7 @@ import { OrderPageComponent } from './order-page/order-page.component';
 import { AuthGuard } from './route-guards/auth-guard.service';
 import { AdminAuthGuard } from './route-guards/admin-auth-guard.service';
 import { CustomerAuthGuard } from './route-guards/customer-auth-guard.service';
+import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
 
 const routerOptions: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
@@ -70,6 +71,11 @@ const routes: Routes = [
   {
     path: 'orders',
     component: OrderPageComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'confirm-order',
+    component: ConfirmOrderComponent,
     canActivate: [AuthGuard]
   },
   {

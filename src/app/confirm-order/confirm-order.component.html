@@ -1,1 +1,55 @@
-<p>confirm-order works!</p>
+<main class="confirm-order-page">
+    <div class="album py-5">
+        <div class="container">
+
+            <div class="d-flex align-items-center pb-3 mb-5 border-bottom">
+                <span class="fs-2">Confirm order</span>
+            </div>
+
+            <div class="text-center" *ngIf="orderArray.length == 0">
+                <h3>You need to first add items to your cart.</h3>
+            </div>
+
+            <div *ngIf="orderArray.length > 0">
+                <div *ngFor="let item of orderArray">
+                    <div class="card mb-3 mx-auto" style="max-width: 700px;">
+                        <div class="row g-0">
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{item.name}}</h5>
+                                    <p class="card-text item-price">
+                                        ₹{{item.price}} × {{item.quantity}} = ₹{{getItemTotalAmount(item.price, item.quantity)}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center" style="margin-top: 80px; margin-bottom: 30px;">
+                    <h4>Total amount: ₹{{totalAmt}}</h4>
+                    <p>(inclusive of 18% GST)</p>
+                </div>
+
+                <div class="text-center cart-btn-group" *ngIf="isProcessing == false && isOrdered == false">
+                    <div class="form-group">
+                        <button class="btn btn-outline-warning" (click)="goBackToCart()" style="margin-right: 15px">Back to cart</button>
+                        <button class="btn btn-outline-danger" (click)="confirm()">Confirm</button>
+                    </div>
+                </div>
+
+                <div class="alert alert-success mx-auto" role="alert" style="max-width: 500px;" *ngIf="isOrdered == true">
+                    Your order has been placed successfully!
+                </div>
+
+                <div class="text-center cart-btn-group" *ngIf="isOrdered == true">
+                    <div class="form-group">
+                        <button class="btn btn-outline-primary" [routerLink]="['/orders']">My orders</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</main>

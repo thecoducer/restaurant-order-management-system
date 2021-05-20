@@ -15,11 +15,11 @@ export class CartPageComponent implements OnInit, OnDestroy {
   isCartEmpty: boolean = true;
 
   constructor(
-    private handleLocalStorage: HandleLocalStorageService,
+    private handleLocalStorageService: HandleLocalStorageService,
     private handleCartService: HandleCartService,
     private router: Router
   ) {
-    this.cartObj = JSON.parse(this.handleLocalStorage.getCartData());
+    this.cartObj = JSON.parse(this.handleLocalStorageService.getCartData());
   }
 
   ngOnInit(): void {
@@ -70,7 +70,7 @@ export class CartPageComponent implements OnInit, OnDestroy {
 
     // if not items in cart
     // set isCartEmpty to true
-    this.cartObj = JSON.parse(this.handleLocalStorage.getCartData());
+    this.cartObj = JSON.parse(this.handleLocalStorageService.getCartData());
     if(this.cartObj == null) {
       this.isCartEmpty = true;
     }
