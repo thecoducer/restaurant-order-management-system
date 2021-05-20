@@ -1,11 +1,10 @@
-<nav class="navbar fixed-bottom navbar-expand-lg" id="cart-bar" *ngIf="!isCartEmpty">
+<nav class="navbar fixed-bottom navbar-expand-lg" id="cart-bar" *ngIf="isCartEmpty == false && showCartBar == true">
     <div class="container" id="cart-bar-div">
         <span class="navbar-brand">Cart ({{totalItems}})</span>
 
         <div>
             <span id="subtotal">Subtotal: ₹{{totalAmt}}</span>
-            <!-- <button type="button" class="btn btn-outline-danger" id="clear-cart-btn" (click)="clearCart()">Clear cart</button> -->
-            <button type="button" class="btn btn-outline-success" id="view-cart-btn">Continue</button>
+            <button type="button" class="btn btn-outline-danger" id="view-cart-btn" (click)="onContinue()">Continue</button>
         </div>
     </div>
 </nav>

@@ -3,5 +3,9 @@ export interface ItemDetails {
     addedOn: string;
     quantity: number;
     itemId: string;
+    category: string;
+    name: string;
+    price: string;
+    imageUrl: string
   };
 }

@@ -7,6 +7,7 @@ import { ItemDataService } from './item-data.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,8 @@ export class HandleCartService implements OnInit {
   uid: string;
   postPath: string;
   getPath: string;
+
+  cartBarSub = new BehaviorSubject<boolean>(true);
 
   constructor(private handleLocalStorageService: HandleLocalStorageService) {}
 
@@ -38,6 +41,10 @@ export class HandleCartService implements OnInit {
             addedOn: new Date().toLocaleString(),
             quantity: item.quantity,
             itemId: item.id,
+            category: item.category,
+            name: item.name,
+            price: item.price,
+            imageUrl: item.imageUrl
           },
         },
         totalAmt: item.price,
@@ -52,6 +59,10 @@ export class HandleCartService implements OnInit {
             addedOn: new Date().toLocaleString(),
             quantity: item.quantity,
             itemId: item.id,
+            category: item.category,
+            name: item.name,
+            price: item.price,
+            imageUrl: item.imageUrl
           },
         };
 
@@ -128,5 +139,18 @@ export class HandleCartService implements OnInit {
   clearCart() {
     this.cartObj = null;
     this.handleLocalStorageService.removeCartData();
+  }
+
+  getCartBarObservable() {
+    this.cartBarSub.next(true);
+    return this.cartBarSub.asObservable();
+  }
+
+  disableCartBar() {
+    this.cartBarSub.next(false);
+  }
+
+  enableCartBar() {
+    this.cartBarSub.next(true);
   }
 }

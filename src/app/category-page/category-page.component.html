@@ -4,7 +4,7 @@
 
             <div class="d-flex flex-row-reverse" style="margin-bottom: 30px;" #startersRef>
                 <div class="p-2">
-                    <!-- <button type="button" class="btn btn-outline-primary" (click)="onAdd()">Add a new item</button> -->
+
                 </div>
             </div>
 
@@ -64,7 +64,7 @@
                                             <div class="btn-toolbar" role="toolbar" *ngIf="item.quantity > 0">
                                                 <div class="btn-group" role="group" aria-label="-">
                                                     <span type="button" class="btn btn-outline-danger btn-sm" (click)="onRemove(item)">-</span>
-                                                    <input class="text-center" style="width: 30px;" [(ngModel)]="item.quantity">
+                                                    <span class="text-center" style="width: 30px;">{{[(item.quantity)]}}</span>
                                                     <span type="button" class="btn btn-outline-success btn-sm" (click)="onAdd(item)">+</span>
                                                 </div>
                                             </div>
@@ -102,7 +102,7 @@
                                             <div class="btn-toolbar" role="toolbar" *ngIf="item.quantity > 0">
                                                 <div class="btn-group" role="group" aria-label="-">
                                                     <span type="button" class="btn btn-outline-danger btn-sm" (click)="onRemove(item)">-</span>
-                                                    <input class="text-center" style="width: 30px;" [(ngModel)]="item.quantity">
+                                                    <span class="text-center" style="width: 30px;">{{[(item.quantity)]}}</span>
                                                     <span type="button" class="btn btn-outline-success btn-sm" (click)="onAdd(item)">+</span>
                                                 </div>
                                             </div>
@@ -141,7 +141,7 @@
                                             <div class="btn-toolbar" role="toolbar" *ngIf="item.quantity > 0">
                                                 <div class="btn-group" role="group" aria-label="-">
                                                     <span type="button" class="btn btn-outline-danger btn-sm" (click)="onRemove(item)">-</span>
-                                                    <input class="text-center" style="width: 30px;" [(ngModel)]="item.quantity">
+                                                    <span class="text-center" style="width: 30px;">{{[(item.quantity)]}}</span>
                                                     <span type="button" class="btn btn-outline-success btn-sm" (click)="onAdd(item)">+</span>
                                                 </div>
                                             </div>
@@ -180,7 +180,7 @@
                                             <div class="btn-toolbar" role="toolbar" *ngIf="item.quantity > 0">
                                                 <div class="btn-group" role="group" aria-label="-">
                                                     <span type="button" class="btn btn-outline-danger btn-sm" (click)="onRemove(item)">-</span>
-                                                    <input class="text-center" style="width: 30px;" [(ngModel)]="item.quantity">
+                                                    <span class="text-center" style="width: 30px;">{{[(item.quantity)]}}</span>
                                                     <span type="button" class="btn btn-outline-success btn-sm" (click)="onAdd(item)">+</span>
                                                 </div>
                                             </div>

@@ -12,6 +12,7 @@ import { AddOrEditItemsComponent } from './admin/manage-items/add-or-edit-items/
 import { ManageItemsComponent } from './admin/manage-items/manage-items.component';
 import { NotFoundComponent } from './global/not-found/not-found.component';
 import { CategoryPageComponent } from './category-page/category-page.component';
+import { CartPageComponent } from './cart-page/cart-page.component';
 
 const routerOptions: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
@@ -57,6 +58,10 @@ const routes: Routes = [
   {
     path: 'not-found',
     component: NotFoundComponent,
+  },
+  {
+    path: 'cart',
+    component: CartPageComponent
   },
   {
     path: '**',
