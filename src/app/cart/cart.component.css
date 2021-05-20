@@ -13,6 +13,7 @@
     /** below css is to make cart bar sticky and always on top without obstructing others*/
     position: sticky;
     font-family: "Karla", sans-serif;
+    font-size: 20px;
 }
 
 
@@ -63,10 +64,10 @@
 
 @media (min-width: 481px) and (max-width: 767px) {
     .navbar-brand {
-        font-size: 14px;
+        font-size: 17px;
     }
     #subtotal {
-        font-size: 13px;
+        font-size: 16px;
     }
     #cart-bar-div {
         font-size: 14px;
@@ -75,7 +76,7 @@
         font-size: 14px;
     }
     #view-cart-btn {
-        font-size: 14px;
+        font-size: 15px;
     }
 }
 
@@ -87,10 +88,10 @@
 
 @media (min-width: 320px) and (max-width: 480px) {
     .navbar-brand {
-        font-size: 14px;
+        font-size: 17px;
     }
     #subtotal {
-        font-size: 13px;
+        font-size: 16px;
     }
     #cart-bar-div {
         font-size: 14px;
@@ -99,6 +100,6 @@
         font-size: 14px;
     }
     #view-cart-btn {
-        font-size: 14px;
+        font-size: 15px;
     }
 }

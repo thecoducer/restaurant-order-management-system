@@ -11,6 +11,7 @@ import { DisplayItemsComponent } from './admin/manage-items/display-items/displa
 import { AddOrEditItemsComponent } from './admin/manage-items/add-or-edit-items/add-or-edit-items.component';
 import { ManageItemsComponent } from './admin/manage-items/manage-items.component';
 import { NotFoundComponent } from './global/not-found/not-found.component';
+import { CategoryPageComponent } from './category-page/category-page.component';
 
 const routerOptions: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
@@ -48,6 +49,10 @@ const routes: Routes = [
     path: 'admin/items/edit/:itemCategory/:itemId',
     component: AddOrEditItemsComponent,
     data: { path: 'edit' },
+  },
+  {
+    path: 'menu-page',
+    component: CategoryPageComponent
   },
   {
     path: 'not-found',

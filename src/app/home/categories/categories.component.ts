@@ -14,6 +14,6 @@ export class CategoriesComponent implements OnInit {
   }
 
   onViewCategory(){
-    this.router.navigate(['admin/items']);
+    this.router.navigate(['menu-page']);
   }
 }

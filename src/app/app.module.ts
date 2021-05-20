@@ -33,6 +33,7 @@ import { StartersIconComponent } from './global/starters-icon/starters-icon.comp
 import { MainsIconComponent } from './global/mains-icon/mains-icon.component';
 import { DrinksIconComponent } from './global/drinks-icon/drinks-icon.component';
 import { DessertsIconComponent } from './global/desserts-icon/desserts-icon.component';
+import { CartIconComponent } from './global/cart-icon/cart-icon.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { DessertsIconComponent } from './global/desserts-icon/desserts-icon.comp
     MainsIconComponent,
     DrinksIconComponent,
     DessertsIconComponent,
+    CartIconComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

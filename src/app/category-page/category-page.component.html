@@ -1,1 +1,198 @@
-<p>category-page works!</p>
+<main>
+    <div class="album py-5">
+        <div class="container">
+
+            <div class="d-flex flex-row-reverse" style="margin-bottom: 30px;" #startersRef>
+                <div class="p-2">
+                    <!-- <button type="button" class="btn btn-outline-primary" (click)="onAdd()">Add a new item</button> -->
+                </div>
+            </div>
+
+            <nav class="sticky-top category-navbar" *ngIf="showCategoryNavbar == true">
+                <div class="container">
+                    <ul class="nav nav-pills nav-justified text-light category-ul-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" [ngClass]="{'active': currentActive === 1}" (click)="scrollTo(startersRef, 1)">
+                                <app-starters-icon></app-starters-icon>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [ngClass]="{'active': currentActive === 2}" (click)="scrollTo(mainsRef, 2)">
+                                <app-mains-icon></app-mains-icon>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [ngClass]="{'active': currentActive === 3}" (click)="scrollTo(dessertsRef, 3)">
+                                <app-desserts-icon></app-desserts-icon>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [ngClass]="{'active': currentActive === 4}" (click)="scrollTo(alcoholicBeveragesRef, 4)">
+                                <app-drinks-icon></app-drinks-icon>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="loader-div" *ngIf="isLoading == true && isLoaded == false">
+                <app-loader></app-loader>
+            </div>
+
+            <section class="section" id="starters" style="scroll-margin-top: 0rem;">
+                <div class="items-div" *ngIf="isLoaded == true">
+                    <div class="d-flex align-items-center pb-3 mb-5 border-bottom">
+                        <span class="fs-2">Starters</span>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        <div class="col" *ngFor="let item of starters">
+                            <div class="card">
+                                <img class="img-loading card-img-top" src={{item.imageUrl}} role="img" aria-label="item-image" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+                                <div class="card-body">
+                                    <p class="card-text">{{item.name}}</p>
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-dark item-price">₹{{item.price}}</small>
+
+                                        <div class="btn-group">
+                                            <span class="btn btn-sm" *ngIf="item.quantity == 0" (click)="onAdd(item)">
+                                                <app-cart-icon></app-cart-icon>
+                                            </span>
+
+                                            <div class="btn-toolbar" role="toolbar" *ngIf="item.quantity > 0">
+                                                <div class="btn-group" role="group" aria-label="-">
+                                                    <span type="button" class="btn btn-outline-danger btn-sm" (click)="onRemove(item)">-</span>
+                                                    <input class="text-center" style="width: 30px;" [(ngModel)]="item.quantity">
+                                                    <span type="button" class="btn btn-outline-success btn-sm" (click)="onAdd(item)">+</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="mains" #mainsRef>
+                <div class="items-div" *ngIf="isLoaded == true">
+                    <div class="d-flex align-items-center pb-3 mb-5 border-bottom">
+                        <span class="fs-2">Mains</span>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        <div class="col" *ngFor="let item of mains">
+                            <div class="card">
+                                <img class="img-loading card-img-top" src={{item.imageUrl}} role="img" aria-label="item-image" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+                                <div class="card-body">
+                                    <p class="card-text">{{item.name}}</p>
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-dark item-price">₹{{item.price}}</small>
+
+                                        <div class="btn-group">
+                                            <span class="btn btn-sm" *ngIf="item.quantity == 0" (click)="onAdd(item)">
+                                                <app-cart-icon></app-cart-icon>
+                                            </span>
+
+                                            <div class="btn-toolbar" role="toolbar" *ngIf="item.quantity > 0">
+                                                <div class="btn-group" role="group" aria-label="-">
+                                                    <span type="button" class="btn btn-outline-danger btn-sm" (click)="onRemove(item)">-</span>
+                                                    <input class="text-center" style="width: 30px;" [(ngModel)]="item.quantity">
+                                                    <span type="button" class="btn btn-outline-success btn-sm" (click)="onAdd(item)">+</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="desserts" #dessertsRef>
+                <div class="items-div" *ngIf="isLoaded == true">
+                    <div class="d-flex align-items-center pb-3 mb-5 border-bottom">
+                        <span class="fs-2">Desserts</span>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        <div class="col" *ngFor="let item of desserts">
+                            <div class="card">
+                                <img class="img-loading card-img-top" src={{item.imageUrl}} role="img" aria-label="item-image" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+                                <div class="card-body">
+                                    <p class="card-text">{{item.name}}</p>
+                                    <!-- <span class="badge bg-light text-dark item-category">{{item.category}}</span> -->
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-dark item-price">₹{{item.price}}</small>
+
+                                        <div class="btn-group">
+                                            <span class="btn btn-sm" *ngIf="item.quantity == 0" (click)="onAdd(item)">
+                                                <app-cart-icon></app-cart-icon>
+                                            </span>
+
+                                            <div class="btn-toolbar" role="toolbar" *ngIf="item.quantity > 0">
+                                                <div class="btn-group" role="group" aria-label="-">
+                                                    <span type="button" class="btn btn-outline-danger btn-sm" (click)="onRemove(item)">-</span>
+                                                    <input class="text-center" style="width: 30px;" [(ngModel)]="item.quantity">
+                                                    <span type="button" class="btn btn-outline-success btn-sm" (click)="onAdd(item)">+</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="alcoholic-beverages" #alcoholicBeveragesRef>
+                <div class="items-div" *ngIf="isLoaded == true">
+                    <div class="d-flex align-items-center pb-3 mb-5 border-bottom">
+                        <span class="fs-2">Alcoholic Beverages</span>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        <div class="col" *ngFor="let item of alcoholicBeverages">
+                            <div class="card">
+                                <img class="img-loading card-img-top" src={{item.imageUrl}} role="img" aria-label="item-image" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+                                <div class="card-body">
+                                    <p class="card-text">{{item.name}}</p>
+                                    <!-- <span class="badge bg-light text-dark item-category">{{item.category}}</span> -->
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-dark item-price">₹{{item.price}}</small>
+
+                                        <div class="btn-group">
+                                            <span class="btn btn-sm" *ngIf="item.quantity == 0" (click)="onAdd(item)">
+                                                <app-cart-icon></app-cart-icon>
+                                            </span>
+
+                                            <div class="btn-toolbar" role="toolbar" *ngIf="item.quantity > 0">
+                                                <div class="btn-group" role="group" aria-label="-">
+                                                    <span type="button" class="btn btn-outline-danger btn-sm" (click)="onRemove(item)">-</span>
+                                                    <input class="text-center" style="width: 30px;" [(ngModel)]="item.quantity">
+                                                    <span type="button" class="btn btn-outline-success btn-sm" (click)="onAdd(item)">+</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</main>

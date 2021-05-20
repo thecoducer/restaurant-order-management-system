@@ -34,6 +34,7 @@ export class AuthService {
       if (user) {
         handleLocalStorageService.setUser(user.uid);
         this.userDataService.getUserDataFromFirebase();
+        // sync cart data
         this.setIsAuthenticated(true);
         handleLocalStorageService.setIsAuthenticated('true');
         this.setAuthState(user);

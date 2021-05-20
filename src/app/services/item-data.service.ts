@@ -107,6 +107,7 @@ export class ItemDataService {
     return await itemRef.update({ imageUrl: '' });
   }
 
+  /** update item data */
   async updateItemData(item: Item, itemCategory: string, itemId: string) {
     const pathItemId = this.getPathItemId(itemId);
     const itemRef = this.afdb.object(
