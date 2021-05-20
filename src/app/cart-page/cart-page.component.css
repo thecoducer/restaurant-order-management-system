@@ -1,3 +1,7 @@
+div {
+    font-family: "Karla", sans-serif;
+}
+
 .cart-page {
     min-height: 120vh;
     padding-top: 80px;
@@ -18,7 +22,8 @@ img {
 }
 
 .item-price {
-    font-size: 25px;
+    font-size: 19px;
+    color: rgb(68, 68, 68);
 }
 
 .card {
@@ -33,11 +38,6 @@ div.card {
 div.card:hover {
     transform: translateY(-0.1rem) scale(1);
     box-shadow: 0 0.5em 3rem -1rem rgba(0, 0, 0, 0.5);
-}
-
-.card-text {
-    font-size: 20px;
-    color: black;
 }
 
 .item-category {

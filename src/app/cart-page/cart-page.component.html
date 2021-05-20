@@ -11,6 +11,10 @@
             </div>
 
             <div *ngIf="isCartEmpty == false">
+                <div class="text-center" style="margin-bottom: 50px;">
+                    <h4>Subtotal: ₹{{[(totalAmt)]}}</h4>
+                </div>
+
                 <div *ngFor="let item of cartArray">
                     <div class="card mb-3 mx-auto" style="max-width: 700px;" *ngIf="item.quantity > 0">
                         <div class="row g-0">
@@ -21,7 +25,9 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{item.name}}</h5>
                                     <span class="badge bg-light text-dark item-category">{{item.category}}</span>
-                                    <p class="card-text item-price">₹{{item.price}}</p>
+                                    <p class="card-text item-price">
+                                        ₹{{item.price}} × {{item.quantity}} = ₹{{getItemTotalAmount(item.price, item.quantity)}}
+                                    </p>
                                     <div class="btn-toolbar" role="toolbar" *ngIf="item.quantity > 0">
                                         <div class="btn-group" role="group" aria-label="-">
                                             <span type="button" class="btn btn-outline-danger btn-sm" (click)="onRemove(item)">-</span>

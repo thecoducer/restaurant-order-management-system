@@ -13,6 +13,7 @@ export class CartPageComponent implements OnInit, OnDestroy {
   cartObj: Cart;
   cartArray: any[] = [];
   isCartEmpty: boolean = true;
+  totalAmt: number;
 
   constructor(
     private handleLocalStorage: HandleLocalStorageService,
@@ -20,6 +21,12 @@ export class CartPageComponent implements OnInit, OnDestroy {
     private router: Router
   ) {
     this.cartObj = JSON.parse(this.handleLocalStorage.getCartData());
+
+    this.handleLocalStorage.getCartDataObservable().subscribe(data => {
+      if(data != null) {
+        this.totalAmt = data.totalAmt; //two-way binded
+      }
+    })
   }
 
   ngOnInit(): void {
@@ -74,6 +81,10 @@ export class CartPageComponent implements OnInit, OnDestroy {
     if(this.cartObj == null) {
       this.isCartEmpty = true;
     }
+  }
+
+  getItemTotalAmount(price: number, quantity: number) {
+    return Number(price) * Number(quantity);
   }
 
   placeOrder() {
