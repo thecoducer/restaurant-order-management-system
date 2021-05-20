@@ -6,6 +6,14 @@ footer {
     padding-bottom: 50px;
 }
 
+a:hover {
+    color: white;
+}
+
+a {
+    color: white;
+}
+
 .footer-column {
     text-align: center;
 }
