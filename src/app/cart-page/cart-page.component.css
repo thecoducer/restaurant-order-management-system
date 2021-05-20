@@ -26,6 +26,15 @@ img {
     border-radius: 1.3em;
 }
 
+div.card {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+div.card:hover {
+    transform: translateY(-0.1rem) scale(1);
+    box-shadow: 0 0.5em 3rem -1rem rgba(0, 0, 0, 0.5);
+}
+
 .card-text {
     font-size: 20px;
     color: black;

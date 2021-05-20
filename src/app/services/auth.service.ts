@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import auth from 'firebase/app';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { User } from '../models/user.model';
 import { UserDataService } from './user-data.service';
 import { HandleLocalStorageService } from './handle-local-storage.service';
@@ -17,7 +17,7 @@ import { HandleLocalStorageService } from './handle-local-storage.service';
 })
 export class AuthService {
   private isAuthenticated: boolean = false;
-  isAuthSubject = new Subject<any>();
+  isAuthSub = new BehaviorSubject<any>(null);
   private authStateData: any = null;
   authStateSubject = new Subject<any>();
 
@@ -76,16 +76,13 @@ export class AuthService {
   }
 
   getIsAuthObservable() {
-    return this.isAuthSubject.asObservable();
-  }
-
-  initializeIsAuth() {
-    this.isAuthSubject.next(this.isAuthenticated);
+    this.isAuthSub.next(this.isAuthenticated);
+    return this.isAuthSub.asObservable();
   }
 
   setIsAuthenticated(v: boolean) {
     this.isAuthenticated = v;
-    this.isAuthSubject.next(this.isAuthenticated);
+    this.isAuthSub.next(this.isAuthenticated);
   }
 
   //

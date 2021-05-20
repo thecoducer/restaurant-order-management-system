@@ -15,6 +15,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isAuthSub: Subscription;
   displayName: string = null;
   userDataSub: Subscription;
+  isAdminSub: Subscription;
+  isAdmin: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -24,15 +26,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ) {
     // get name and isAuthenticated values from local storage if they are present there
     this.displayName = this.handleLocalStorageService.getUserName();
-    this.isAuthenticated =
-      this.handleLocalStorageService.getIsAuthenticated() == 'true' ? true : false;
+    this.isAuthenticated = this.handleLocalStorageService.getIsAuthenticated() == 'true' ? true : false;
+    this.isAdmin = this.handleLocalStorageService.getIsAdmin() == 'true' ? true : false;
 
     this.isAuthSub = this.authService
       .getIsAuthObservable()
       .subscribe((data) => {
         this.isAuthenticated = data;
       });
-    this.authService.initializeIsAuth();
 
     // using observer pattern for getting name here
     // because if name gets updated in profile,
@@ -44,6 +45,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
           this.displayName = data.name;
         }
       });
+
+      // get isAdmin data
+    this.isAdminSub = this.userDataService.getIsAdminObservable().subscribe(data => {
+      if(data != null) {
+        this.isAdmin = data;
+      }
+    })
   }
 
   ngOnInit(): void {}

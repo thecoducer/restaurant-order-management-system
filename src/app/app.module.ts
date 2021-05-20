@@ -34,6 +34,8 @@ import { MainsIconComponent } from './global/mains-icon/mains-icon.component';
 import { DrinksIconComponent } from './global/drinks-icon/drinks-icon.component';
 import { DessertsIconComponent } from './global/desserts-icon/desserts-icon.component';
 import { CartIconComponent } from './global/cart-icon/cart-icon.component';
+import { OrderPageComponent } from './order-page/order-page.component';
+import { AuthGuard } from './route-guards/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,8 @@ import { CartIconComponent } from './global/cart-icon/cart-icon.component';
     MainsIconComponent,
     DrinksIconComponent,
     DessertsIconComponent,
-    CartIconComponent
+    CartIconComponent,
+    OrderPageComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -71,7 +74,7 @@ import { CartIconComponent } from './global/cart-icon/cart-icon.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -21,7 +21,8 @@ export class UserDataService {
       val: 'customer',
     },
   };
-  userDataSubject = new BehaviorSubject<User>(this.userData);
+  userDataSub = new BehaviorSubject<User>(this.userData);
+  isAdminSub = new BehaviorSubject<any>(null);
 
   constructor(
     private afdb: AngularFireDatabase,
@@ -40,11 +41,11 @@ export class UserDataService {
       this.getUserDataFromFirebase();
     });
 
-    this.userDataSubject.next(this.userData);
+    this.userDataSub.next(this.userData);
   }
 
   getUserDataObservable() {
-    return this.userDataSubject.asObservable();
+    return this.userDataSub.asObservable();
   }
 
   getUserDataFromFirebase() {
@@ -59,16 +60,29 @@ export class UserDataService {
         )
         .subscribe((data: User) => {
           this.userData = data;
-          this.userDataSubject.next(this.userData);
+          this.userDataSub.next(this.userData);
           this.handleLocalStorageService.setUserName(this.userData.name);
-          //console.log('got from firebase', this.userData);
+          
+          // set isAdmin value
+          if (data.role.val == 'admin') {
+            this.handleLocalStorageService.setIsAdmin('true');
+            this.isAdminSub.next(true);
+          } else if (data.role.val == 'customer') {
+            this.isAdminSub.next(false);
+            this.handleLocalStorageService.setIsAdmin('false');
+          }
         });
     }
   }
-  
+
+  getIsAdminObservable() {
+    this.isAdminSub.next(this.userData.role.val == 'true' ? true : false);
+    return this.isAdminSub.asObservable();
+  }
+
   updateUserData(userDataParam: User): Promise<void> {
     this.handleLocalStorageService.setUserName(userDataParam.name);
-    this.userDataSubject.next(userDataParam);
+    this.userDataSub.next(userDataParam);
     this.userObj = this.afdb.object('users/' + userDataParam.uid);
     return this.userObj.update(userDataParam);
   }

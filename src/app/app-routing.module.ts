@@ -13,6 +13,10 @@ import { ManageItemsComponent } from './admin/manage-items/manage-items.componen
 import { NotFoundComponent } from './global/not-found/not-found.component';
 import { CategoryPageComponent } from './category-page/category-page.component';
 import { CartPageComponent } from './cart-page/cart-page.component';
+import { OrderPageComponent } from './order-page/order-page.component';
+import { AuthGuard } from './route-guards/auth-guard.service';
+import { AdminAuthGuard } from './route-guards/admin-auth-guard.service';
+import { CustomerAuthGuard } from './route-guards/customer-auth-guard.service';
 
 const routerOptions: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
@@ -36,32 +40,41 @@ const routes: Routes = [
   {
     path: 'profile/:name',
     component: UserProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'admin/items',
     component: DisplayItemsComponent,
+    canActivate: [AdminAuthGuard]
   },
   {
     path: 'admin/items/add',
     component: AddOrEditItemsComponent,
     data: { path: 'add' },
+    canActivate: [AdminAuthGuard]
   },
   {
     path: 'admin/items/edit/:itemCategory/:itemId',
     component: AddOrEditItemsComponent,
     data: { path: 'edit' },
+    canActivate: [AdminAuthGuard]
   },
   {
     path: 'menu-page',
     component: CategoryPageComponent
   },
   {
-    path: 'not-found',
-    component: NotFoundComponent,
-  },
-  {
     path: 'cart',
     component: CartPageComponent
+  },
+  {
+    path: 'orders',
+    component: OrderPageComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent,
   },
   {
     path: '**',
