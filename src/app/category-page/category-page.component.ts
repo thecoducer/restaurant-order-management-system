@@ -35,7 +35,6 @@ export class CategoryPageComponent implements OnInit, AfterViewInit {
 
   // for cart
   cartData: Cart;
-  cartItems = new Set();
 
   sectionName: string = '';
 
@@ -159,7 +158,6 @@ export class CategoryPageComponent implements OnInit, AfterViewInit {
           itemDetailsObj.quantity != undefined
         ) {
           count = this.cartData.items[id].quantity;
-          this.cartItems.add(id);
         }
       }
 
@@ -177,7 +175,6 @@ export class CategoryPageComponent implements OnInit, AfterViewInit {
           itemDetailsObj.quantity != undefined
         ) {
           count = this.cartData.items[id].quantity;
-          this.cartItems.add(id);
         }
       }
 
@@ -195,7 +192,6 @@ export class CategoryPageComponent implements OnInit, AfterViewInit {
           itemDetailsObj.quantity != undefined
         ) {
           count = this.cartData.items[id].quantity;
-          this.cartItems.add(id);
         }
       }
 
@@ -213,7 +209,6 @@ export class CategoryPageComponent implements OnInit, AfterViewInit {
           itemDetailsObj.quantity != undefined
         ) {
           count = this.cartData.items[id].quantity;
-          this.cartItems.add(id);
         }
       }
 
@@ -227,19 +222,12 @@ export class CategoryPageComponent implements OnInit, AfterViewInit {
   /** add to cart */
   onAdd(item: any) {
     item.quantity += 1; //two-way binded
-    this.handleCartService.addOrUpdate(item);
-    this.cartItems.add(item.id);
-    console.log(this.handleCartService.getCartData());
-    console.log(this.cartItems);
-    
+    this.handleCartService.addOrUpdate(item);    
   }
 
   /** remove from cart */
   onRemove(item: any) {
     item.quantity -= 1; //two-way binded
     this.handleCartService.removeItem(item);
-    this.cartItems.delete(item.id);
-    console.log(this.handleCartService.getCartData());
-    console.log(this.cartItems);
   }
 }
