@@ -20,6 +20,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 
 import { environment } from 'src/environments/environment';
 import { CartPageComponent } from './cart-page/cart-page.component';
@@ -70,6 +71,7 @@ import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
+    AngularFireAnalyticsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
