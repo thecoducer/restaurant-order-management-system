@@ -31,6 +31,14 @@
                     <p>(inclusive of 18% GST)</p>
                 </div>
 
+                <div class="mx-auto text-center" style="max-width: 500px; margin-top: 20px; margin-bottom: 50px;" *ngIf="addressNotFound == true">
+                    <div class="alert alert-danger" role="alert">
+                        You haven't set your address. Please do it otherwise we cannot confirm your order.
+                    </div>
+
+                    <button class="btn btn-md btn-outline-primary" (click)="goToProfile()">Go to profile</button>
+                </div>
+
                 <div class="text-center cart-btn-group" *ngIf="isProcessing == false && isOrdered == false">
                     <div class="form-group">
                         <button class="btn btn-outline-warning" (click)="goBackToCart()" style="margin-right: 15px">Back to cart</button>

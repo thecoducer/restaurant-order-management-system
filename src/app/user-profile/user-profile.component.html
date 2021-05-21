@@ -28,8 +28,17 @@
                     <label for="exampleInputEmail1">Role</label>
                     <input type="role" class="form-control" formControlName="role" readonly>
                 </div>
-                <button type="submit" [disabled]="!userProfileForm.valid" class="btn btn-md" [ngClass]="{'btn-success': isUpdateSuccess, 'btn-danger': isUpdateFailure, 'btn-primary': !isUpdateSuccess && !isUpdateFailure}">
-                    {{updateStatus}}
+
+                <div class="alert alert-success mx-auto" role="alert" *ngIf="isUpdateSuccess == true">
+                    Profile updated!
+                </div>
+
+                <div class="alert alert-danger mx-auto" role="alert" *ngIf="isUpdateFailure == true">
+                    Some error occurred.
+                </div>
+
+                <button type="submit" [disabled]="!userProfileForm.valid" class="btn btn-md btn-primary">
+                    Update
                 </button>
             </form>
         </div>

@@ -62,7 +62,7 @@ export class UserDataService {
           this.userData = data;
           this.userDataSub.next(this.userData);
           this.handleLocalStorageService.setUserName(this.userData.name);
-          
+
           // set isAdmin value
           if (data.role.val == 'admin') {
             this.handleLocalStorageService.setIsAdmin('true');
@@ -83,12 +83,30 @@ export class UserDataService {
   updateUserData(userDataParam: User): Promise<void> {
     this.handleLocalStorageService.setUserName(userDataParam.name);
     this.userDataSub.next(userDataParam);
+
     this.userObj = this.afdb.object('users/' + userDataParam.uid);
     return this.userObj.update(userDataParam);
   }
 
+  async checkAddressPresentOrNot() {
+    if (this.handleLocalStorageService.getUser() != null) {
+      return await this.getAddressFromFirebase();
+    }
+  }
+
+  async getAddressFromFirebase() {
+    return await this.http
+      .get(
+        environment.firebase.databaseURL +
+          '/users/' +
+          localStorage.getItem('user') +
+          '/address' +
+          '.json'
+      )
+      .toPromise();
+  }
+
   clearUserDataLocally() {
-    console.log(this.userData);
     Object.entries(this.userData).forEach(([key, val]) => {
       if (key === 'role') {
         this.userData.role.val = 'customer';
@@ -96,7 +114,6 @@ export class UserDataService {
         this.userData[key] = null;
       }
     });
-    console.log(this.userData);
   }
 
   public set setUid(v: string) {

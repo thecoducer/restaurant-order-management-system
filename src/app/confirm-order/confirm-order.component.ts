@@ -4,6 +4,7 @@ import { Cart } from '../models/cart.model';
 import { HandleCartService } from '../services/handle-cart.service';
 import { HandleLocalStorageService } from '../services/handle-local-storage.service';
 import { OrderDataService } from '../services/order-data.service';
+import { UserDataService } from '../services/user-data.service';
 
 @Component({
   selector: 'app-confirm-order',
@@ -16,12 +17,14 @@ export class ConfirmOrderComponent implements OnInit, OnDestroy {
   totalAmt: string;
   isOrdered: boolean = false;
   isProcessing: boolean = false;
+  addressNotFound: boolean = false;
 
   constructor(
     private handleCartService: HandleCartService,
     private handleLocalStorageService: HandleLocalStorageService,
     private router: Router,
-    private orderDataService: OrderDataService
+    private orderDataService: OrderDataService,
+    private userDataService: UserDataService
   ) {
     this.cartObj = JSON.parse(this.handleLocalStorageService.getCartData());
   }
@@ -29,6 +32,13 @@ export class ConfirmOrderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.populateOrderData();
     this.handleCartService.hideCartBar(true);
+
+    this.userDataService.checkAddressPresentOrNot().then((data: string) => {
+      console.log('address', data);
+      if(data == null || data == undefined || data.trim().length < 1) {
+        this.addressNotFound = true;
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -70,21 +80,37 @@ export class ConfirmOrderComponent implements OnInit, OnDestroy {
   }
 
   confirm() {
+    // don't allow to confirm order if address is not present
+    if(this.addressNotFound === true){
+      return;
+    }
+
     this.isProcessing = true;
 
     // clear cart
     this.cartObj = null;
     this.handleLocalStorageService.removeCartData();
 
-    this.orderDataService.addOrderData(this.orderArray).subscribe(
+    this.orderDataService.addOrderData(this.orderArray, this.totalAmt).subscribe(
       (res: any) => {
         this.isOrdered = true;
-        this.orderDataService.setOrderId(res.name);        
+        this.orderDataService.setOrderId(res.name);
       },
       (error) => {
         console.log(error);
       }
     );
-    console.log(this.orderArray);
+  }
+
+  goToProfile() {
+    let _name = this.makeProfilePath(this.handleLocalStorageService.getUserName());
+    this.router.navigate(['profile', _name]);
+  }
+
+  /** utilities */
+
+  /** make profile path from name of the user */
+  makeProfilePath(v: string) {
+    return v.split(' ').join('-');
   }
 }

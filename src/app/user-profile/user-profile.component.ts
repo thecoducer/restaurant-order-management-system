@@ -17,7 +17,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   private userData: User;
   private pathVar: string = '';
 
-  updateStatus: string = 'Update profile';
   isUpdateSuccess: boolean = false;
   isUpdateFailure: boolean = false;
 
@@ -39,7 +38,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       );
 
       if (this.pathVar != _name) {
-        console.log(this.pathVar);
         this.router.navigate(['not-found']);
       }
     }
@@ -76,8 +74,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           });
           */
         }
-
-        console.log(this.userData);
       });
 
     // creating reactive signup form
@@ -109,31 +105,22 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.userData.address = this.userProfileForm.get('address').value;
     this.userDataService.setUid = this.userData.uid;
 
-    console.log(this.userProfileForm);
-
     this.userDataService
       .updateUserData(this.userData)
       .then(() => {
         this.isUpdateSuccess = true;
-        this.updateStatus = 'Updated';
 
-        setTimeout(() => {
-          this.isUpdateSuccess = false;
-          this.updateStatus = 'Update profile';
-          let _name: string;
-          _name = this.makeProfilePath(this.userDataService.getName);
-          this.router.navigate(['profile', _name]);
-        }, 3500);
+        let _name: string;
+        _name = this.makeProfilePath(this.userDataService.getName);
+        this.router.navigate(['profile', _name]);
       })
       .catch(() => {
         this.isUpdateFailure = true;
-        this.updateStatus = 'Try again';
-
-        setTimeout(() => {
-          this.isUpdateFailure = false;
-          this.updateStatus = 'Update profile';
-        }, 3500);
       });
+
+      setTimeout(() => {
+        this.isUpdateFailure = this.isUpdateSuccess = false;
+      }, 2000);
   }
 
   /** utility functions */
@@ -145,6 +132,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     return v;
   }
 
+  /** make profile path from name of the user */
   makeProfilePath(v: string) {
     return v.split(' ').join('-');
   }

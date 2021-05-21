@@ -21,8 +21,8 @@ export class OrderDataService {
   }
 
   // adds item data to Firebase DB
-  addOrderData(orderData: any) {
-    const orderObj: Order = this.formatOrderData(orderData);
+  addOrderData(orderData: any, totalAmt: string) {
+    const orderObj: Order = this.formatOrderData(orderData, totalAmt);
 
     console.log(orderObj);
 
@@ -32,7 +32,7 @@ export class OrderDataService {
     return this.http.post<Order>(path, orderObj);
   }
 
-  formatOrderData(od: any): Order {
+  formatOrderData(od: any, amt: string): Order {
     let orderDetailsObj = {};
 
     for (let key in od) {
@@ -55,6 +55,7 @@ export class OrderDataService {
       orderId: '',
       orderedItems: orderDetailsObj,
       addedOn: new Date().toLocaleString(),
+      totalAmt: amt
     };
 
     return orderObj;
@@ -67,7 +68,8 @@ export class OrderDataService {
     orderRef.update({ orderId: orderId });
   }
 
-  /* async getOrderData() {
-
-  } */
+  async getOrderData() {
+    const path = environment.firebase.databaseURL + '/orders/' + this.uid + '.json';
+    return await this.http.get(path).toPromise();
+  }
 }
