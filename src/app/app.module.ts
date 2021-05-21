@@ -26,9 +26,8 @@ import { environment } from 'src/environments/environment';
 import { CartPageComponent } from './cart-page/cart-page.component';
 import { CategoryPageComponent } from './category-page/category-page.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { ManageItemsComponent } from './admin/manage-items/manage-items.component';
-import { AddOrEditItemsComponent } from './admin/manage-items/add-or-edit-items/add-or-edit-items.component';
-import { DisplayItemsComponent } from './admin/manage-items/display-items/display-items.component';
+import { AddOrEditItemsComponent } from './admin/add-or-edit-items/add-or-edit-items.component';
+import { DisplayItemsComponent } from './admin/display-items/display-items.component';
 import { NotFoundComponent } from './global/not-found/not-found.component';
 import { StartersIconComponent } from './global/starters-icon/starters-icon.component';
 import { MainsIconComponent } from './global/mains-icon/mains-icon.component';
@@ -54,7 +53,6 @@ import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
     CartPageComponent,
     CategoryPageComponent,
     UserProfileComponent,
-    ManageItemsComponent,
     AddOrEditItemsComponent,
     DisplayItemsComponent,
     NotFoundComponent,
