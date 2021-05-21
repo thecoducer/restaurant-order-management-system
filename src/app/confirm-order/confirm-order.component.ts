@@ -34,7 +34,6 @@ export class ConfirmOrderComponent implements OnInit, OnDestroy {
     this.handleCartService.hideCartBar(true);
 
     this.userDataService.checkAddressPresentOrNot().then((data: string) => {
-      console.log('address', data);
       if(data == null || data == undefined || data.trim().length < 1) {
         this.addressNotFound = true;
       }

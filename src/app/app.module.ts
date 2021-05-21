@@ -37,6 +37,8 @@ import { CartIconComponent } from './global/cart-icon/cart-icon.component';
 import { OrderPageComponent } from './order-page/order-page.component';
 import { AuthGuard } from './route-guards/auth-guard.service';
 import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
+import { ManageOrdersComponent } from './admin/manage-orders/manage-orders.component';
+import { DisplayOrdersComponent } from './admin/display-orders/display-orders.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
     DessertsIconComponent,
     CartIconComponent,
     OrderPageComponent,
-    ConfirmOrderComponent
+    ConfirmOrderComponent,
+    ManageOrdersComponent,
+    DisplayOrdersComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

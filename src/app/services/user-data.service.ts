@@ -48,6 +48,7 @@ export class UserDataService {
     return this.userDataSub.asObservable();
   }
 
+  // --- replace this with an async method
   getUserDataFromFirebase() {
     if (this.handleLocalStorageService.getUser() != null) {
       //console.log('getting user data from firebase');
@@ -104,6 +105,11 @@ export class UserDataService {
           '.json'
       )
       .toPromise();
+  }
+
+  async getAllUsersData() {
+    const path = environment.firebase.databaseURL + '/users.json';
+    return await this.http.get(path).toPromise();
   }
 
   clearUserDataLocally() {

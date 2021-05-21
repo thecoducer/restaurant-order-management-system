@@ -2,8 +2,19 @@
     <div class="album py-5">
         <div class="container">
 
+            <div class="d-flex flex-row-reverse" style="margin-bottom: 30px;">
+                <div class="p-2">
+                    <button type="button" class="btn btn-outline-primary" [routerLink]="['/admin/manage-orders']">
+                        <i class="fa fa-arrow-left"></i>
+                        <span style="margin-left: 3px; margin-bottom: 10px;">
+                            Back to manage orders
+                        </span>
+                    </button>
+                </div>
+            </div>
+
             <div class="d-flex align-items-center pb-3 mb-5 border-bottom">
-                <span class="fs-2">My orders</span>
+                <span class="fs-2">{{userData.name}}'s orders</span>
             </div>
 
             <div *ngIf="isLoading == true">
@@ -11,7 +22,7 @@
             </div>
 
             <div class="text-center" *ngIf="isLoaded == true && orderArray.length == 0">
-                <h3>You haven't ordered anything yet.</h3>
+                <h3>The customer hasn't ordered anything yet.</h3>
             </div>
 
             <div *ngFor="let order of orderArray">

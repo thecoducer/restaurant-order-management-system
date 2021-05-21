@@ -72,4 +72,10 @@ export class OrderDataService {
         
     return await this.http.get(path).toPromise();
   }
+
+  async getOrderDataById(uid: string) {
+    const path = environment.firebase.databaseURL + '/orders/' + uid + '.json';
+        
+    return await this.http.get(path).toPromise();
+  }
 }

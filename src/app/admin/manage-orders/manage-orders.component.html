@@ -1,0 +1,37 @@
+<main class="manage-orders-page">
+    <div class="album py-5">
+        <div class="container">
+
+            <div class="d-flex align-items-center pb-3 mb-5 border-bottom">
+                <span class="fs-2">Manage orders</span>
+            </div>
+
+            <div *ngIf="isLoading == true">
+                <app-loader></app-loader>
+            </div>
+
+            <div *ngIf="isLoaded == true">
+
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col" *ngFor="let user of usersDataArray">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{user.name}}</h5>
+                                <div class="card-text">
+                                    <ul>
+                                        <li><strong>Email:</strong> {{user.email}}</li>
+                                        <li><strong>Address:</strong> {{user.address}}</li>
+                                        <li><strong>User ID:</strong> {{user.uid}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-footer" (click)="goToOrders(user)">
+                                Orders <i class="fa fa-angle-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

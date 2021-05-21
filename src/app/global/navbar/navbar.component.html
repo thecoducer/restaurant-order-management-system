@@ -22,7 +22,6 @@
                         <a class="nav-link" [routerLink]="['/sign-up']" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Sign up</a>
                     </li>
 
-                    <!-- visible only to customers -->
                     <li class="nav-item dropdown" *ngIf="isAuthenticated == true && displayName != null">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Hi, {{displayName}}
@@ -32,7 +31,7 @@
                             <a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" (click)="onMyCart()">My Cart</a>
                             <a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" (click)="onMyOrders()">My Orders</a>
                             <a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" (click)="onManageItems()" *ngIf="isAdmin == true">Manage Items</a>
-                            <a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" (click)="onManageItems()" *ngIf="isAdmin == true">Manage Orders</a>
+                            <a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" (click)="onManageOrders()" *ngIf="isAdmin == true">Manage Orders</a>
                             <a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" (click)="onLogOut()">Log out</a>
                         </div>
                     </li>

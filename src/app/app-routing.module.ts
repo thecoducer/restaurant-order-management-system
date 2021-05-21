@@ -17,6 +17,8 @@ import { AuthGuard } from './route-guards/auth-guard.service';
 import { AdminAuthGuard } from './route-guards/admin-auth-guard.service';
 import { CustomerAuthGuard } from './route-guards/customer-auth-guard.service';
 import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
+import { ManageOrdersComponent } from './admin/manage-orders/manage-orders.component';
+import { DisplayOrdersComponent } from './admin/display-orders/display-orders.component';
 
 const routerOptions: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
@@ -57,6 +59,16 @@ const routes: Routes = [
     path: 'admin/items/edit/:itemCategory/:itemId',
     component: AddOrEditItemsComponent,
     data: { path: 'edit' },
+    canActivate: [AdminAuthGuard]
+  },
+  {
+    path: 'admin/manage-orders',
+    component: ManageOrdersComponent,
+    canActivate: [AdminAuthGuard]
+  },
+  {
+    path: 'admin/:uid/orders',
+    component: DisplayOrdersComponent,
     canActivate: [AdminAuthGuard]
   },
   {

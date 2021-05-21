@@ -1,0 +1,14 @@
+.manage-orders-page {
+    min-height: 120vh;
+    padding-top: 80px;
+}
+
+div {
+    font-family: "Karla", sans-serif;
+}
+
+.card-footer:hover {
+    cursor: pointer;
+    background-color: rgb(46, 144, 255);
+    color: white;
+}
