@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { count } from 'rxjs/operators';
 import { Order } from '../models/order.model';
 import { OrderDataService } from '../services/order-data.service';
@@ -11,14 +11,19 @@ import { OrderDataService } from '../services/order-data.service';
 export class OrderPageComponent implements OnInit {
   orders: any;
   orderArray: any = [];
+  isLoading: boolean = true;
+  isLoaded: boolean = false;
 
-  constructor(private orderDataService: OrderDataService) {}
-
-  ngOnInit(): void {
+  constructor(private orderDataService: OrderDataService) {    
     this.fetchOrderData();
   }
 
+  ngOnInit(): void {}
+
   async fetchOrderData() {
+    this.isLoaded = false;
+    this.isLoading = true;
+
     this.orders = await this.orderDataService.getOrderData();
 
     let count = 0;
@@ -50,6 +55,9 @@ export class OrderPageComponent implements OnInit {
 
     // reverse it to show latest order first
     this.orderArray.reverse();
+
+    this.isLoaded = true;
+    this.isLoading = false;
   }
 
   getItemTotalAmount(price: number, quantity: number) {

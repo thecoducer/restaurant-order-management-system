@@ -24,8 +24,6 @@ export class OrderDataService {
   addOrderData(orderData: any, totalAmt: string) {
     const orderObj: Order = this.formatOrderData(orderData, totalAmt);
 
-    console.log(orderObj);
-
     const path =
       environment.firebase.databaseURL + '/orders/' + this.uid + '.json';
 
@@ -69,7 +67,9 @@ export class OrderDataService {
   }
 
   async getOrderData() {
-    const path = environment.firebase.databaseURL + '/orders/' + this.uid + '.json';
+    const uid = this.handleLocalStorageService.getUser();
+    const path = environment.firebase.databaseURL + '/orders/' + uid + '.json';
+        
     return await this.http.get(path).toPromise();
   }
 }
