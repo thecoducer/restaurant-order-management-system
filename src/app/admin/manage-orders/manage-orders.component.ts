@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { Order } from 'src/app/models/order.model';
 import { User } from 'src/app/models/user.model';
-import { ManageOrdersService } from 'src/app/services/manage-orders.service';
 import { OrderDataService } from 'src/app/services/order-data.service';
 import { UserDataService } from 'src/app/services/user-data.service';
 
@@ -21,8 +20,7 @@ export class ManageOrdersComponent implements OnInit {
   constructor(
     private userDataService: UserDataService,
     private orderDataService: OrderDataService,
-    private router: Router,
-    private manageOrdersService: ManageOrdersService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -46,9 +44,9 @@ export class ManageOrdersComponent implements OnInit {
   }
 
   goToOrders(user: User) {
-    console.log(user);
-    
-    this.manageOrdersService.setUserData(user);
-    this.router.navigate(['admin', user.uid, 'orders']);
+    const navObj: NavigationExtras = {
+      queryParams: {name: user.name}
+    }
+    this.router.navigate(['admin', user.uid, 'orders'], navObj);
   }
 }

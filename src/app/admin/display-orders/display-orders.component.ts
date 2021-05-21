@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { count } from 'rxjs/operators';
 import { Order } from 'src/app/models/order.model';
-import { ManageOrdersService } from 'src/app/services/manage-orders.service';
 import { OrderDataService } from 'src/app/services/order-data.service';
 
 @Component({
@@ -15,29 +14,27 @@ export class DisplayOrdersComponent implements OnInit {
   orderArray: any = [];
   isLoading: boolean = true;
   isLoaded: boolean = false;
-  userData: any = {};
+  userName: string;
+  uid: string;
 
   constructor(
     private orderDataService: OrderDataService,
-    private route: ActivatedRoute,
-    private manageOrdersService: ManageOrdersService
+    private route: ActivatedRoute
   ) {
-    this.manageOrdersService.getPassUserDataObservable().subscribe((data) => {
-      if (data != null) {
-        this.userData = data;
-        this.fetchOrderData();
-      }
-    });
+    this.userName = this.route.snapshot.queryParams['name']
+    this.uid = this.route.snapshot.params['uid'];    
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.fetchOrderData();
+  }
 
   async fetchOrderData() {
     this.isLoaded = false;
     this.isLoading = true;
 
     this.orders = await this.orderDataService.getOrderDataById(
-      this.userData.uid
+      this.uid
     );
 
     let count = 0;
