@@ -131,10 +131,10 @@ export class CategoryPageComponent implements OnInit, AfterViewInit {
         'desserts'
       );
 
+      this.mergeItemAndCartData();
+
       this.isLoading = false;
       this.isLoaded = true;
-
-      this.mergeItemAndCartData();
     } catch (error) {
       console.log(error);
     }
