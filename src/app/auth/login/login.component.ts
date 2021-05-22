@@ -50,6 +50,24 @@ export class LoginComponent implements OnInit, OnDestroy {
         Validators.minLength(8),
       ]),
     });
+
+    // reset the errorObj
+    // so that previous errors don't come up in view 
+    this.errorObj = {
+      logIn: {
+        errorFound: null,
+        email: null,
+        password: null,
+        unknown: null,
+      },
+      signUp: {
+        errorFound: null,
+        name: null,
+        email: null,
+        password: null,
+        unknown: null,
+      },
+    };
   }
 
   ngOnDestroy() {

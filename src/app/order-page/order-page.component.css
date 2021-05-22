@@ -11,3 +11,7 @@ div {
     margin-bottom: 20px;
     font-size: 18px;
 }
+
+.card-header {
+    background-color: rgb(0 255 167 / 46%);
+}
