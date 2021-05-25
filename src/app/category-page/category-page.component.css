@@ -92,6 +92,15 @@ div.card:hover {
     font-size: 17px;
 }
 
+.not-available {
+    filter: grayscale(1);
+}
+
+.not-available-text {
+    font-size: 14px;
+    color: red;
+}
+
 
 /*
 ##Device = Low Resolution Tablets, Mobiles (Landscape)

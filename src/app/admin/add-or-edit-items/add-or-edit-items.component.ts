@@ -51,6 +51,7 @@ export class AddOrEditItemsComponent implements OnInit {
     imageUrl: '',
     addedOn: '',
     modifiedOn: '',
+    isAvailable: true
   };
 
   constructor(
@@ -310,6 +311,7 @@ export class AddOrEditItemsComponent implements OnInit {
       imageUrl: '',
       addedOn: '',
       modifiedOn: '',
+      isAvailable: true
     };
   }
 

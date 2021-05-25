@@ -7,4 +7,5 @@ export interface Item {
     imageUrl: string;
     addedOn: string;
     modifiedOn: string;
+    isAvailable: boolean;
 }

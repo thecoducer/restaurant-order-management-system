@@ -102,6 +102,19 @@ div.card:hover {
     }
 }
 
+.form-switch {
+    word-break: break-word;
+}
+
+.form-check-label {
+    font-size: 13px;
+}
+
+.form-check-input:checked {
+    background-color: #33ea00;
+    border-color: #33ea00;
+}
+
 
 /* 
 ##Device = Most of the Smartphones Mobiles (Portrait)

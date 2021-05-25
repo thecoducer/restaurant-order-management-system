@@ -116,6 +116,15 @@ export class ItemDataService {
     return await itemRef.update(item);
   }
 
+  /** set/toggle item availability status */
+  async setIsAvailable(v: boolean, itemCategory: string, itemId: string) { 
+    const pathItemId = this.getPathItemId(itemId);
+    const itemRef = this.afdb.object(
+      'items/' + itemCategory + '/' + pathItemId
+    );
+    return await itemRef.update({ isAvailable: v });
+  }
+
   /** utilities */
 
   getPathItemId(itemId: string): string {
@@ -135,7 +144,7 @@ export class ItemDataService {
 
   /** utilities end */
 
-  /* async getAllItems() {
+  async getAllItems() {
     const path = environment.firebase.databaseURL + '/items.json';
     let res: any;
 
@@ -155,5 +164,5 @@ export class ItemDataService {
         })
       )
       .toPromise();
-  } */
+  }
 }

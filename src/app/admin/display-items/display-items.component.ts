@@ -130,4 +130,12 @@ export class DisplayItemsComponent implements OnInit, AfterViewInit {
   onAdd() {
     this.router.navigate(['admin/items/add']);
   }
+
+  setAvailabilityStatus(item: any) {
+    const status = item.isAvailable;
+    console.log(status);
+    item.isAvailable = !status;
+    
+    this.itemDataService.setIsAvailable(!status, item.category, item.id);
+  }
 }

@@ -48,7 +48,7 @@
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                         <div class="col" *ngFor="let item of starters">
                             <div class="card">
-                                <img class="img-loading card-img-top" src={{item.imageUrl}} role="img" aria-label="item-image" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <img class="img-loading card-img-top" [ngClass]="{'not-available': !item.isAvailable}" src={{item.imageUrl}} role="img" aria-label="item-image" preserveAspectRatio="xMidYMid slice" focusable="false">
 
                                 <div class="card-body">
                                     <p class="card-text"><strong>{{item.name}}</strong></p>
@@ -56,7 +56,7 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <small class="text-dark item-price">₹{{item.price}}</small>
 
-                                        <div class="btn-group">
+                                        <div class="btn-group" *ngIf="item.isAvailable == true">
                                             <span class="btn btn-sm" *ngIf="item.quantity == 0" (click)="onAdd(item)">
                                                 <app-cart-icon></app-cart-icon>
                                             </span>
@@ -68,6 +68,9 @@
                                                     <span type="button" class="btn btn-outline-success btn-sm" (click)="onAdd(item)">+</span>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div *ngIf="item.isAvailable == false">
+                                            <span class="not-available-text">Not Available.</span>
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +89,7 @@
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                         <div class="col" *ngFor="let item of mains">
                             <div class="card">
-                                <img class="img-loading card-img-top" src={{item.imageUrl}} role="img" aria-label="item-image" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <img class="img-loading card-img-top" [ngClass]="{'not-available': !item.isAvailable}" src={{item.imageUrl}} role="img" aria-label="item-image" preserveAspectRatio="xMidYMid slice" focusable="false">
 
                                 <div class="card-body">
                                     <p class="card-text"><strong>{{item.name}}</strong></p>
@@ -94,7 +97,7 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <small class="text-dark item-price">₹{{item.price}}</small>
 
-                                        <div class="btn-group">
+                                        <div class="btn-group" *ngIf="item.isAvailable == true">
                                             <span class="btn btn-sm" *ngIf="item.quantity == 0" (click)="onAdd(item)">
                                                 <app-cart-icon></app-cart-icon>
                                             </span>
@@ -106,6 +109,9 @@
                                                     <span type="button" class="btn btn-outline-success btn-sm" (click)="onAdd(item)">+</span>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div *ngIf="item.isAvailable == false">
+                                            <span class="not-available-text">Not Available.</span>
                                         </div>
                                     </div>
                                 </div>
@@ -124,7 +130,7 @@
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                         <div class="col" *ngFor="let item of desserts">
                             <div class="card">
-                                <img class="img-loading card-img-top" src={{item.imageUrl}} role="img" aria-label="item-image" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <img class="img-loading card-img-top" [ngClass]="{'not-available': !item.isAvailable}" src={{item.imageUrl}} role="img" aria-label="item-image" preserveAspectRatio="xMidYMid slice" focusable="false">
 
                                 <div class="card-body">
                                     <p class="card-text"><strong>{{item.name}}</strong></p>
@@ -133,7 +139,7 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <small class="text-dark item-price">₹{{item.price}}</small>
 
-                                        <div class="btn-group">
+                                        <div class="btn-group" *ngIf="item.isAvailable == true">
                                             <span class="btn btn-sm" *ngIf="item.quantity == 0" (click)="onAdd(item)">
                                                 <app-cart-icon></app-cart-icon>
                                             </span>
@@ -145,6 +151,9 @@
                                                     <span type="button" class="btn btn-outline-success btn-sm" (click)="onAdd(item)">+</span>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div *ngIf="item.isAvailable == false">
+                                            <span class="not-available-text">Not Available.</span>
                                         </div>
                                     </div>
                                 </div>
@@ -163,7 +172,7 @@
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                         <div class="col" *ngFor="let item of alcoholicBeverages">
                             <div class="card">
-                                <img class="img-loading card-img-top" src={{item.imageUrl}} role="img" aria-label="item-image" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <img class="img-loading card-img-top" [ngClass]="{'not-available': !item.isAvailable}" src={{item.imageUrl}} role="img" aria-label="item-image" preserveAspectRatio="xMidYMid slice" focusable="false">
 
                                 <div class="card-body">
                                     <p class="card-text"><strong>{{item.name}}</strong></p>
@@ -172,7 +181,7 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <small class="text-dark item-price">₹{{item.price}}</small>
 
-                                        <div class="btn-group">
+                                        <div class="btn-group" *ngIf="item.isAvailable == true">
                                             <span class="btn btn-sm" *ngIf="item.quantity == 0" (click)="onAdd(item)">
                                                 <app-cart-icon></app-cart-icon>
                                             </span>
@@ -184,6 +193,9 @@
                                                     <span type="button" class="btn btn-outline-success btn-sm" (click)="onAdd(item)">+</span>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div *ngIf="item.isAvailable == false">
+                                            <span class="not-available-text">Not Available.</span>
                                         </div>
                                     </div>
                                 </div>
