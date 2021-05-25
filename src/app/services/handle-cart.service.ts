@@ -45,7 +45,7 @@ export class HandleCartService implements OnInit {
             category: item.category,
             name: item.name,
             price: item.price,
-            imageUrl: item.imageUrl
+            imageUrl: item.imageUrl,
           },
         },
         totalAmt: item.price,
@@ -63,7 +63,7 @@ export class HandleCartService implements OnInit {
             category: item.category,
             name: item.name,
             price: item.price,
-            imageUrl: item.imageUrl
+            imageUrl: item.imageUrl,
           },
         };
 

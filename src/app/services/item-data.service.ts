@@ -125,6 +125,22 @@ export class ItemDataService {
     return await itemRef.update({ isAvailable: v });
   }
 
+  /** checks item availability status before confirm order */
+  async reportItemAvailability(orders: any[]) {
+    let notAvailableItems: any[] = [];
+
+    for(let i in orders) {
+      const obj: Item = await this.getItemById(orders[i].category, orders[i].id) as Item;
+
+      if(obj.isAvailable == false){
+        notAvailableItems.push({name: obj.name, id: obj.id});
+      }
+    }
+
+    return notAvailableItems;
+    
+  }
+
   /** utilities */
 
   getPathItemId(itemId: string): string {

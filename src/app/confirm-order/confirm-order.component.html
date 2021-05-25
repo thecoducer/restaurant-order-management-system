@@ -39,10 +39,17 @@
                     <button class="btn btn-md btn-outline-primary" (click)="goToProfile()">Go to profile</button>
                 </div>
 
+                <div class="alert alert-danger mx-auto" role="alert" style="max-width: 500px; margin-bottom: 20px;" *ngIf="notAvailableItems.length > 0">
+                    <h5>Following items are currently not available:</h5>
+                    <ul>
+                        <li *ngFor="let item of notAvailableItems">{{item.name}}</li>
+                    </ul>
+                </div>
+
                 <div class="text-center cart-btn-group" *ngIf="isProcessing == false && isOrdered == false">
                     <div class="form-group">
                         <button class="btn btn-outline-warning" (click)="goBackToCart()" style="margin-right: 15px">Back to cart</button>
-                        <button class="btn btn-outline-danger" (click)="confirm()">Confirm</button>
+                        <button class="btn btn-outline-danger" (click)="confirm()" *ngIf="notAvailableItems.length < 1">Confirm</button>
                     </div>
                 </div>
 

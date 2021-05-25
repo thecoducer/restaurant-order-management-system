@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Cart } from '../models/cart.model';
 import { HandleCartService } from '../services/handle-cart.service';
 import { HandleLocalStorageService } from '../services/handle-local-storage.service';
+import { ItemDataService } from '../services/item-data.service';
 import { OrderDataService } from '../services/order-data.service';
 import { UserDataService } from '../services/user-data.service';
 
@@ -18,13 +19,16 @@ export class ConfirmOrderComponent implements OnInit, OnDestroy {
   isOrdered: boolean = false;
   isProcessing: boolean = false;
   addressNotFound: boolean = false;
+  notAvailableItems: any[] = [];
+  itemAvailabilityChecked: boolean = false;
 
   constructor(
     private handleCartService: HandleCartService,
     private handleLocalStorageService: HandleLocalStorageService,
     private router: Router,
     private orderDataService: OrderDataService,
-    private userDataService: UserDataService
+    private userDataService: UserDataService,
+    private itemDataService: ItemDataService
   ) {
     this.cartObj = JSON.parse(this.handleLocalStorageService.getCartData());
   }
@@ -34,7 +38,7 @@ export class ConfirmOrderComponent implements OnInit, OnDestroy {
     this.handleCartService.hideCartBar(true);
 
     this.userDataService.checkAddressPresentOrNot().then((data: string) => {
-      if(data == null || data == undefined || data.trim().length < 1) {
+      if (data == null || data == undefined || data.trim().length < 1) {
         this.addressNotFound = true;
       }
     });
@@ -53,6 +57,7 @@ export class ConfirmOrderComponent implements OnInit, OnDestroy {
 
         const obj = {
           id: itemObj.itemId,
+          category: itemObj.category,
           name: itemObj.name,
           price: itemObj.price,
           quantity: itemObj.quantity,
@@ -80,29 +85,45 @@ export class ConfirmOrderComponent implements OnInit, OnDestroy {
 
   confirm() {
     // don't allow to confirm order if address is not present
-    if(this.addressNotFound === true){
+    if (this.addressNotFound === true) {
       return;
     }
 
+    this.onConfirm();
+  }
+
+  async onConfirm() {
     this.isProcessing = true;
-
-    // clear cart
-    this.cartObj = null;
-    this.handleLocalStorageService.removeCartData();
-
-    this.orderDataService.addOrderData(this.orderArray, this.totalAmt).subscribe(
-      (res: any) => {
-        this.isOrdered = true;
-        this.orderDataService.setOrderId(res.name);
-      },
-      (error) => {
-        console.log(error);
-      }
+    this.notAvailableItems = await this.itemDataService.reportItemAvailability(
+      this.orderArray
     );
+
+    // if there are not available items in order
+    if (this.notAvailableItems.length > 0) {
+      this.isProcessing = false;
+    } else {
+      // clear cart
+      this.cartObj = null;
+      this.handleLocalStorageService.removeCartData();
+
+      this.orderDataService
+        .addOrderData(this.orderArray, this.totalAmt)
+        .subscribe(
+          (res: any) => {
+            this.isOrdered = true;
+            this.orderDataService.setOrderId(res.name);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    }
   }
 
   goToProfile() {
-    let _name = this.makeProfilePath(this.handleLocalStorageService.getUserName());
+    let _name = this.makeProfilePath(
+      this.handleLocalStorageService.getUserName()
+    );
     this.router.navigate(['profile', _name]);
   }
 
