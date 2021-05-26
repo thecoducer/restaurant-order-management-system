@@ -18,9 +18,10 @@ This is an Angular web application whose backend is powered by Firebase.
 
 - Have written comments in code.
 - Used meaningful names for variables and methods.
-- Focused on code maintainability and readability.
-- Used **RxJs's BehaviorSubject** and **Observable** to communicate between several components and keep data in sync. For instance, when we add/remove items to cart from menu page the cart data gets updated in local storage. There is a service for handling the local storage where the cart data is passed to a BehaviorSubject so that components that need the cart data updates can subscribe to its Observable and listen to the updates. The number of items and subtotal amount in the cart bar at the bottom of page has subscribed to the cart data updates.
-- Used **async/await** to make use of asynchronous programming. There are cases where API calls are being made. It's good to asynchronously call them and wait until we get the response.
+- Made several components and functionalities loosely coupled.
+- Focused on code maintainability, readability and reusability.
+- Used **RxJs's BehaviorSubject** and **Observable** to communicate between several components and keep data in sync. For instance, when we add/remove items to cart from menu page the cart data gets updated in local storage. There is a service for handling the local storage where the cart data is passed to a BehaviorSubject so that components that need the cart data updates can subscribe to its Observable and listen to the updates. The number of items and subtotal amount in the cart bar at the bottom of page has subscribed to the cart data updates and that's why the values change whenever the cart is updated.
+- Used **async/await** to make use of asynchronous programming. There are cases where API calls are being made. It's good to asynchronously call them and wait until we get the response from the API.
 
 ## How to run
 
