@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import { MenuItem } from 'primeng/api';
-import { PrimeNGConfig } from 'primeng/api';
 import { AuthService } from './services/auth.service';
 import { UserDataService } from './services/user-data.service';
 
@@ -12,15 +10,11 @@ import { UserDataService } from './services/user-data.service';
 })
 export class AppComponent {
   constructor(
-    private primengConfig: PrimeNGConfig,
     private authService: AuthService,
     private userDataService: UserDataService
   ) {}
 
   ngOnInit() {
-    // enables ripple effect for primeng
-    //this.primengConfig.ripple = true;
-
     // auto log in user if local storage has the uid returned by firebase
     this.authService.autoLogIn();
   }

@@ -25,9 +25,6 @@
         "firebase": "^8.5.0",
         "font-awesome": "^4.7.0",
         "jquery": "^3.6.0",
-        "primeflex": "^2.0.0",
-        "primeicons": "^4.1.0",
-        "primeng": "^11.4.0",
         "rxjs": "~6.6.0",
         "tslib": "^2.0.0",
         "zone.js": "~0.11.3"
