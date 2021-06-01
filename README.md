@@ -96,3 +96,6 @@ ng serve --open
 ![](https://github.com/thecoducer/restaurant-order-management-system/blob/master/Screenshots/admin-items-page.jpg)
 
 ---
+
+## Improvements
+Listed here: https://github.com/thecoducer/restaurant-order-management-system/issues/1#issue-907845093
